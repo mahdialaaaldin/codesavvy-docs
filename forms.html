@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeSavvy Sandbox - Forms & Inputs</title>
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/icons/icon16.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="assets/icons/icon48.png">
+    <link rel="icon" type="image/png" sizes="128x128" href="assets/icons/icon128.png">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #070a13;
+            --bg-card: rgba(15, 23, 42, 0.65);
+            --bg-card-hover: rgba(23, 37, 84, 0.35);
+            --border-glow: rgba(99, 102, 241, 0.15);
+            --border-normal: rgba(255, 255, 255, 0.08);
+            --primary: #6366f1;
+            --primary-gradient: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+            --secondary: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --text-main: #f8fafc;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --radius-sm: 8px;
+            --radius-md: 16px;
+            --radius-lg: 24px;
+            --shadow-glow: 0 0 25px rgba(99, 102, 241, 0.15);
+            --shadow-card: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: background-color 0.3s, border-color 0.3s, transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            min-height: 100vh;
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-image:
+                radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(168, 85, 247, 0.08) 0%, transparent 40%);
+            background-attachment: fixed;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Nav Header */
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 40px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-normal);
+            backdrop-filter: blur(12px);
+            padding: 20px 32px;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-card);
+        }
+
+        .logo-group {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .logo-img {
+            width: 42px;
+            height: 42px;
+            filter: drop-shadow(0 0 8px rgba(99, 102, 241, 0.4));
+        }
+
+        .logo-title h1 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #fff, var(--text-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .back-btn {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-normal);
+            padding: 8px 16px;
+            border-radius: var(--radius-sm);
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .back-btn:hover {
+            background: rgba(99, 102, 241, 0.1);
+            border-color: var(--primary);
+            color: #fff;
+        }
+
+        /* Grid */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        /* Cards */
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-normal);
+            border-radius: var(--radius-lg);
+            padding: 30px;
+            backdrop-filter: blur(8px);
+            box-shadow: var(--shadow-card);
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            position: relative;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(99, 102, 241, 0.25);
+            box-shadow: var(--shadow-glow), var(--shadow-card);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--border-normal);
+            padding-bottom: 16px;
+        }
+
+        .card-title-group h2 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .card-title-group p {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .status-pill {
+            padding: 4px 10px;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            font-family: 'JetBrains Mono', monospace;
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--danger);
+        }
+
+        /* Inputs */
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .input-group label {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            font-weight: 600;
+        }
+
+        input[type="text"],
+        input[type="password"],
+        select,
+        textarea {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-normal);
+            padding: 12px 16px;
+            border-radius: var(--radius-sm);
+            color: var(--text-main);
+            font-family: inherit;
+            font-size: 0.9rem;
+            outline: none;
+        }
+
+        input[type="text"]:focus,
+        input[type="password"]:focus,
+        select:focus,
+        textarea:focus {
+            border-color: var(--primary);
+            background: rgba(255, 255, 255, 0.04);
+            box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.15);
+        }
+
+        /* Disabled states */
+        input:disabled,
+        select:disabled,
+        textarea:disabled,
+        button:disabled {
+            cursor: not-allowed;
+            background: rgba(255, 255, 255, 0.01) !important;
+            border-color: rgba(255, 255, 255, 0.04) !important;
+            color: var(--text-muted) !important;
+        }
+
+        .divDisabled {
+            opacity: 0.5;
+            pointer-events: none;
+            user-select: none;
+            background: rgba(239, 68, 68, 0.02);
+            border: 2px dashed rgba(239, 68, 68, 0.2);
+            padding: 16px;
+            border-radius: var(--radius-sm);
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* Checkbox list */
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: not-allowed;
+        }
+
+        .checkbox-group label {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Buttons */
+        .btn {
+            background: var(--primary-gradient);
+            color: #fff;
+            border: none;
+            padding: 12px 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2);
+        }
+
+        .btn:hover:not([disabled]) {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 16px rgba(99, 102, 241, 0.35);
+        }
+
+        /* Counters */
+        .counter-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 4px;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .counter-badge {
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 600;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            margin-top: 60px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-normal);
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        footer a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <a href="index.html" class="logo-group">
+                <img src="assets/icons/icon128.png" alt="CodeSavvy Logo" class="logo-img"
+                    onerror="this.src='https://img.icons8.com/color/96/000000/google-code.png';">
+                <div class="logo-title">
+                    <h1>Forms Sandbox</h1>
+                </div>
+            </a>
+            <a href="index.html" class="back-btn">
+                <span>← Back to Hub</span>
+            </a>
+        </header>
+
+        <!-- Grid layout for the test cards -->
+        <div class="grid">
+
+            <!-- Card 1: Unlock Elements -->
+            <div class="card" id="card-unlock">
+                <div class="card-header">
+                    <div class="card-title-group">
+                        <h2>Unlock Elements</h2>
+                        <p>Tests activeTab & scripting permissions</p>
+                    </div>
+                    <span class="status-pill">LOCKED</span>
+                </div>
+
+                <div class="input-group">
+                    <label>Disabled Input Field</label>
+                    <input type="text" disabled value="This input field is hard-coded as disabled.">
+                </div>
+
+                <div class="input-group">
+                    <label>Readonly Input Field</label>
+                    <input type="text" readonly value="This input field is read-only.">
+                </div>
+
+                <div class="input-group">
+                    <label>Disabled Dropdown (Select)</label>
+                    <select disabled>
+                        <option>Option 1 (Locked)</option>
+                        <option>Option 2</option>
+                    </select>
+                </div>
+
+                <div class="checkbox-group">
+                    <input type="checkbox" id="disabled-check" disabled>
+                    <label for="disabled-check">Disabled Checkbox option</label>
+                </div>
+
+                <div class="input-group">
+                    <label>Custom Locked Container (.divDisabled)</label>
+                    <div class="divDisabled">
+                        🚫 This custom content block has pointer-events disabled via CSS.
+                    </div>
+                </div>
+
+                <button class="btn" disabled>
+                    Submit Form (Locked)
+                </button>
+            </div>
+
+            <!-- Card 2: Remove Max Length Limits -->
+            <div class="card" id="card-limits">
+                <div class="card-header">
+                    <div class="card-title-group">
+                        <h2>Remove Limits</h2>
+                        <p>Tests removal of input maxlengths</p>
+                    </div>
+                    <span class="status-pill" style="color: var(--warning); border-color: rgba(245, 158, 11, 0.2); background: rgba(245, 158, 11, 0.1);">RESTRICTED</span>
+                </div>
+
+                <div class="input-group">
+                    <label for="limit-input-short">Short Username (Restricted to 5 chars)</label>
+                    <input type="text" id="limit-input-short" maxlength="5" placeholder="Type here...">
+                    <div class="counter-container">
+                        <span>Maxlength attribute = 5</span>
+                        <span class="counter-badge" id="counter-short">0/5</span>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label for="limit-input-long">Review Box (Restricted to 15 chars)</label>
+                    <textarea id="limit-input-long" maxlength="15" rows="3" placeholder="Type your review here..."></textarea>
+                    <div class="counter-container">
+                        <span>Maxlength attribute = 15</span>
+                        <span class="counter-badge" id="counter-long">0/15</span>
+                    </div>
+                </div>
+
+                <div class="divDisabled" style="opacity: 1; border-color: var(--border-normal); text-align: left; pointer-events: auto;">
+                    <p style="font-size: 0.8rem; color: var(--text-secondary);">
+                        💡 <strong>How to test:</strong> Try typing past the limit, then use the <strong>CodeSavvy</strong> extension to <strong>Remove Limits</strong>, and you can keep typing!
+                    </p>
+                </div>
+            </div>
+
+            <!-- Card 3: Reveal Passwords -->
+            <div class="card" id="card-passwords">
+                <div class="card-header">
+                    <div class="card-title-group">
+                        <h2>Reveal Passwords</h2>
+                        <p>Tests changing input types to visible text</p>
+                    </div>
+                    <span class="status-pill" style="color: var(--primary); border-color: rgba(99, 102, 241, 0.2); background: rgba(99, 102, 241, 0.1);">MASKED</span>
+                </div>
+
+                <div class="input-group">
+                    <label>Hidden Password</label>
+                    <input type="password" value="SuperSecretPassword123" placeholder="Enter password">
+                </div>
+
+                <div class="input-group" style="background: rgba(255, 255, 255, 0.01); padding: 15px; border: 1px solid var(--border-normal); border-radius: var(--radius-sm);">
+                    <h3 style="font-size: 0.9rem; font-weight: 700; margin-bottom: 12px; color: #fff;">Simulated Login</h3>
+                    <div class="input-group" style="margin-bottom: 12px;">
+                        <label>Email Address</label>
+                        <input type="text" value="admin@codesavvy.io">
+                    </div>
+                    <div class="input-group">
+                        <label>Password</label>
+                        <input type="password" value="dont_look_at_me_99">
+                    </div>
+                </div>
+
+                <div class="divDisabled" style="opacity: 1; border-color: var(--border-normal); text-align: left; pointer-events: auto;">
+                    <p style="font-size: 0.8rem; color: var(--text-secondary);">
+                        💡 <strong>How to test:</strong> Click the <strong>Passwords</strong> button in the extension popup to instantly reveal the text of all password fields above.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Footer -->
+        <footer>
+            <p>&copy; 2026 CodeSavvy. All rights reserved. Created by <a href="https://github.com/mahdialaaaldin"
+                    target="_blank" rel="noopener noreferrer">mahdialaaaldin</a>.</p>
+        </footer>
+    </div>
+
+    <!-- Scripts to update the character counters -->
+    <script>
+        const shortInput = document.getElementById('limit-input-short');
+        const shortCounter = document.getElementById('counter-short');
+        shortInput.addEventListener('input', () => {
+            const max = shortInput.getAttribute('maxlength') || '∞';
+            shortCounter.textContent = `${shortInput.value.length}/${max}`;
+        });
+
+        const longInput = document.getElementById('limit-input-long');
+        const longCounter = document.getElementById('counter-long');
+        longInput.addEventListener('input', () => {
+            const max = longInput.getAttribute('maxlength') || '∞';
+            longCounter.textContent = `${longInput.value.length}/${max}`;
+        });
+    </script>
+</body>
+
+</html>

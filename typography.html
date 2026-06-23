@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeSavvy Sandbox - Typography & Edit Mode</title>
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/icons/icon16.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="assets/icons/icon48.png">
+    <link rel="icon" type="image/png" sizes="128x128" href="assets/icons/icon128.png">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #070a13;
+            --bg-card: rgba(15, 23, 42, 0.65);
+            --bg-card-hover: rgba(23, 37, 84, 0.35);
+            --border-glow: rgba(99, 102, 241, 0.15);
+            --border-normal: rgba(255, 255, 255, 0.08);
+            --primary: #6366f1;
+            --primary-gradient: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+            --secondary: #10b981;
+            --warning: #f59e0b;
+            --text-main: #f8fafc;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --radius-sm: 8px;
+            --radius-md: 16px;
+            --radius-lg: 24px;
+            --shadow-glow: 0 0 25px rgba(99, 102, 241, 0.15);
+            --shadow-card: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: background-color 0.3s, border-color 0.3s, transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            min-height: 100vh;
+            line-height: 1.7;
+            overflow-x: hidden;
+            background-image:
+                radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(168, 85, 247, 0.08) 0%, transparent 40%);
+            background-attachment: fixed;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Nav Header */
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 40px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-normal);
+            backdrop-filter: blur(12px);
+            padding: 20px 32px;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-card);
+        }
+
+        .logo-group {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .logo-img {
+            width: 42px;
+            height: 42px;
+            filter: drop-shadow(0 0 8px rgba(99, 102, 241, 0.4));
+        }
+
+        .logo-title h1 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #fff, var(--text-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .back-btn {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-normal);
+            padding: 8px 16px;
+            border-radius: var(--radius-sm);
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .back-btn:hover {
+            background: rgba(99, 102, 241, 0.1);
+            border-color: var(--primary);
+            color: #fff;
+        }
+
+        /* Tip Alert Box */
+        .tip-box {
+            background: rgba(245, 158, 11, 0.05);
+            border: 1px dashed rgba(245, 158, 11, 0.3);
+            border-radius: var(--radius-md);
+            padding: 20px;
+            margin-bottom: 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .tip-title {
+            color: var(--warning);
+            font-weight: 700;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .tip-desc {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        /* Article Card styling */
+        article {
+            background: var(--bg-card);
+            border: 1px solid var(--border-normal);
+            border-radius: var(--radius-lg);
+            padding: 40px;
+            box-shadow: var(--shadow-card);
+            margin-bottom: 40px;
+        }
+
+        article h1 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 12px;
+            color: #fff;
+        }
+
+        .meta-line {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-bottom: 1px solid var(--border-normal);
+            padding-bottom: 16px;
+        }
+
+        .meta-author {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        article p {
+            margin-bottom: 24px;
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+        }
+
+        /* Blockquote */
+        blockquote {
+            border-left: 4px solid var(--primary);
+            background: rgba(99, 102, 241, 0.03);
+            padding: 20px 24px;
+            margin: 30px 0;
+            border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+            font-style: italic;
+        }
+
+        blockquote p {
+            margin-bottom: 0;
+            color: var(--text-main);
+        }
+
+        blockquote cite {
+            display: block;
+            margin-top: 10px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        /* Headers */
+        article h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 40px 0 20px 0;
+            color: #fff;
+        }
+
+        article h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin: 30px 0 16px 0;
+            color: #fff;
+        }
+
+        /* Code block */
+        pre {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border-normal);
+            padding: 20px;
+            border-radius: var(--radius-sm);
+            overflow-x: auto;
+            margin: 24px 0;
+        }
+
+        code {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            color: #a855f7;
+        }
+
+        pre code {
+            color: var(--text-main);
+        }
+
+        /* Unordered/Ordered List */
+        ul, ol {
+            margin-left: 24px;
+            margin-bottom: 24px;
+            color: var(--text-secondary);
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        /* Table */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+            font-size: 0.95rem;
+        }
+
+        th, td {
+            padding: 12px 16px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-normal);
+        }
+
+        th {
+            background: rgba(255, 255, 255, 0.02);
+            color: #fff;
+            font-weight: 600;
+        }
+
+        tr:hover {
+            background: rgba(255, 255, 255, 0.01);
+        }
+
+        /* Design mode indicators */
+        body.design-mode-active [contenteditable] {
+            outline: 1px dashed var(--warning) !important;
+            background: rgba(245, 158, 11, 0.02);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            margin-top: 60px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-normal);
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        footer a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <a href="index.html" class="logo-group">
+                <img src="assets/icons/icon128.png" alt="CodeSavvy Logo" class="logo-img"
+                    onerror="this.src='https://img.icons8.com/color/96/000000/google-code.png';">
+                <div class="logo-title">
+                    <h1>Typography Sandbox</h1>
+                </div>
+            </a>
+            <a href="index.html" class="back-btn">
+                <span>← Back to Hub</span>
+            </a>
+        </header>
+
+        <!-- Tip Box -->
+        <div class="tip-box">
+            <span class="tip-title">⚡ Testing Typography Tools</span>
+            <p class="tip-desc">
+                1. Use the <strong>Change Font</strong> button in the extension popup to instantly apply clean, readable custom fonts (like Poppins, Lexend Deca, or Atkinson Hyperlegible) to this whole page.<br>
+                2. Toggle <strong>Edit Mode (Design Mode)</strong> in the extension, then click anywhere on the text in the article card below to edit headings, content, or table rows directly in your browser.
+            </p>
+        </div>
+
+        <!-- Article content for testing -->
+        <article>
+            <h1>The Role of Typography in Visual Communication and Software Design</h1>
+            
+            <div class="meta-line">
+                <span>By <span class="meta-author">mahdialaaaldin</span></span>
+                <span>•</span>
+                <span>Published June 23, 2026</span>
+                <span>•</span>
+                <span>6 min read</span>
+            </div>
+
+            <p>
+                Typography is often considered the hidden foundation of great interface design. While layout and color schemes catch the eye first, it is the typography that guides the user through the narrative, ensures legibility, and facilitates ease of interaction. Selecting the correct typeface is not merely an aesthetic choice; it dictates user comprehension and retention.
+            </p>
+
+            <blockquote>
+                <p>"Typography is the craft of endowing a human language with a durable visual form."</p>
+                <cite>— Robert Bringhurst, The Elements of Typographic Style</cite>
+            </blockquote>
+
+            <h2>Why Font Readability Matters</h2>
+            <p>
+                In the context of developer tools and browser utilities, readability becomes a critical performance vector. Standard system fonts can sometimes lack distinction between characters, causing visual fatigue during long periods of reading. Specialized typefaces, such as <code>Atkinson Hyperlegible</code> (designed for low-vision readers) or <code>Lexend Deca</code> (designed to improve reading speed), can greatly enhance access.
+            </p>
+
+            <h3>Important Design Principles</h3>
+            <ul>
+                <li><strong>Hierarchical Scale:</strong> Establishing a clear contrast between headings (`h1`, `h2`) and body text.</li>
+                <li><strong>Line Height (Leading):</strong> Providing sufficient vertical space (typically 1.5 - 1.7x font size) to prevent reading overlap.</li>
+                <li><strong>Line Length:</strong> Keeping columns restricted to 45–75 characters per line for maximum tracking ease.</li>
+            </ul>
+
+            <h2>Comparison of Typographic Metrics</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Font Family</th>
+                        <th>Classification</th>
+                        <th>Best Used For</th>
+                        <th>Readability Level</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Poppins</td>
+                        <td>Geometric Sans-serif</td>
+                        <td>Headings & UI Labels</td>
+                        <td>Excellent</td>
+                    </tr>
+                    <tr>
+                        <td>Lexend Deca</td>
+                        <td>San-serif (Dyslexia-friendly)</td>
+                        <td>Body text & Large paragraphs</td>
+                        <td>Superb</td>
+                    </tr>
+                    <tr>
+                        <td>EB Garamond</td>
+                        <td>Classic Serif</td>
+                        <td>Long-form editorial articles</td>
+                        <td>Good (for print style)</td>
+                    </tr>
+                    <tr>
+                        <td>JetBrains Mono</td>
+                        <td>Monospace</td>
+                        <td>Code blocks & Technical text</td>
+                        <td>Exceptional (for logic)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>Configuring Styles in Code</h2>
+            <p>
+                Applying font adjustments dynamically in a web environment can be done by injecting CSS style nodes into the webpage document head. The CodeSavvy extension automates this process using the following snippet structure:
+            </p>
+
+            <pre><code>function applyCustomFont(fontName) {
+    const style = document.createElement('style');
+    style.id = 'codesavvy-custom-font';
+    style.textContent = `
+        * {
+            font-family: '${fontName}', sans-serif !important;
+        }
+    `;
+    document.head.appendChild(style);
+}</code></pre>
+
+            <p>
+                This ensures that the styling is applied across all active components, bypassing any localized element overrides via the <code>!important</code> specifier.
+            </p>
+        </article>
+
+        <!-- Footer -->
+        <footer>
+            <p>&copy; 2026 CodeSavvy. All rights reserved. Created by <a href="https://github.com/mahdialaaaldin"
+                    target="_blank" rel="noopener noreferrer">mahdialaaaldin</a>.</p>
+        </footer>
+    </div>
+</body>
+
+</html>

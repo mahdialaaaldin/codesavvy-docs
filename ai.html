@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeSavvy Sandbox - AI & Text Manipulation</title>
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/icons/icon16.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="assets/icons/icon48.png">
+    <link rel="icon" type="image/png" sizes="128x128" href="assets/icons/icon128.png">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #070a13;
+            --bg-card: rgba(15, 23, 42, 0.65);
+            --bg-card-hover: rgba(23, 37, 84, 0.35);
+            --border-glow: rgba(99, 102, 241, 0.15);
+            --border-normal: rgba(255, 255, 255, 0.08);
+            --primary: #6366f1;
+            --primary-gradient: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+            --secondary: #10b981;
+            --warning: #f59e0b;
+            --text-main: #f8fafc;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --radius-sm: 8px;
+            --radius-md: 16px;
+            --radius-lg: 24px;
+            --shadow-glow: 0 0 25px rgba(99, 102, 241, 0.15);
+            --shadow-card: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: background-color 0.3s, border-color 0.3s, transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            min-height: 100vh;
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-image:
+                radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(168, 85, 247, 0.08) 0%, transparent 40%);
+            background-attachment: fixed;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Nav Header */
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 40px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-normal);
+            backdrop-filter: blur(12px);
+            padding: 20px 32px;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-card);
+        }
+
+        .logo-group {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .logo-img {
+            width: 42px;
+            height: 42px;
+            filter: drop-shadow(0 0 8px rgba(99, 102, 241, 0.4));
+        }
+
+        .logo-title h1 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #fff, var(--text-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .back-btn {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-normal);
+            padding: 8px 16px;
+            border-radius: var(--radius-sm);
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .back-btn:hover {
+            background: rgba(99, 102, 241, 0.1);
+            border-color: var(--primary);
+            color: #fff;
+        }
+
+        /* Tip Box */
+        .tip-box {
+            background: rgba(99, 102, 241, 0.05);
+            border: 1px dashed rgba(99, 102, 241, 0.3);
+            border-radius: var(--radius-md);
+            padding: 20px;
+            margin-bottom: 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .tip-title {
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .tip-desc {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        /* Grid */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-normal);
+            border-radius: var(--radius-lg);
+            padding: 30px;
+            backdrop-filter: blur(8px);
+            box-shadow: var(--shadow-card);
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(99, 102, 241, 0.25);
+            box-shadow: var(--shadow-glow), var(--shadow-card);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--border-normal);
+            padding-bottom: 16px;
+        }
+
+        .card-header h2 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .card-header p {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        /* Selection Box styles */
+        .selection-box {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-normal);
+            border-radius: var(--radius-sm);
+            padding: 20px 16px;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            cursor: pointer;
+            user-select: text;
+            position: relative;
+            margin-top: 12px;
+        }
+
+        .selection-box:hover {
+            border-color: rgba(99, 102, 241, 0.2);
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .selection-label {
+            position: absolute;
+            top: -10px;
+            left: 12px;
+            background: #0d1222;
+            padding: 0 8px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: var(--primary);
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border-normal);
+        }
+
+        /* Code highlight */
+        .codesavvy-highlight {
+            background-color: #fef08a !important;
+            color: #000000 !important;
+            border-radius: 2px;
+            padding: 1px 3px;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            margin-top: 60px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-normal);
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        footer a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <a href="index.html" class="logo-group">
+                <img src="assets/icons/icon128.png" alt="CodeSavvy Logo" class="logo-img"
+                    onerror="this.src='https://img.icons8.com/color/96/000000/google-code.png';">
+                <div class="logo-title">
+                    <h1>AI & Text Sandbox</h1>
+                </div>
+            </a>
+            <a href="index.html" class="back-btn">
+                <span>← Back to Hub</span>
+            </a>
+        </header>
+
+        <!-- Tip Box -->
+        <div class="tip-box">
+            <span class="tip-title">🤖 Testing Context Menu Actions</span>
+            <p class="tip-desc">
+                1. Select any portion of text in the cards below, right-click to open your browser's context menu, and locate the <strong>CodeSavvy</strong> action items.<br>
+                2. Test <strong>AI text enhancements</strong> (Gemini) such as "Summarize", "Improve Tone", "Translate", or "Format Code".<br>
+                3. Test <strong>text utilities</strong> such as case conversions (UPPERCASE, lowercase, camelCase, snake_case) and highlights.
+            </p>
+        </div>
+
+        <!-- Sandbox Grid -->
+        <div class="grid">
+
+            <!-- Card 1: AI Enhancements (Gemini Integration) -->
+            <div class="card">
+                <div class="card-header">
+                    <div>
+                        <h2>AI Enhancements</h2>
+                        <p>Requires Gemini API key configured in options</p>
+                    </div>
+                </div>
+
+                <!-- Text Area 1: Draft Email -->
+                <div class="selection-box">
+                    <span class="selection-label">Draft Email</span>
+                    Subject: extension update.
+                    Hi team, i wanted to write to you that the new extension is ready but i got some issues to finish it on time. Can we do a call later today to check the timeline and talk about details? Let me know.
+                </div>
+
+                <!-- Text Area 2: Messy Code Block -->
+                <div style="margin-top: 10px;">
+                    <div class="selection-box" style="font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; background: rgba(0, 0, 0, 0.2);">
+                        <span class="selection-label">Messy JS Code</span>
+                        function c(t){let r = t.split(" ");
+                        let o = ""; for(let i=0; i&lt;r.length;i++){
+                        o+=r[i].charAt(0).toUpperCase()+r[i].slice(1).toLowerCase()+" ";
+                        } return o.trim();}
+                    </div>
+                </div>
+
+                <!-- Text Area 3: Informal Draft -->
+                <div class="selection-box">
+                    <span class="selection-label">Draft Article Segment</span>
+                    AI tools are super cool because they help you do work fast. People like them because you do not have to write everything from scratch. It saves a lot of time.
+                </div>
+            </div>
+
+            <!-- Card 2: Case Conversions & Highlight -->
+            <div class="card">
+                <div class="card-header">
+                    <div>
+                        <h2>Case & Utility Conversions</h2>
+                        <p>Local Javascript text transformations</p>
+                    </div>
+                </div>
+
+                <!-- Case Conversion 1 -->
+                <div class="selection-box">
+                    <span class="selection-label">Camel/Snake Case Candidate</span>
+                    Convert this plain text into camelCase or snake_case for developer coding variable assignments.
+                </div>
+
+                <!-- Case Conversion 2 -->
+                <div class="selection-box">
+                    <span class="selection-label">Upper/Lower Case Candidate</span>
+                    SELECT THIS TEXT TO TOGGLE BETWEEN ALL UPPERCASE LETTERS AND ALL LOWERCASE LETTERS INSTANTLY.
+                </div>
+
+                <!-- Highlighting target -->
+                <div class="selection-box">
+                    <span class="selection-label">Text Highlighting</span>
+                    CodeSavvy extension includes an inline marker. Select any word or sentence in this box and select the <strong>Highlight Selection</strong> utility in the context menu to mark it.
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Footer -->
+        <footer>
+            <p>&copy; 2026 CodeSavvy. All rights reserved. Created by <a href="https://github.com/mahdialaaaldin"
+                    target="_blank" rel="noopener noreferrer">mahdialaaaldin</a>.</p>
+        </footer>
+    </div>
+</body>
+
+</html>

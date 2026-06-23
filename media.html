@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeSavvy Sandbox - Media & Screenshots</title>
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/icons/icon16.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="assets/icons/icon48.png">
+    <link rel="icon" type="image/png" sizes="128x128" href="assets/icons/icon128.png">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #070a13;
+            --bg-card: rgba(15, 23, 42, 0.65);
+            --bg-card-hover: rgba(23, 37, 84, 0.35);
+            --border-glow: rgba(99, 102, 241, 0.15);
+            --border-normal: rgba(255, 255, 255, 0.08);
+            --primary: #6366f1;
+            --primary-gradient: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+            --secondary: #10b981;
+            --secondary-gradient: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            --warning: #f59e0b;
+            --text-main: #f8fafc;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --radius-sm: 8px;
+            --radius-md: 16px;
+            --radius-lg: 24px;
+            --shadow-glow: 0 0 25px rgba(99, 102, 241, 0.15);
+            --shadow-card: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: background-color 0.3s, border-color 0.3s, transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            min-height: 100vh;
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-image:
+                radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(168, 85, 247, 0.08) 0%, transparent 40%);
+            background-attachment: fixed;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Nav Header */
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 40px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-normal);
+            backdrop-filter: blur(12px);
+            padding: 20px 32px;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-card);
+        }
+
+        .logo-group {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .logo-img {
+            width: 42px;
+            height: 42px;
+            filter: drop-shadow(0 0 8px rgba(99, 102, 241, 0.4));
+        }
+
+        .logo-title h1 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #fff, var(--text-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .back-btn {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-normal);
+            padding: 8px 16px;
+            border-radius: var(--radius-sm);
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .back-btn:hover {
+            background: rgba(99, 102, 241, 0.1);
+            border-color: var(--primary);
+            color: #fff;
+        }
+
+        /* Tip Box */
+        .tip-box {
+            background: rgba(16, 185, 129, 0.05);
+            border: 1px dashed rgba(16, 185, 129, 0.3);
+            border-radius: var(--radius-md);
+            padding: 20px;
+            margin-bottom: 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .tip-title {
+            color: var(--secondary);
+            font-weight: 700;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .tip-desc {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        /* Dashboard Grid */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-normal);
+            border-radius: var(--radius-lg);
+            padding: 30px;
+            backdrop-filter: blur(8px);
+            box-shadow: var(--shadow-card);
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--border-normal);
+            padding-bottom: 16px;
+        }
+
+        .card-header h2 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        /* Chart mockups */
+        .chart-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            padding: 10px 0;
+        }
+
+        .bar-row {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .bar-label {
+            width: 80px;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .bar-track {
+            flex-grow: 1;
+            height: 16px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid var(--border-normal);
+        }
+
+        .bar-fill {
+            height: 100%;
+            background: var(--primary-gradient);
+            border-radius: 8px;
+        }
+
+        .bar-val {
+            width: 40px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            text-align: right;
+        }
+
+        /* Profile Card */
+        .profile-box {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .profile-avatar {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #a855f7 0%, #10b981 100%);
+            border: 2px solid var(--border-normal);
+            box-shadow: 0 0 15px rgba(168, 85, 247, 0.3);
+        }
+
+        .profile-details h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .profile-details p {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        /* Glowing Grid / Images */
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+
+        .grid-img {
+            aspect-ratio: 1;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border-normal);
+            background: linear-gradient(135deg, rgba(255,255,255,0.01) 0%, rgba(99, 102, 241, 0.05) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .grid-img:hover {
+            border-color: var(--primary);
+            box-shadow: 0 0 10px rgba(99, 102, 241, 0.15);
+            transform: scale(1.05);
+        }
+
+        /* Full bleed area */
+        .fullbleed-section {
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.8) 0%, rgba(7, 10, 19, 0.9) 100%);
+            border: 1px solid var(--border-normal);
+            border-radius: var(--radius-lg);
+            padding: 40px;
+            text-align: center;
+            box-shadow: var(--shadow-card);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .fullbleed-section h2 {
+            font-size: 1.6rem;
+            font-weight: 800;
+            margin-bottom: 12px;
+            color: #fff;
+        }
+
+        .fullbleed-section p {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 24px auto;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            margin-top: 60px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-normal);
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        footer a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <a href="index.html" class="logo-group">
+                <img src="assets/icons/icon128.png" alt="CodeSavvy Logo" class="logo-img"
+                    onerror="this.src='https://img.icons8.com/color/96/000000/google-code.png';">
+                <div class="logo-title">
+                    <h1>Media Sandbox</h1>
+                </div>
+            </a>
+            <a href="index.html" class="back-btn">
+                <span>← Back to Hub</span>
+            </a>
+        </header>
+
+        <!-- Tip Box -->
+        <div class="tip-box">
+            <span class="tip-title">📸 Testing Capture & Window Features</span>
+            <p class="tip-desc">
+                1. Click the <strong>Screenshot</strong> button in the extension popup to capture a screenshot of this viewport. It will save the captured region directly to your browser's download folder.<br>
+                2. Click the <strong>Fullscreen</strong> button in the extension to expand this page layout, hiding browser chrome and showing how the responsive container scales to fill your display.
+            </p>
+        </div>
+
+        <!-- Dashboard Widgets -->
+        <div class="dashboard-grid">
+
+            <!-- Card 1: Data Visualization Chart -->
+            <div class="card">
+                <div class="card-header">
+                    <h2>Traffic Analytics</h2>
+                    <span style="font-size: 0.75rem; color: var(--secondary);">● LIVE DATA</span>
+                </div>
+                <div class="chart-container">
+                    <div class="bar-row">
+                        <span class="bar-label">Direct</span>
+                        <div class="bar-track">
+                            <div class="bar-fill" style="width: 74%;"></div>
+                        </div>
+                        <span class="bar-val">74%</span>
+                    </div>
+                    <div class="bar-row">
+                        <span class="bar-label">Search</span>
+                        <div class="bar-track">
+                            <div class="bar-fill" style="width: 48%; background: var(--secondary-gradient);"></div>
+                        </div>
+                        <span class="bar-val">48%</span>
+                    </div>
+                    <div class="bar-row">
+                        <span class="bar-label">Social</span>
+                        <div class="bar-track">
+                            <div class="bar-fill" style="width: 29%; background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);"></div>
+                        </div>
+                        <span class="bar-val">29%</span>
+                    </div>
+                    <div class="bar-row">
+                        <span class="bar-label">Referrals</span>
+                        <div class="bar-track">
+                            <div class="bar-fill" style="width: 15%;"></div>
+                        </div>
+                        <span class="bar-val">15%</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 2: Interactive Interface Profile -->
+            <div class="card">
+                <div class="card-header">
+                    <h2>System Operator</h2>
+                    <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--text-muted);">UID-1980</span>
+                </div>
+                <div class="profile-box">
+                    <div class="profile-avatar"></div>
+                    <div class="profile-details">
+                        <h3>Alex Savvy</h3>
+                        <p style="margin-bottom: 4px;">Senior Devops Lead</p>
+                        <span style="font-size: 10px; background: rgba(99, 102, 241, 0.1); color: var(--primary); padding: 2px 8px; border-radius: 10px; border: 1px solid rgba(99, 102, 241, 0.2);">ACTIVE</span>
+                    </div>
+                </div>
+                <p style="font-size: 0.8rem; color: var(--text-secondary); line-height: 1.5;">
+                    Testing screen captures on highly styled profile overlays confirms the extension preserves alpha filters and CSS backdrop filters properly.
+                </p>
+            </div>
+
+            <!-- Card 3: Graphic Visual Gallery -->
+            <div class="card">
+                <div class="card-header">
+                    <h2>Graphical Assets</h2>
+                    <span style="font-size: 0.75rem; color: var(--text-muted);">3x3 grid</span>
+                </div>
+                <div class="image-grid">
+                    <div class="grid-img">🔮</div>
+                    <div class="grid-img">🎨</div>
+                    <div class="grid-img">📊</div>
+                    <div class="grid-img">⚡</div>
+                    <div class="grid-img">💻</div>
+                    <div class="grid-img">🛡️</div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Full Bleed layout test box -->
+        <div class="fullbleed-section">
+            <h2>Fullscreen Layout Container</h2>
+            <p>
+                When entering fullscreen, this container acts as a mock presentation dashboard. Test how the browser scaling, text layouts, and graphical elements adapt to higher screen real-estate.
+            </p>
+            <div style="display: inline-flex; gap: 16px;">
+                <span style="font-size: 0.8rem; font-family: 'JetBrains Mono', monospace; color: var(--text-muted);">Esc to exit fullscreen mode manually</span>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer>
+            <p>&copy; 2026 CodeSavvy. All rights reserved. Created by <a href="https://github.com/mahdialaaaldin"
+                    target="_blank" rel="noopener noreferrer">mahdialaaaldin</a>.</p>
+        </footer>
+    </div>
+</body>
+
+</html>
