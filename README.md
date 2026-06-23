@@ -1,6 +1,6 @@
-# CodeSavvy Public Docs & Interactive Sandboxes
+# CodeSavvy Public Docs & Interactive Sandboxes <img src="assets/icons/icon48.png" width="32" height="32" align="center" alt="CodeSavvy logo">
 
-This repository hosts the public documentation and live testing sandboxes for **CodeSavvy** — a browser extension utility toolbox designed for developers and power users.
+This repository hosts the public documentation and live testing sandboxes for **CodeSavvy**, which is a browser extension utility toolbox designed for developers and power users.
 
 ## 🔗 Links & Deployments
 
