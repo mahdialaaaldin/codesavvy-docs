@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeSavvy Sandbox - Secure Portal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0f172a;
+            --card-bg: #1e293b;
+            --accent: #ef4444;
+            --primary: #6366f1;
+            --text: #f1f5f9;
+            --text-muted: #94a3b8;
+            --border: rgba(148, 163, 184, 0.1);
+            --success: #10b981;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 1000px;
+            width: 100%;
+        }
+
+        /* Nav Header */
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 40px;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            backdrop-filter: blur(12px);
+            padding: 20px 32px;
+            border-radius: 16px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+            width: 100%;
+        }
+
+        .logo-group {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .logo-img {
+            width: 42px;
+            height: 42px;
+            filter: drop-shadow(0 0 8px rgba(239, 68, 68, 0.4));
+        }
+
+        .logo-title h1 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #fff, var(--text-muted));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0;
+        }
+
+        .back-btn {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border);
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .back-btn:hover {
+            background: rgba(99, 102, 241, 0.1);
+            border-color: var(--primary);
+            color: #fff;
+        }
+
+        .badge-warning {
+            background-color: rgba(239, 68, 68, 0.15);
+            color: var(--accent);
+            border: 1px solid var(--accent);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            display: inline-block;
+            margin-top: 12px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: var(--text);
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .lock-indicator {
+            color: var(--accent);
+            font-size: 12px;
+            font-family: 'JetBrains Mono', monospace;
+            background: rgba(239, 68, 68, 0.1);
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+
+        /* Test Section 1: Right-Click & Select Blocker */
+        .restrict-select {
+            user-select: none !important;
+            -webkit-user-select: none !important;
+            -moz-user-select: none !important;
+            -ms-user-select: none !important;
+        }
+
+        .text-content {
+            line-height: 1.6;
+            color: var(--text-muted);
+            margin-bottom: 16px;
+            font-size: 15px;
+        }
+
+        /* Transparent click interceptor overlay */
+        .overlay-container {
+            position: relative;
+        }
+
+        .selection-blocker-overlay {
+            position: absolute;
+            inset: 0;
+            z-index: 10;
+            background: transparent;
+            cursor: not-allowed;
+        }
+
+        /* Test Section 2: Code Editor (Copy-Paste Blocker) */
+        .code-container {
+            position: relative;
+            background-color: #0b0f19;
+            border-radius: 8px;
+            padding: 16px;
+            border: 1px solid var(--border);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 14px;
+            line-height: 1.5;
+            color: #38bdf8;
+            margin-bottom: 16px;
+            overflow-x: auto;
+        }
+
+        .code-block {
+            white-space: pre;
+        }
+
+        /* Form styling */
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+            font-weight: 500;
+        }
+
+        .form-input {
+            width: 100%;
+            background-color: #0b0f19;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 10px 14px;
+            color: var(--text);
+            font-family: inherit;
+            outline: none;
+            font-size: 14px;
+            transition: border-color 0.2s;
+        }
+
+        .form-input:focus {
+            border-color: var(--primary);
+        }
+
+        .form-input:disabled,
+        .btn-disabled:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            background-color: rgba(255, 255, 255, 0.02);
+        }
+
+        .btn-submit {
+            display: block;
+            width: 100%;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: filter 0.2s;
+        }
+
+        .btn-submit:hover {
+            filter: brightness(1.1);
+        }
+
+        /* Interactive custom notification toast */
+        .toast {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            background-color: var(--accent);
+            color: white;
+            padding: 14px 20px;
+            border-radius: 8px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+            font-weight: 600;
+            font-size: 14px;
+            transform: translateY(150%);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 1000;
+        }
+
+        .toast.show {
+            transform: translateY(0);
+        }
+
+        .toast-success {
+            background-color: var(--success);
+        }
+
+        /* Inline oncontextmenu demo */
+        .inline-restricted-box {
+            padding: 20px;
+            border: 2px dashed var(--accent);
+            border-radius: 8px;
+            text-align: center;
+            color: var(--accent);
+            font-weight: 600;
+            background: rgba(239, 68, 68, 0.05);
+            margin-top: 16px;
+        }
+    </style>
+</head>
+<body oncontextmenu="showWarningToast('Right-click is globally blocked on the body tag (oncontextmenu=\'return false\')'); return false;">
+
+    <div class="container">
+        <header>
+            <a href="index.html" class="logo-group">
+                <img src="assets/icons/icon128.png" alt="CodeSavvy Logo" class="logo-img"
+                    onerror="this.src='https://img.icons8.com/color/96/000000/google-code.png';">
+                <div class="logo-title">
+                    <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+                        <h1>Protection Sandbox</h1>
+                        <span class="badge-warning" style="margin-top: 0;">SECURITY SHIELD ENFORCED</span>
+                    </div>
+                </div>
+            </a>
+            <a href="index.html" class="back-btn">
+                <span>← Back to Hub</span>
+            </a>
+        </header>
+
+        <div class="grid">
+            <!-- CARD 1: Text selection & Right click restrictions -->
+            <div class="card restrict-select" id="select-card">
+                <div class="card-title">
+                    <span>1. Protected Article Text</span>
+                    <span class="lock-indicator">SELECT & RIGHT-CLICK BLOCKED</span>
+                </div>
+                
+                <div class="overlay-container">
+                    <!-- Invisible Overlay Div to intercept selections -->
+                    <div class="selection-blocker-overlay" id="overlay-shield" title="Interception Overlay Active"></div>
+                    
+                    <p class="text-content">
+                        <strong>Text Protection System:</strong> This paragraph is restricted using multiple layer strategies.
+                    </p>
+                    <p class="text-content">
+                        1. CSS rule: <code>user-select: none !important</code> is active.
+                        <br>
+                        2. An invisible transparent overlay <code>div</code> captures all drag-and-clicks to prevent cursor highlighting.
+                        <br>
+                        3. Inline attribute: <code>unselectable="on"</code> is appended to this card element.
+                    </p>
+                </div>
+
+                <p class="text-content" style="border-top: 1px solid var(--border); padding-top: 12px; margin-top: 12px;">
+                    <strong>Instructions:</strong> Use CodeSavvy's <strong>Right Click</strong> and <strong>Select Text</strong> features. You should then be able to freely highlight this text and trigger your browser's default context menu!
+                </p>
+
+                <!-- Box with inline contextmenu script block -->
+                <div class="inline-restricted-box" oncontextmenu="showWarningToast('Inline right-click restriction triggered!'); return false;">
+                    Inline oncontextmenu blocker (returns false)
+                </div>
+            </div>
+
+            <!-- CARD 2: Code block & Clipboard restrictions -->
+            <div class="card" id="clipboard-card">
+                <div class="card-title">
+                    <span>2. Secret Source Code</span>
+                    <span class="lock-indicator">COPY / CUT / PASTE BLOCKED</span>
+                </div>
+
+                <p class="text-content">
+                    This block prevents you from copying its contents, cutting, or pasting any text in the input box below.
+                </p>
+
+                <div class="code-container" id="secret-code">
+                    <div class="code-block">const apiToken = "SEC_KEY_8a92f031b2e88a91";
+function initializeSecureSession() {
+    console.log("Session verified: true");
+}</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="paste-input">Paste code here to verify paste functionality:</label>
+                    <input type="text" id="paste-input" class="form-input" placeholder="Try pasting here...">
+                </div>
+
+                <p class="text-content" style="border-top: 1px solid var(--border); padding-top: 12px; margin-top: 12px;">
+                    <strong>Instructions:</strong> Try copying the secret token or pasting. It will be blocked. Use CodeSavvy's <strong>Copy-Paste</strong> tool to bypass the block.
+                </p>
+            </div>
+
+            <!-- CARD 3: Restriction Engine Logger -->
+            <div class="card" style="background: rgba(255, 255, 255, 0.01);">
+                <div class="card-title">
+                    <span>3. Restrictions Logger</span>
+                    <span class="lock-indicator" style="background: rgba(16, 185, 129, 0.1); color: var(--success);">LOGGER ACTIVE</span>
+                </div>
+                <p class="text-content">
+                    Real-time monitoring of intercepted browser actions:
+                </p>
+                <div class="code-container" style="color: #10b981; height: 180px; overflow-y: auto;" id="logs-box">
+[Engine] Initialization successful. Monitoring events...
+[Engine] Restrictions globally active.
+</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Alert / Warning Toast -->
+    <div id="warning-toast" class="toast">Security warning message</div>
+
+    <!-- Restrictions Implementation Scripts -->
+    <script>
+        const logsBox = document.getElementById('logs-box');
+        const toast = document.getElementById('warning-toast');
+
+        function addLog(message) {
+            const timestamp = new Date().toLocaleTimeString();
+            logsBox.innerHTML += `\n[${timestamp}] ${message}`;
+            logsBox.scrollTop = logsBox.scrollHeight;
+        }
+
+        function showWarningToast(message, isSuccess = false) {
+            toast.textContent = message;
+            if (isSuccess) {
+                toast.classList.add('toast-success');
+                toast.classList.remove('restrict-select'); // visually allow interaction
+            } else {
+                toast.classList.remove('toast-success');
+            }
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+            addLog(`EVENT INTERCEPTED: ${message}`);
+        }
+
+        // --- 1. RIGHT CLICK BLOCKERS ---
+        // Bubbling layer blocker
+        document.addEventListener('contextmenu', function(e) {
+            showWarningToast('Right-click blocked by Document listener (contextmenu event).');
+            e.preventDefault();
+        });
+
+        // Capturing layer blocker (to catch elements that try to bypass bubbling)
+        window.addEventListener('contextmenu', function(e) {
+            addLog('Window contextmenu capturing listener processed.');
+        }, true);
+
+        // --- 2. USER SELECT BLOCKERS ---
+        // selectstart blocker
+        document.addEventListener('selectstart', function(e) {
+            // Check if select started inside target cards
+            if (e.target.closest('#select-card')) {
+                showWarningToast('Selection blocked by selectstart listener.');
+                e.preventDefault();
+            }
+        });
+
+        // Apply unselectable attribute programmatically
+        document.getElementById('select-card').setAttribute('unselectable', 'on');
+
+        // --- 3. COPY / CUT / PASTE BLOCKERS ---
+        const clipboardCard = document.getElementById('clipboard-card');
+        
+        clipboardCard.addEventListener('copy', function(e) {
+            showWarningToast('Copy event intercepted! Copy action blocked.');
+            e.preventDefault();
+            
+            // Try to overwrite the clipboard with generic warning text
+            if (e.clipboardData) {
+                e.clipboardData.setData('text/plain', '❌ SECURITY BLOCK: You are not allowed to copy from this portal!');
+                addLog('Clipboard data overwritten with warning text.');
+            }
+        });
+
+        clipboardCard.addEventListener('cut', function(e) {
+            showWarningToast('Cut event intercepted! Cut action blocked.');
+            e.preventDefault();
+        });
+
+        clipboardCard.addEventListener('paste', function(e) {
+            showWarningToast('Paste event intercepted! Paste action blocked.');
+            e.preventDefault();
+        });
+
+        // Success logs for validation
+        document.addEventListener('copy', function(e) {
+            if (e.defaultPrevented === false) {
+                addLog('✓ COPY SUCCESSFUL! (defaultPrevented is false)');
+            }
+        }, true);
+
+        document.addEventListener('paste', function(e) {
+            if (e.defaultPrevented === false) {
+                addLog('✓ PASTE SUCCESSFUL! (defaultPrevented is false)');
+            }
+        }, true);
+
+    </script>
+</body>
+</html>

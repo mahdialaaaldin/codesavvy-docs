@@ -14,11 +14,12 @@ This repository hosts the public documentation and live testing sandboxes for **
 
 This suite provides multiple specialized environments to test various extension features without security blocks or restrictions:
 
-1. **🔓 Forms & Inputs (`forms.html`):** Test DOM unlocking, disabled checkbox/dropdown bypasses, character max-length overrides, and password revealing.
-2. **✍️ Typography & Edit Mode (`typography.html`):** Test font injections and dynamic page-wide content editing (Design Mode).
-3. **📸 Media & Screenshots (`media.html`):** Test viewport screenshot capture, downloads, responsive scaling, and fullscreen window adjustments.
-4. **🤖 AI & Text Utility (`ai.html`):** Select sample strings, draft emails, and code to test Gemini enhancements and local case transformations via the right-click context menu.
-5. **⚡ Classic Sandbox (`test.html`):** The original all-in-one testing workspace with real-time stats trackers.
+1. **⚡ Classic Sandbox (`sandbox.html`):** The original all-in-one testing workspace with real-time stats trackers.
+2. **🔓 Forms & Inputs (`forms.html`):** Test DOM unlocking, disabled checkbox/dropdown bypasses, character max-length overrides, and password revealing.
+3. **✍️ Typography & Edit Mode (`typography.html`):** Test font injections and dynamic page-wide content editing (Design Mode).
+4. **📸 Media & Screenshots (`media.html`):** Test viewport screenshot capture, downloads, responsive scaling, and fullscreen window adjustments.
+5. **🤖 AI & Text Utility (`ai.html`):** Select sample strings, draft emails, and code to test Gemini enhancements and local case transformations via the right-click context menu.
+6. **🛡️ Security & Restrictions (`security.html`):** Test right-click interceptors, user-select restrictions, and clipboard copy/cut/paste blocking.
 
 ---
 
