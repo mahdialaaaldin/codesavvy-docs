@@ -4,13 +4,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CodeSavvy Extension - Sandbox & Docs</title>
+    <title>CodeSavvy — Developer Toolbox Documentation</title>
+    <meta name="description" content="CodeSavvy is a browser extension developer toolbox. Explore interactive sandboxes for DOM unlocking, font switching, AI text tools, screenshots, and more.">
     <link rel="icon" type="image/png" sizes="16x16" href="assets/icons/icon16.png">
     <link rel="icon" type="image/png" sizes="48x48" href="assets/icons/icon48.png">
     <link rel="icon" type="image/png" sizes="128x128" href="assets/icons/icon128.png">
     <link
         href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
         rel="stylesheet">
+    <!-- Theme system (load before CSS to prevent flash of incorrect theme) -->
+    <script src="theme.js"></script>
+    <link rel="stylesheet" href="theme.css">
     <style>
         :root {
             --bg-dark: #070a13;
@@ -37,7 +41,6 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            transition: background-color 0.3s, border-color 0.3s, transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         body {
@@ -53,18 +56,24 @@
             background-attachment: fixed;
         }
 
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: rgba(15, 23, 42, 0.5); }
+        ::-webkit-scrollbar-thumb { background: rgba(99, 102, 241, 0.3); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(99, 102, 241, 0.6); }
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 40px 20px;
         }
 
-        /* Top Header Navigation */
+        /* ── Header ─────────────────────────────── */
         header {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-bottom: 60px;
+            margin-bottom: 72px;
         }
 
         .logo-container {
@@ -80,18 +89,12 @@
             height: 46px;
             filter: drop-shadow(0 0 8px var(--primary-glow));
             animation: logoPulse 3s infinite ease-in-out;
+            flex-shrink: 0;
         }
 
         @keyframes logoPulse {
-
-            0%,
-            100% {
-                transform: scale(1);
-            }
-
-            50% {
-                transform: scale(1.05) rotate(3deg);
-            }
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05) rotate(3deg); }
         }
 
         .logo-text {
@@ -103,73 +106,179 @@
             -webkit-text-fill-color: transparent;
         }
 
-        .policy-nav-btn {
+        .nav-links {
+            display: flex;
+            gap: 8px;
+        }
+
+        .nav-btn {
             background: rgba(255, 255, 255, 0.03);
             border: 1px solid var(--border-normal);
-            padding: 10px 20px;
+            padding: 9px 18px;
             border-radius: var(--radius-sm);
             font-size: 0.85rem;
             color: var(--text-secondary);
             text-decoration: none;
             font-weight: 600;
+            transition: all 0.2s ease;
         }
 
-        .policy-nav-btn:hover {
-            background: rgba(16, 185, 129, 0.1);
-            border-color: var(--secondary);
+        .nav-btn:hover {
+            background: rgba(99, 102, 241, 0.1);
+            border-color: var(--primary);
             color: #fff;
         }
 
-        /* Hero / Intro */
+        /* ── Version Badge ───────────────────────── */
+        .version-ribbon {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px solid rgba(99, 102, 241, 0.25);
+            border-radius: 999px;
+            padding: 5px 14px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: #a5b4fc;
+            margin-bottom: 24px;
+            font-family: 'JetBrains Mono', monospace;
+            letter-spacing: 0.5px;
+        }
+
+        .version-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--secondary);
+            box-shadow: 0 0 6px var(--secondary);
+            animation: blink 2s ease-in-out infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+
+        /* ── Hero ────────────────────────────────── */
         .hero {
             text-align: center;
-            margin-bottom: 60px;
+            margin-bottom: 72px;
         }
 
         .hero h1 {
-            font-size: 3rem;
+            font-size: clamp(2.2rem, 5vw, 3.4rem);
             font-weight: 800;
-            letter-spacing: -1px;
-            margin-bottom: 16px;
-            line-height: 1.2;
-            background: linear-gradient(to right, #fff 50%, var(--text-secondary));
+            letter-spacing: -1.5px;
+            margin-bottom: 20px;
+            line-height: 1.15;
+            background: linear-gradient(160deg, #ffffff 40%, #94a3b8 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
         .hero p {
-            font-size: 1.15rem;
+            font-size: 1.1rem;
             color: var(--text-secondary);
-            max-width: 700px;
-            margin: 0 auto;
+            max-width: 620px;
+            margin: 0 auto 32px;
+            line-height: 1.7;
         }
 
-        /* Grid */
+        .hero-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--primary-gradient);
+            color: #fff;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.95rem;
+            padding: 13px 28px;
+            border-radius: var(--radius-sm);
+            box-shadow: 0 4px 20px rgba(99, 102, 241, 0.35);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .hero-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(99, 102, 241, 0.5);
+        }
+
+        /* ── Feature Pills ───────────────────────── */
+        .feature-pills {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 72px;
+        }
+
+        .pill {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-normal);
+            border-radius: 999px;
+            padding: 7px 16px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            backdrop-filter: blur(8px);
+            transition: border-color 0.2s, color 0.2s;
+        }
+
+        .pill:hover {
+            border-color: var(--primary);
+            color: #fff;
+        }
+
+        .pill-icon {
+            font-size: 1rem;
+        }
+
+        /* ── Section Labels ──────────────────────── */
+        .section-label {
+            font-size: 0.72rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+        }
+
+        /* ── Grid ────────────────────────────────── */
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 24px;
-            margin-bottom: 60px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 24px;
         }
 
-        /* Interactive cards */
+        /* ── Sandbox Cards ───────────────────────── */
         .card-link {
             text-decoration: none;
             color: inherit;
+            display: flex;
         }
 
         .card {
             background-color: var(--bg-card);
             border: 1px solid var(--border-normal);
             border-radius: var(--radius-lg);
-            padding: 30px;
+            padding: 28px;
             box-shadow: var(--shadow-card);
             display: flex;
             flex-direction: column;
-            gap: 16px;
-            height: 100%;
+            gap: 14px;
+            width: 100%;
             position: relative;
             overflow: hidden;
+            transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+                        border-color 0.25s ease,
+                        box-shadow 0.25s ease,
+                        background-color 0.25s ease;
         }
 
         .card::before {
@@ -185,8 +294,8 @@
         }
 
         .card:hover {
-            transform: translateY(-4px);
-            border-color: var(--primary);
+            transform: translateY(-5px);
+            border-color: rgba(99, 102, 241, 0.35);
             box-shadow: var(--shadow-glow), var(--shadow-card);
             background: var(--bg-card-hover);
         }
@@ -196,15 +305,16 @@
         }
 
         .card-icon {
-            font-size: 2rem;
+            font-size: 1.6rem;
             background: rgba(255, 255, 255, 0.03);
-            width: 52px;
-            height: 52px;
+            width: 50px;
+            height: 50px;
             border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
             border: 1px solid var(--border-normal);
+            transition: background 0.25s, border-color 0.25s;
         }
 
         .card:hover .card-icon {
@@ -213,90 +323,158 @@
         }
 
         .card h2 {
-            font-size: 1.25rem;
+            font-size: 1.15rem;
             font-weight: 700;
             color: #fff;
         }
 
         .card p {
-            font-size: 0.9rem;
+            font-size: 0.88rem;
             color: var(--text-secondary);
-            line-height: 1.5;
+            line-height: 1.55;
+            flex: 1;
         }
 
         .card-footer-action {
             font-size: 0.8rem;
             font-weight: 700;
             color: var(--primary);
-            margin-top: auto;
             display: flex;
             align-items: center;
             gap: 6px;
         }
 
-        /* Banner for privacy policy */
+        /* ── Policy Banners ──────────────────────── */
+        .banners {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 16px;
+            margin-bottom: 60px;
+        }
+
         .policy-banner {
             background: var(--bg-card);
             border: 1px solid var(--border-normal);
-            border-radius: var(--radius-lg);
-            padding: 30px;
+            border-radius: var(--radius-md);
+            padding: 24px 28px;
             box-shadow: var(--shadow-card);
             display: flex;
             align-items: center;
             justify-content: space-between;
             gap: 20px;
+            transition: border-color 0.2s ease;
+        }
+
+        .policy-banner:hover {
+            border-color: var(--secondary);
         }
 
         .policy-banner-left {
             display: flex;
             align-items: center;
-            gap: 20px;
+            gap: 16px;
         }
 
         .policy-icon {
-            font-size: 2rem;
+            font-size: 1.5rem;
             color: var(--secondary);
-            width: 52px;
-            height: 52px;
+            width: 48px;
+            height: 48px;
             border-radius: 12px;
             background: var(--secondary-glow);
             display: flex;
             align-items: center;
             justify-content: center;
             border: 1px solid rgba(16, 185, 129, 0.2);
+            flex-shrink: 0;
         }
 
         .policy-text-group h3 {
-            font-size: 1.15rem;
+            font-size: 1rem;
             font-weight: 700;
             color: #fff;
+            margin-bottom: 3px;
         }
 
         .policy-text-group p {
+            font-size: 0.82rem;
+            color: var(--text-secondary);
+        }
+
+        .banner-btn {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-normal);
+            padding: 9px 18px;
+            border-radius: var(--radius-sm);
+            font-size: 0.82rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 600;
+            white-space: nowrap;
+            transition: all 0.2s ease;
+        }
+
+        .banner-btn:hover {
+            background: rgba(16, 185, 129, 0.1);
+            border-color: var(--secondary);
+            color: #fff;
+        }
+
+        /* ── Keyboard Shortcuts Strip ─────────────── */
+        .shortcuts-strip {
+            background: var(--bg-card);
+            border: 1px solid var(--border-normal);
+            border-radius: var(--radius-md);
+            padding: 20px 28px;
+            margin-bottom: 60px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px 32px;
+            align-items: center;
+        }
+
+        .shortcuts-title {
+            font-size: 0.75rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--text-muted);
+            flex-basis: 100%;
+            margin-bottom: 4px;
+        }
+
+        .shortcut-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
             font-size: 0.85rem;
             color: var(--text-secondary);
         }
 
-        @media (max-width: 768px) {
-            .policy-banner {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            .policy-banner .policy-nav-btn {
-                width: 100%;
-                text-align: center;
-            }
+        .shortcut-item strong {
+            color: var(--text-main);
+            font-weight: 600;
         }
 
-        /* Footer */
+        kbd {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.72rem;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-bottom-width: 2px;
+            border-radius: 5px;
+            padding: 2px 8px;
+            color: #a5b4fc;
+            white-space: nowrap;
+        }
+
+        /* ── Footer ──────────────────────────────── */
         footer {
             text-align: center;
-            margin-top: 80px;
             padding-top: 24px;
             border-top: 1px solid var(--border-normal);
             color: var(--text-muted);
-            font-size: 14px;
+            font-size: 0.85rem;
         }
 
         footer a {
@@ -308,16 +486,22 @@
         footer a:hover {
             text-decoration: underline;
         }
+
+        @media (max-width: 600px) {
+            .policy-banner { flex-direction: column; align-items: flex-start; }
+            .banner-btn { width: 100%; text-align: center; }
+            .shortcuts-strip { flex-direction: column; gap: 12px; }
+        }
     </style>
 </head>
 
 <body>
     <div class="container">
+
         <!-- Header -->
         <header>
             <a href="#" class="logo-container">
-                <svg id="codesavvy-master-svg" viewBox="0 0 512 512" class="logo-icon-svg" fill="none"
-                    xmlns="http://www.w3.org/2000/svg">
+                <svg viewBox="0 0 512 512" class="logo-icon-svg" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <defs>
                         <filter id="vector-glow" x="-20%" y="-20%" width="140%" height="140%">
                             <feGaussianBlur stdDeviation="12" result="blur" />
@@ -348,28 +532,56 @@
                 </svg>
                 <span class="logo-text">CodeSavvy</span>
             </a>
-            <a href="privacy.html" class="policy-nav-btn">Privacy Policy</a>
+            <nav class="nav-links">
+                <a href="changelog.html" class="nav-btn">📜 Changelog</a>
+                <a href="privacy.html" class="nav-btn">🛡️ Privacy</a>
+            </nav>
         </header>
 
-        <!-- Hero / Title -->
+        <!-- Hero -->
         <section class="hero">
-            <h1>Interactive Testing Sandboxes</h1>
+            <div class="version-ribbon">
+                <div class="version-dot"></div>
+                v2.2.3 — Manifest V3
+            </div>
+            <h1>CodeSavvy<br>Developer Toolbox</h1>
             <p>
-                Welcome to the CodeSavvy documentation and testing suite. Select one of our dedicated sandbox
-                environments below to test individual extension features in real-time.
+                A powerful browser extension packed with DOM manipulation tools, AI-powered text utilities
+                via Google Gemini, customizable themes, and more — built for developers and power users.
             </p>
+            <a href="https://chromewebstore.google.com/detail/codesavvy/jenendhnlcnokliclhccikgeohdgfhml"
+               class="hero-cta" target="_blank" rel="noopener noreferrer">
+                🔗 Get on Chrome Web Store
+            </a>
         </section>
 
-        <!-- Grid of Sandboxes -->
-        <div class="grid">
+        <!-- Feature Pills -->
+        <div class="feature-pills">
+            <div class="pill"><span class="pill-icon">🔓</span> Unlock DOM Elements</div>
+            <div class="pill"><span class="pill-icon">∞</span> Remove Input Limits</div>
+            <div class="pill"><span class="pill-icon">👁️</span> Reveal Passwords</div>
+            <div class="pill"><span class="pill-icon">🖱️</span> Force Right-Click</div>
+            <div class="pill"><span class="pill-icon">📋</span> Enable Copy-Paste</div>
+            <div class="pill"><span class="pill-icon">✍️</span> Edit Mode</div>
+            <div class="pill"><span class="pill-icon">🔤</span> Custom Font Injection</div>
+            <div class="pill"><span class="pill-icon">🗑️</span> Clear Cache</div>
+            <div class="pill"><span class="pill-icon">📸</span> Screenshot Capture</div>
+            <div class="pill"><span class="pill-icon">⛶</span> Fullscreen Toggle</div>
+            <div class="pill"><span class="pill-icon">🤖</span> Google Gemini AI</div>
+            <div class="pill"><span class="pill-icon">🎨</span> 7 Color Themes</div>
+        </div>
+
+        <!-- Sandbox Environments -->
+        <div class="section-label">Interactive Sandbox Environments</div>
+        <div class="grid" style="margin-bottom: 60px;">
 
             <!-- Card 1: Classic Sandbox -->
             <a href="sandbox.html" class="card-link">
                 <div class="card">
                     <div class="card-icon">⚡</div>
                     <h2>Classic Sandbox</h2>
-                    <p>The original all-in-one testing workbench featuring interactive fields and stats tracker for
-                        testing all extension commands.</p>
+                    <p>The all-in-one testing workbench featuring interactive fields, a real-time stats tracker,
+                        and quick-access demos for the extension's main tool categories.</p>
                     <span class="card-footer-action">Open Sandbox →</span>
                 </div>
             </a>
@@ -378,9 +590,10 @@
             <a href="forms.html" class="card-link">
                 <div class="card">
                     <div class="card-icon">🔓</div>
-                    <h2>Forms & Inputs</h2>
-                    <p>Test input unlocking, disabled checkbox toggles, read-only field bypasses, password revealing,
-                        and max character length limits override.</p>
+                    <h2>Forms &amp; Inputs</h2>
+                    <p>Test the <strong>Elements</strong> unlocker, <strong>Remove Limits</strong>
+                        on maxlength fields, <strong>Passwords</strong> reveal,
+                        and disabled checkbox bypasses on real form controls.</p>
                     <span class="card-footer-action">Open Sandbox →</span>
                 </div>
             </a>
@@ -389,9 +602,10 @@
             <a href="typography.html" class="card-link">
                 <div class="card">
                     <div class="card-icon">✍️</div>
-                    <h2>Typography & Edit Mode</h2>
-                    <p>Test dynamic readability font injection (such as Lexend Deca or Atkinson Hyperlegible) and
-                        document-wide Design Mode live text overrides.</p>
+                    <h2>Typography &amp; Edit Mode</h2>
+                    <p>Test the <strong>Change Font</strong> injection across 30+ typefaces
+                        and <strong>Edit Mode</strong> (Design Mode) for live in-page
+                        content editing.</p>
                     <span class="card-footer-action">Open Sandbox →</span>
                 </div>
             </a>
@@ -400,20 +614,22 @@
             <a href="media.html" class="card-link">
                 <div class="card">
                     <div class="card-icon">📸</div>
-                    <h2>Media & Screenshots</h2>
-                    <p>Test viewport screenshot captures with download redirection, full-page design elements scaling,
-                        and fullscreen browser window controls.</p>
+                    <h2>Media &amp; Screenshots</h2>
+                    <p>Test viewport <strong>Screenshot</strong> capture with automatic
+                        download, <strong>Fullscreen</strong> toggle, and responsive
+                        scaling controls.</p>
                     <span class="card-footer-action">Open Sandbox →</span>
                 </div>
             </a>
 
-            <!-- Card 5: AI & Text Transformations -->
+            <!-- Card 5: AI & Text Utility -->
             <a href="ai.html" class="card-link">
                 <div class="card">
                     <div class="card-icon">🤖</div>
-                    <h2>AI & Text Utility</h2>
-                    <p>Select mock strings, drafts, and coding fragments to test context-menu utility transformations
-                        and Google Gemini text improvements.</p>
+                    <h2>AI &amp; Text Utility</h2>
+                    <p>Select text from sample content, right-click, and test <strong>Gemini AI</strong>
+                        enhancements (Improve Text, Enhance Professionally, Add Humor, Roasted Mode…)
+                        and local case transformations via the context menu.</p>
                     <span class="card-footer-action">Open Sandbox →</span>
                 </div>
             </a>
@@ -422,25 +638,62 @@
             <a href="security.html" class="card-link">
                 <div class="card">
                     <div class="card-icon">🛡️</div>
-                    <h2>Security & Restrictions</h2>
-                    <p>Test right-click interceptors, user-select restrictions, copy/cut/paste blocking, and contextmenu
-                        event prevention.</p>
+                    <h2>Security &amp; Restrictions</h2>
+                    <p>Test <strong>Right Click</strong> unlocker, <strong>Select Text</strong>
+                        and <strong>Copy-Paste</strong> restorer against right-click
+                        interceptors and clipboard-blocking scripts.</p>
                     <span class="card-footer-action">Open Sandbox →</span>
                 </div>
             </a>
 
         </div>
 
-        <!-- Privacy Policy Banner -->
-        <div class="policy-banner">
-            <div class="policy-banner-left">
-                <div class="policy-icon">🛡️</div>
-                <div class="policy-text-group">
-                    <h3>CodeSavvy Privacy Policy</h3>
-                    <p>Read about our local-first storage policy and how we protect your settings and API keys.</p>
-                </div>
+        <!-- Keyboard Shortcuts -->
+        <div class="shortcuts-strip">
+            <div class="shortcuts-title">⌨️ Global Keyboard Shortcuts</div>
+            <div class="shortcut-item">
+                <kbd>Ctrl+Shift+E</kbd>
+                <span><strong>Unlock Elements</strong></span>
             </div>
-            <a href="privacy.html" class="policy-nav-btn">View Privacy Policy</a>
+            <div class="shortcut-item">
+                <kbd>Ctrl+Shift+Y</kbd>
+                <span><strong>Toggle Edit Mode</strong></span>
+            </div>
+            <div class="shortcut-item">
+                <kbd>Ctrl+Shift+L</kbd>
+                <span><strong>Improve Selected Text</strong> (Gemini)</span>
+            </div>
+            <div class="shortcut-item">
+                <kbd>Ctrl+Shift+R</kbd>
+                <span><strong>Clear Cache &amp; Reload</strong></span>
+            </div>
+        </div>
+
+        <!-- Banners -->
+        <div class="banners">
+            <!-- Changelog -->
+            <div class="policy-banner">
+                <div class="policy-banner-left">
+                    <div class="policy-icon">📜</div>
+                    <div class="policy-text-group">
+                        <h3>Release Changelog</h3>
+                        <p>Full version history from v1.0 to v2.2.3 — features, AI upgrades &amp; theme releases.</p>
+                    </div>
+                </div>
+                <a href="changelog.html" class="banner-btn">View Notes →</a>
+            </div>
+
+            <!-- Privacy Policy -->
+            <div class="policy-banner">
+                <div class="policy-banner-left">
+                    <div class="policy-icon">🛡️</div>
+                    <div class="policy-text-group">
+                        <h3>Privacy Policy</h3>
+                        <p>Local-first storage — your API keys and settings never leave your browser.</p>
+                    </div>
+                </div>
+                <a href="privacy.html" class="banner-btn">View Policy →</a>
+            </div>
         </div>
 
         <!-- Footer -->
@@ -448,6 +701,7 @@
             <p>&copy; 2026 CodeSavvy. All rights reserved. Created by <a href="https://github.com/mahdialaaaldin"
                     target="_blank" rel="noopener noreferrer">mahdialaaaldin</a>.</p>
         </footer>
+
     </div>
 </body>
 

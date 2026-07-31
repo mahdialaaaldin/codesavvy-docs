@@ -6,6 +6,7 @@ This repository hosts the public documentation and live testing sandboxes for **
 
 * **Chrome Web Store:** [Get CodeSavvy on Chrome Web Store](https://chromewebstore.google.com/detail/codesavvy/jenendhnlcnokliclhccikgeohdgfhml)
 * **Privacy Policy:** [privacy.html](https://mahdialaaaldin.github.io/codesavvy-docs/privacy.html) (Registered on Chrome Web Store Dashboard)
+* **Release Changelog:** [changelog.html](https://mahdialaaaldin.github.io/codesavvy-docs/changelog.html)
 * **Interactive Sandbox Hub:** [index.html](https://mahdialaaaldin.github.io/codesavvy-docs/index.html)
 
 ---

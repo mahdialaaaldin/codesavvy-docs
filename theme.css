@@ -1,0 +1,419 @@
+/* ─────────────────────────────────────────────────────────────────────────────
+   CodeSavvy Docs — Theme System
+   Defines light/dark mode overrides via [data-theme] on <html>.
+   All pages share this sheet; each page's own :root defines dark defaults.
+───────────────────────────────────────────────────────────────────────────── */
+
+/* ── Floating Theme Toggle Button ─────────────────────────────────────────── */
+#cs-theme-toggle {
+    position: fixed;
+    bottom: 28px;
+    right: 28px;
+    z-index: 9999;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(15, 23, 42, 0.75);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    cursor: pointer;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(99, 102, 241, 0.2);
+    transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+                box-shadow 0.2s ease,
+                background 0.3s ease,
+                border-color 0.3s ease;
+    user-select: none;
+}
+
+#cs-theme-toggle:hover {
+    transform: scale(1.12);
+    box-shadow: 0 6px 28px rgba(99, 102, 241, 0.4), 0 0 0 1px rgba(99, 102, 241, 0.4);
+}
+
+#cs-theme-toggle:active {
+    transform: scale(0.96);
+}
+
+/* Light mode button variant */
+html[data-theme="light"] #cs-theme-toggle {
+    background: rgba(255, 255, 255, 0.85);
+    border-color: rgba(99, 102, 241, 0.25);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(99, 102, 241, 0.15);
+    color: #0f172a;
+}
+
+/* ── Light Theme: CSS Variable Overrides ──────────────────────────────────── */
+/*
+   Overrides all the custom properties the docs use.
+   Pages define dark defaults in :root; we re-declare them
+   on html[data-theme="light"] which has higher specificity.
+*/
+
+html[data-theme="light"] {
+
+    /* Backgrounds */
+    --bg-dark:        #f0f4f8;
+    --bg-card:        rgba(255, 255, 255, 0.85);
+    --bg-card-hover:  rgba(241, 245, 249, 0.9);
+
+    /* Borders */
+    --border-normal:  rgba(148, 163, 184, 0.22);
+    --border-glow:    rgba(99, 102, 241, 0.12);
+
+    /* Text */
+    --text-main:      #0f172a;
+    --text-secondary: #475569;
+    --text-muted:     #64748b;
+
+    /* Shadows */
+    --shadow-card:    0 4px 16px 0 rgba(0, 0, 0, 0.07), 0 1px 4px rgba(0,0,0,0.05);
+    --shadow-glow:    0 0 20px rgba(99, 102, 241, 0.12);
+
+    /* Security page variables */
+    --bg:             #f0f4f8;
+    --card-bg:        #ffffff;
+    --text:           #0f172a;
+    --border:         rgba(148, 163, 184, 0.2);
+    --text-muted:     #64748b;
+}
+
+/* ── Light: Body Base ─────────────────────────────────────────────────────── */
+html[data-theme="light"] body {
+    background-color: #f0f4f8; /* covers both --bg-dark and --bg consumers */
+    background-image:
+        radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.06) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(168, 85, 247, 0.05) 0%, transparent 40%);
+    color: #0f172a;
+}
+
+/* ── Light: Cards ─────────────────────────────────────────────────────────── */
+html[data-theme="light"] .card,
+html[data-theme="light"] .settings-section,
+html[data-theme="light"] .policy-banner,
+html[data-theme="light"] .tip-box,
+html[data-theme="light"] .stat-badge,
+html[data-theme="light"] .shortcuts-strip,
+html[data-theme="light"] .incognito-banner,
+html[data-theme="light"] .how-to {
+    background: var(--bg-card);
+    border-color: var(--border-normal);
+    box-shadow: var(--shadow-card);
+    color: var(--text-main);
+}
+
+html[data-theme="light"] .card:hover {
+    background: var(--bg-card-hover);
+    border-color: rgba(99, 102, 241, 0.35);
+    box-shadow: 0 0 20px rgba(99, 102, 241, 0.12), var(--shadow-card);
+}
+
+/* ── Light: Header ────────────────────────────────────────────────────────── */
+html[data-theme="light"] header {
+    background: rgba(255, 255, 255, 0.88);
+    border-color: rgba(148, 163, 184, 0.22);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+    backdrop-filter: blur(12px);
+}
+
+/* ── Light: Nav buttons ───────────────────────────────────────────────────── */
+html[data-theme="light"] .nav-btn,
+html[data-theme="light"] .back-btn,
+html[data-theme="light"] .banner-btn {
+    background: rgba(248, 250, 252, 0.8);
+    border-color: rgba(148, 163, 184, 0.25);
+    color: #475569;
+}
+
+html[data-theme="light"] .nav-btn:hover,
+html[data-theme="light"] .back-btn:hover,
+html[data-theme="light"] .banner-btn:hover {
+    background: rgba(224, 231, 255, 0.5);
+    border-color: #6366f1;
+    color: #4338ca;
+}
+
+/* ── Light: Pills & Badges ────────────────────────────────────────────────── */
+html[data-theme="light"] .pill {
+    background: rgba(255, 255, 255, 0.85);
+    border-color: rgba(148, 163, 184, 0.25);
+    color: #475569;
+}
+
+html[data-theme="light"] .pill:hover {
+    border-color: #6366f1;
+    color: #4338ca;
+}
+
+html[data-theme="light"] .version-ribbon {
+    background: rgba(224, 231, 255, 0.6);
+    border-color: rgba(99, 102, 241, 0.3);
+    color: #4338ca;
+}
+
+html[data-theme="light"] .page-badge {
+    background: rgba(224, 231, 255, 0.6);
+    border-color: rgba(99, 102, 241, 0.3);
+    color: #4338ca;
+}
+
+html[data-theme="light"] .menu-tag.ai {
+    background: rgba(99, 102, 241, 0.08);
+    border-color: rgba(99, 102, 241, 0.2);
+    color: #4338ca;
+}
+
+html[data-theme="light"] .menu-tag.local {
+    background: rgba(16, 185, 129, 0.08);
+    border-color: rgba(16, 185, 129, 0.2);
+    color: #065f46;
+}
+
+html[data-theme="light"] .menu-tag.beta {
+    background: rgba(245, 158, 11, 0.08);
+    border-color: rgba(245, 158, 11, 0.2);
+    color: #92400e;
+}
+
+/* ── Light: Text Colors & Headings ────────────────────────────────────────── */
+html[data-theme="light"] .hero h1,
+html[data-theme="light"] .logo-title h1,
+html[data-theme="light"] .brand-title h1,
+html[data-theme="light"] .logo-text,
+html[data-theme="light"] .version-title,
+html[data-theme="light"] .section-title {
+    background: linear-gradient(160deg, #0f172a 30%, #334155 100%) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    color: #0f172a !important;
+}
+
+html[data-theme="light"] h1,
+html[data-theme="light"] h2,
+html[data-theme="light"] h3,
+html[data-theme="light"] h4,
+html[data-theme="light"] h5,
+html[data-theme="light"] h6,
+html[data-theme="light"] .card h2,
+html[data-theme="light"] .card-header h2,
+html[data-theme="light"] .card-title,
+html[data-theme="light"] .policy-text-group h3,
+html[data-theme="light"] .section-label,
+html[data-theme="light"] .shortcuts-title,
+html[data-theme="light"] .highlight-card h3,
+html[data-theme="light"] .content-section h2 {
+    color: #0f172a !important;
+}
+
+/* Bold text elements in light mode */
+html[data-theme="light"] strong,
+html[data-theme="light"] b,
+html[data-theme="light"] .shortcut-item strong,
+html[data-theme="light"] .tip-desc strong,
+html[data-theme="light"] .how-to strong,
+html[data-theme="light"] .text-content strong,
+html[data-theme="light"] .card p strong,
+html[data-theme="light"] .swatch-title strong {
+    color: #0f172a !important;
+    font-weight: 700;
+}
+
+html[data-theme="light"] .hero p,
+html[data-theme="light"] .card p,
+html[data-theme="light"] .tip-desc,
+html[data-theme="light"] .text-content,
+html[data-theme="light"] .card-header .sub,
+html[data-theme="light"] .policy-text-group p,
+html[data-theme="light"] .how-to,
+html[data-theme="light"] .shortcut-item,
+html[data-theme="light"] .highlight-card p,
+html[data-theme="light"] .content-section p,
+html[data-theme="light"] .permission-desc {
+    color: #475569;
+}
+
+html[data-theme="light"] .card-footer-action {
+    color: #6366f1;
+}
+
+html[data-theme="light"] .tip-title,
+html[data-theme="light"] .selection-label {
+    color: #4338ca;
+}
+
+html[data-theme="light"] .brand-title p {
+    color: #475569;
+}
+
+/* ── Light: Selection Boxes (AI sandbox) ──────────────────────────────────── */
+html[data-theme="light"] .selection-box {
+    background: rgba(241, 245, 249, 0.8);
+    border-color: rgba(148, 163, 184, 0.25);
+    color: #1e293b;
+}
+
+html[data-theme="light"] .selection-box:hover {
+    border-color: rgba(99, 102, 241, 0.3);
+    background: rgba(224, 231, 255, 0.2);
+}
+
+html[data-theme="light"] .selection-box .selection-label {
+    background: #ffffff;
+    border-color: rgba(148, 163, 184, 0.25);
+    color: #6366f1;
+}
+
+html[data-theme="light"] .selection-box.code-block {
+    background: rgba(15, 23, 42, 0.04);
+    color: #3730a3;
+}
+
+/* ── Light: Form Inputs ───────────────────────────────────────────────────── */
+html[data-theme="light"] input[type="text"],
+html[data-theme="light"] input[type="password"],
+html[data-theme="light"] select,
+html[data-theme="light"] textarea,
+html[data-theme="light"] .form-input {
+    background: #f8fafc;
+    border-color: rgba(148, 163, 184, 0.3);
+    color: #0f172a;
+}
+
+html[data-theme="light"] input[type="text"]:focus,
+html[data-theme="light"] input[type="password"]:focus,
+html[data-theme="light"] select:focus,
+html[data-theme="light"] textarea:focus,
+html[data-theme="light"] .form-input:focus {
+    border-color: #6366f1;
+    background: #ffffff;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.12);
+}
+
+html[data-theme="light"] input:disabled,
+html[data-theme="light"] select:disabled,
+html[data-theme="light"] textarea:disabled {
+    background: rgba(148, 163, 184, 0.08) !important;
+    border-color: rgba(148, 163, 184, 0.15) !important;
+    color: #94a3b8 !important;
+}
+
+html[data-theme="light"] .divDisabled {
+    border-color: rgba(239, 68, 68, 0.15);
+    background: rgba(239, 68, 68, 0.02);
+    color: #94a3b8;
+}
+
+/* ── Light: Sandbox Stat Badges ───────────────────────────────────────────── */
+html[data-theme="light"] .stat-badge {
+    background: rgba(241, 245, 249, 0.9);
+    border-color: rgba(148, 163, 184, 0.22);
+}
+
+html[data-theme="light"] .stat-badge span:first-child {
+    color: #64748b;
+}
+
+/* ── Light: Security page card backgrounds ────────────────────────────────── */
+html[data-theme="light"] .code-container {
+    background-color: #f1f5f9;
+    border-color: rgba(148, 163, 184, 0.25);
+    color: #3730a3;
+}
+
+html[data-theme="light"] .inline-restricted-box {
+    background: rgba(239, 68, 68, 0.04);
+    border-color: rgba(239, 68, 68, 0.25);
+}
+
+html[data-theme="light"] .lock-indicator {
+    background: rgba(239, 68, 68, 0.08);
+}
+
+/* ── Light: Scrollbar ─────────────────────────────────────────────────────── */
+html[data-theme="light"] ::-webkit-scrollbar-track {
+    background: rgba(241, 245, 249, 0.8);
+}
+
+html[data-theme="light"] ::-webkit-scrollbar-thumb {
+    background: rgba(99, 102, 241, 0.2);
+}
+
+html[data-theme="light"] ::-webkit-scrollbar-thumb:hover {
+    background: rgba(99, 102, 241, 0.4);
+}
+
+/* ── Light: Footer ────────────────────────────────────────────────────────── */
+html[data-theme="light"] footer {
+    border-color: rgba(148, 163, 184, 0.2);
+    color: #64748b;
+}
+
+/* ── Light: Section separators ────────────────────────────────────────────── */
+html[data-theme="light"] .card-header {
+    border-color: rgba(148, 163, 184, 0.18);
+}
+
+html[data-theme="light"] .section-title::after {
+    background: linear-gradient(90deg, rgba(148, 163, 184, 0.2) 0%, transparent 100%);
+}
+
+/* ── Light: Keyboard badge ────────────────────────────────────────────────── */
+html[data-theme="light"] kbd {
+    background: rgba(241, 245, 249, 0.9);
+    border-color: rgba(148, 163, 184, 0.3);
+    border-bottom-color: rgba(148, 163, 184, 0.5);
+    color: #4338ca;
+}
+
+/* ── Light: Policy icon ───────────────────────────────────────────────────── */
+html[data-theme="light"] .policy-icon {
+    background: rgba(16, 185, 129, 0.08);
+    border-color: rgba(16, 185, 129, 0.18);
+}
+
+/* ── Light: Body background gradient ─────────────────────────────────────── */
+html[data-theme="light"] body::before,
+html[data-theme="light"] body::after {
+    opacity: 0.6;
+}
+
+/* ── Light: Changelog specific ────────────────────────────────────────────── */
+html[data-theme="light"] .timeline-item,
+html[data-theme="light"] .change-entry {
+    background: rgba(255, 255, 255, 0.85);
+    border-color: rgba(148, 163, 184, 0.22);
+}
+
+html[data-theme="light"] .version-header,
+html[data-theme="light"] .release-header {
+    background: rgba(255, 255, 255, 0.9);
+    border-color: rgba(148, 163, 184, 0.22);
+}
+
+/* ── Smooth theme-switch transitions ──────────────────────────────────────── */
+/*
+   Only animate color/bg/shadow — never override transform or opacity
+   to avoid breaking existing card hover / logo pulse animations.
+*/
+body,
+header, footer,
+.card, .pill, .nav-btn, .back-btn, .banner-btn,
+.tip-box, .how-to, .policy-banner, .shortcuts-strip,
+.stat-badge, .selection-box, .menu-tag, .version-ribbon,
+.page-badge, .code-container, .card-header,
+input, select, textarea, button, kbd {
+    transition-property: background-color, border-color, color, box-shadow, fill, stroke;
+    transition-duration: 0.25s;
+    transition-timing-function: ease;
+}
+
+#cs-theme-toggle {
+    transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+                box-shadow 0.2s ease,
+                background-color 0.25s ease,
+                border-color 0.25s ease;
+}

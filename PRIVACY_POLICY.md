@@ -33,12 +33,13 @@ In compliance with Chrome Web Store policies, we practice data minimization. We 
 
 * **`activeTab`**: Allows the Extension to temporarily access the webpage you are viewing so you can use features like "Unlock Elements", "Change Font", and "Toggle Edit Mode".
 * **`scripting`**: Required to inject content scripts that modify fonts, unlock disabled buttons, and alter styles on the active webpage.
-* **`storage`**: Needed to save your local settings, preferences, and Gemini API Key.
-* **`tabs`**: Used to identify the active tab to execute screenshots and page reloads safely.
+* **`storage`**: Needed to save your local settings, preferences, and Gemini API Key via `chrome.storage.local`.
 * **`browsingData`**: Necessary to clear the browser cache when you click the "Clear Cache" button.
 * **`contextMenus`**: Allows CodeSavvy to register context menu items so you can perform AI text enhancements and case transformations by right-clicking selected text.
 * **`notifications`**: Displays brief desktop alerts for status changes (e.g., when the cache is successfully cleared).
 * **`downloads`**: Used to download and save screenshot files to your local system when using the "Take Screenshot" tool.
+
+*(Note: CodeSavvy does **not** request broad `tabs` permissions, ensuring your browser history and tab URLs remain completely private.)*
 
 ---
 

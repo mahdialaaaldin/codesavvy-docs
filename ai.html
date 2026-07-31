@@ -4,13 +4,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CodeSavvy Sandbox - AI & Text Manipulation</title>
+    <title>CodeSavvy Sandbox — AI &amp; Text Utility</title>
+    <meta name="description" content="Test CodeSavvy's Gemini AI text enhancements and local text utility transformations via the right-click context menu.">
     <link rel="icon" type="image/png" sizes="16x16" href="assets/icons/icon16.png">
     <link rel="icon" type="image/png" sizes="48x48" href="assets/icons/icon48.png">
     <link rel="icon" type="image/png" sizes="128x128" href="assets/icons/icon128.png">
     <link
         href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
         rel="stylesheet">
+    <!-- Theme system -->
+    <script src="theme.js"></script>
+    <link rel="stylesheet" href="theme.css">
     <style>
         :root {
             --bg-dark: #070a13;
@@ -52,6 +56,11 @@
             background-attachment: fixed;
         }
 
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: rgba(15, 23, 42, 0.5); }
+        ::-webkit-scrollbar-thumb { background: rgba(99, 102, 241, 0.3); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(99, 102, 241, 0.6); }
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -67,7 +76,7 @@
             background: var(--bg-card);
             border: 1px solid var(--border-normal);
             backdrop-filter: blur(12px);
-            padding: 20px 32px;
+            padding: 18px 28px;
             border-radius: var(--radius-lg);
             box-shadow: var(--shadow-card);
         }
@@ -75,23 +84,35 @@
         .logo-group {
             display: flex;
             align-items: center;
-            gap: 16px;
+            gap: 14px;
             text-decoration: none;
             color: inherit;
         }
 
-        .logo-img {
-            width: 42px;
-            height: 42px;
-            filter: drop-shadow(0 0 8px rgba(99, 102, 241, 0.4));
+        .logo-svg {
+            width: 36px;
+            height: 36px;
+            filter: drop-shadow(0 0 6px rgba(99, 102, 241, 0.4));
+            flex-shrink: 0;
         }
 
-        .logo-title h1 {
-            font-size: 1.5rem;
+        .logo-title {
+            font-size: 1.25rem;
             font-weight: 800;
             background: linear-gradient(135deg, #fff, var(--text-secondary));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+        }
+
+        .page-badge {
+            font-size: 0.75rem;
+            font-weight: 700;
+            background: rgba(99, 102, 241, 0.15);
+            border: 1px solid rgba(99, 102, 241, 0.25);
+            border-radius: 999px;
+            padding: 3px 10px;
+            color: #a5b4fc;
+            font-family: 'JetBrains Mono', monospace;
         }
 
         .back-btn {
@@ -105,6 +126,7 @@
             display: flex;
             align-items: center;
             gap: 8px;
+            font-weight: 600;
         }
 
         .back-btn:hover {
@@ -118,11 +140,8 @@
             background: rgba(99, 102, 241, 0.05);
             border: 1px dashed rgba(99, 102, 241, 0.3);
             border-radius: var(--radius-md);
-            padding: 20px;
-            margin-bottom: 40px;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
+            padding: 22px 24px;
+            margin-bottom: 36px;
         }
 
         .tip-title {
@@ -132,30 +151,74 @@
             display: flex;
             align-items: center;
             gap: 8px;
+            margin-bottom: 12px;
         }
 
         .tip-desc {
-            font-size: 0.85rem;
+            font-size: 0.875rem;
             color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        .tip-desc strong {
+            color: var(--text-main);
+        }
+
+        /* Context menu reference tags */
+        .menu-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 16px;
+        }
+
+        .menu-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            font-family: 'JetBrains Mono', monospace;
+            white-space: nowrap;
+        }
+
+        .menu-tag.ai {
+            background: rgba(99, 102, 241, 0.12);
+            border: 1px solid rgba(99, 102, 241, 0.25);
+            color: #a5b4fc;
+        }
+
+        .menu-tag.local {
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.25);
+            color: #6ee7b7;
+        }
+
+        .menu-tag.beta {
+            background: rgba(245, 158, 11, 0.1);
+            border: 1px solid rgba(245, 158, 11, 0.25);
+            color: #fcd34d;
         }
 
         /* Grid */
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 28px;
         }
 
         .card {
             background: var(--bg-card);
             border: 1px solid var(--border-normal);
             border-radius: var(--radius-lg);
-            padding: 30px;
+            padding: 28px;
             backdrop-filter: blur(8px);
             box-shadow: var(--shadow-card);
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 18px;
         }
 
         .card:hover {
@@ -166,21 +229,45 @@
 
         .card-header {
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             justify-content: space-between;
             border-bottom: 1px solid var(--border-normal);
             padding-bottom: 16px;
+            gap: 12px;
         }
 
         .card-header h2 {
-            font-size: 1.2rem;
+            font-size: 1.15rem;
             font-weight: 700;
             color: #fff;
+            margin-bottom: 4px;
         }
 
-        .card-header p {
+        .card-header .sub {
             font-size: 0.8rem;
             color: var(--text-secondary);
+        }
+
+        .card-tag {
+            padding: 4px 10px;
+            border-radius: 999px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            font-family: 'JetBrains Mono', monospace;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .card-tag.gemini {
+            background: rgba(99, 102, 241, 0.15);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            color: #a5b4fc;
+        }
+
+        .card-tag.local {
+            background: rgba(16, 185, 129, 0.12);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            color: #6ee7b7;
         }
 
         /* Selection Box styles */
@@ -188,13 +275,14 @@
             background: rgba(255, 255, 255, 0.02);
             border: 1px solid var(--border-normal);
             border-radius: var(--radius-sm);
-            padding: 20px 16px;
+            padding: 18px 16px;
             font-size: 0.9rem;
-            line-height: 1.6;
-            cursor: pointer;
+            line-height: 1.65;
+            cursor: text;
             user-select: text;
             position: relative;
-            margin-top: 12px;
+            margin-top: 14px;
+            transition: border-color 0.2s;
         }
 
         .selection-box:hover {
@@ -208,19 +296,43 @@
             left: 12px;
             background: #0d1222;
             padding: 0 8px;
-            font-size: 0.7rem;
+            font-size: 0.68rem;
             font-weight: 700;
             color: var(--primary);
             border-radius: var(--radius-sm);
             border: 1px solid var(--border-normal);
+            font-family: 'JetBrains Mono', monospace;
         }
 
-        /* Code highlight */
+        .selection-box.code-block {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            background: rgba(0, 0, 0, 0.25);
+            color: #a5b4fc;
+            line-height: 1.7;
+        }
+
+        /* Code highlight (applied by extension) */
         .codesavvy-highlight {
             background-color: #fef08a !important;
             color: #000000 !important;
             border-radius: 2px;
             padding: 1px 3px;
+        }
+
+        /* How to use note */
+        .how-to {
+            background: rgba(16, 185, 129, 0.04);
+            border: 1px dashed rgba(16, 185, 129, 0.2);
+            border-radius: var(--radius-sm);
+            padding: 12px 16px;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .how-to strong {
+            color: var(--secondary);
         }
 
         /* Footer */
@@ -236,6 +348,15 @@
         footer a {
             color: var(--primary);
             text-decoration: none;
+            font-weight: 600;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 700px) {
+            .grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -245,89 +366,137 @@
         <!-- Header -->
         <header>
             <a href="index.html" class="logo-group">
-                <img src="assets/icons/icon128.png" alt="CodeSavvy Logo" class="logo-img"
-                    onerror="this.src='https://img.icons8.com/color/96/000000/google-code.png';">
-                <div class="logo-title">
-                    <h1>AI & Text Sandbox</h1>
-                </div>
+                <svg viewBox="0 0 512 512" class="logo-svg" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <filter id="glow2" x="-20%" y="-20%" width="140%" height="140%">
+                            <feGaussianBlur stdDeviation="12" result="blur" />
+                            <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
+                        </filter>
+                        <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#6366f1" />
+                            <stop offset="100%" stop-color="#a855f7" />
+                        </linearGradient>
+                    </defs>
+                    <g transform="translate(256,256) rotate(85) scale(1.2) translate(-256,-256)" filter="url(#glow2)">
+                        <path d="M 180,240 V 170 C 180,120 220,80 270,80 C 320,80 360,120 360,170 V 175" fill="none" stroke="url(#grad2)" stroke-width="33" stroke-linecap="round"/>
+                        <rect x="130" y="230" width="252" height="192" rx="35" fill="none" stroke="url(#grad2)" stroke-width="35.75"/>
+                        <path d="M 230,326 L 210,326 M 282,326 L 302,326 M 256,290 V 362" stroke="#10b981" stroke-width="27.5" stroke-linecap="round"/>
+                        <circle cx="256" cy="326" r="30" fill="none" stroke="#10b981" stroke-width="13.75"/>
+                    </g>
+                </svg>
+                <span class="logo-title">AI &amp; Text Sandbox</span>
+                <span class="page-badge">ai.html</span>
             </a>
-            <a href="index.html" class="back-btn">
-                <span>← Back to Hub</span>
-            </a>
+            <a href="index.html" class="back-btn">← Back to Hub</a>
         </header>
 
         <!-- Tip Box -->
         <div class="tip-box">
-            <span class="tip-title">🤖 Testing Context Menu Actions</span>
+            <div class="tip-title">🤖 How to Use This Sandbox</div>
             <p class="tip-desc">
-                1. Select any portion of text in the cards below, right-click to open your browser's context menu, and locate the <strong>CodeSavvy</strong> action items.<br>
-                2. Test <strong>AI text enhancements</strong> (Gemini) such as "Summarize", "Improve Tone", "Translate", or "Format Code".<br>
-                3. Test <strong>text utilities</strong> such as case conversions (UPPERCASE, lowercase, camelCase, snake_case) and highlights.
+                <strong>1.</strong> Select any portion of text in the cards below.<br>
+                <strong>2.</strong> Right-click → hover over <strong>CodeSavvy Text Tools</strong> in the context menu.<br>
+                <strong>3.</strong> Choose an AI action (requires Gemini API key) or a local text utility.
             </p>
+
+            <div class="menu-tags">
+                <span style="font-size:0.75rem;color:var(--text-muted);font-weight:700;display:flex;align-items:center;">🤖 Gemini AI:</span>
+                <span class="menu-tag ai">Improve Text</span>
+                <span class="menu-tag ai">Advanced Improve Text</span>
+                <span class="menu-tag ai">Enhance Professionally</span>
+                <span class="menu-tag ai">Prompt Engineer</span>
+                <span class="menu-tag ai">Add Humor</span>
+                <span class="menu-tag ai">Roasted Mode</span>
+                <span class="menu-tag ai">Make Casual</span>
+            </div>
+            <div class="menu-tags" style="margin-top:8px;">
+                <span style="font-size:0.75rem;color:var(--text-muted);font-weight:700;display:flex;align-items:center;">⚡ Local (Instant):</span>
+                <span class="menu-tag local">Sentence case</span>
+                <span class="menu-tag local">lower case</span>
+                <span class="menu-tag local">UPPER CASE</span>
+                <span class="menu-tag local">Capitalized Case</span>
+                <span class="menu-tag local">altErNaTiNg CASE</span>
+                <span class="menu-tag local">InVeRsE CaSe</span>
+                <span class="menu-tag local">Title Case</span>
+                <span class="menu-tag local">Slugify</span>
+                <span class="menu-tag local">Highlight Text</span>
+            </div>
+            <div class="menu-tags" style="margin-top:8px;">
+                <span style="font-size:0.75rem;color:var(--text-muted);font-weight:700;display:flex;align-items:center;">🌐 Keyboard Layout:</span>
+                <span class="menu-tag beta">Convert Arabic to English (Beta)</span>
+                <span class="menu-tag beta">Convert English to Arabic (Beta)</span>
+            </div>
         </div>
 
         <!-- Sandbox Grid -->
         <div class="grid">
 
-            <!-- Card 1: AI Enhancements (Gemini Integration) -->
+            <!-- Card 1: AI Enhancements -->
             <div class="card">
                 <div class="card-header">
                     <div>
                         <h2>AI Enhancements</h2>
-                        <p>Requires Gemini API key configured in options</p>
+                        <div class="sub">Requires Gemini API key in extension Options</div>
                     </div>
+                    <span class="card-tag gemini">🤖 Gemini</span>
                 </div>
 
-                <!-- Text Area 1: Draft Email -->
                 <div class="selection-box">
                     <span class="selection-label">Draft Email</span>
                     Subject: extension update.
                     Hi team, i wanted to write to you that the new extension is ready but i got some issues to finish it on time. Can we do a call later today to check the timeline and talk about details? Let me know.
                 </div>
 
-                <!-- Text Area 2: Messy Code Block -->
-                <div style="margin-top: 10px;">
-                    <div class="selection-box" style="font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; background: rgba(0, 0, 0, 0.2);">
-                        <span class="selection-label">Messy JS Code</span>
-                        function c(t){let r = t.split(" ");
-                        let o = ""; for(let i=0; i&lt;r.length;i++){
-                        o+=r[i].charAt(0).toUpperCase()+r[i].slice(1).toLowerCase()+" ";
-                        } return o.trim();}
-                    </div>
+                <div class="selection-box code-block">
+                    <span class="selection-label">Messy JS Code</span>
+                    function c(t){let r = t.split(" ");
+                    let o = ""; for(let i=0; i&lt;r.length;i++){
+                    o+=r[i].charAt(0).toUpperCase()+r[i].slice(1).toLowerCase()+" ";
+                    } return o.trim();}
                 </div>
 
-                <!-- Text Area 3: Informal Draft -->
                 <div class="selection-box">
                     <span class="selection-label">Draft Article Segment</span>
                     AI tools are super cool because they help you do work fast. People like them because you do not have to write everything from scratch. It saves a lot of time.
                 </div>
+
+                <div class="how-to">
+                    💡 <strong>Tip:</strong> The keyboard shortcut <strong>Ctrl+Shift+L</strong> (or <strong>⌘+Shift+L</strong> on Mac) instantly runs <em>Improve Text</em> on your current selection without opening the context menu.
+                </div>
             </div>
 
-            <!-- Card 2: Case Conversions & Highlight -->
+            <!-- Card 2: Local Text Utility -->
             <div class="card">
                 <div class="card-header">
                     <div>
-                        <h2>Case & Utility Conversions</h2>
-                        <p>Local Javascript text transformations</p>
+                        <h2>Case &amp; Utility Transformations</h2>
+                        <div class="sub">Local JavaScript — no API key required</div>
                     </div>
+                    <span class="card-tag local">⚡ Local</span>
                 </div>
 
-                <!-- Case Conversion 1 -->
                 <div class="selection-box">
-                    <span class="selection-label">Camel/Snake Case Candidate</span>
-                    Convert this plain text into camelCase or snake_case for developer coding variable assignments.
+                    <span class="selection-label">Case Conversion Candidate</span>
+                    Convert this plain text into title case or sentence case instantly using the context menu. Try all seven case styles: UPPER, lower, Title, Capitalized, aLtErNaTiNg, iNvErSe, and slug-form.
                 </div>
 
-                <!-- Case Conversion 2 -->
                 <div class="selection-box">
-                    <span class="selection-label">Upper/Lower Case Candidate</span>
-                    SELECT THIS TEXT TO TOGGLE BETWEEN ALL UPPERCASE LETTERS AND ALL LOWERCASE LETTERS INSTANTLY.
+                    <span class="selection-label">Slugify Candidate</span>
+                    My Awesome Blog Post Title — Convert This To A URL Friendly Slug
                 </div>
 
-                <!-- Highlighting target -->
                 <div class="selection-box">
-                    <span class="selection-label">Text Highlighting</span>
-                    CodeSavvy extension includes an inline marker. Select any word or sentence in this box and select the <strong>Highlight Selection</strong> utility in the context menu to mark it.
+                    <span class="selection-label">Text Highlighting Target</span>
+                    CodeSavvy's <strong>Highlight Text</strong> utility wraps your selected words with a bright yellow marker. Select any sentence in this box, right-click, and choose <em>Highlight Text</em> from the CodeSavvy menu to mark it.
+                </div>
+
+                <div class="selection-box">
+                    <span class="selection-label">Arabic Layout (Beta)</span>
+                    ىثقف ثب ف — If you accidentally typed in the wrong keyboard layout, select this text and use "Convert Arabic to English" to recover the original English string.
+                </div>
+
+                <div class="how-to">
+                    💡 <strong>Custom Presets:</strong> You can add your own AI prompts under <em>Settings → AI Right-Click Preset Prompts</em>. They appear directly in the context menu with a ✦ prefix.
                 </div>
             </div>
 

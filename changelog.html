@@ -1,0 +1,1711 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeSavvy Extension - Release Changelog</title>
+    <meta name="description"
+        content="Complete release history, version changelogs, AI capabilities, security enhancements, and UI updates for CodeSavvy Chrome Extension.">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/icons/icon16.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="assets/icons/icon48.png">
+    <link rel="icon" type="image/png" sizes="128x128" href="assets/icons/icon128.png">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <!-- Theme system (light/dark, applies to html element — no conflict with changelog's body color themes) -->
+    <script src="theme.js"></script>
+    <link rel="stylesheet" href="theme.css">
+    <style>
+        :root {
+            --bg-dark: #070a13;
+            --bg-card: rgba(15, 23, 42, 0.65);
+            --bg-card-hover: rgba(23, 37, 84, 0.35);
+            --border-glow: rgba(99, 102, 241, 0.2);
+            --border-normal: rgba(255, 255, 255, 0.08);
+            --primary: #6366f1;
+            --primary-hover: #4f46e5;
+            --primary-gradient: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+            --secondary: #10b981;
+            --secondary-glow: rgba(16, 185, 129, 0.15);
+            --primary-glow: rgba(99, 102, 241, 0.2);
+            --text-main: #f8fafc;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --radius-sm: 8px;
+            --radius-md: 16px;
+            --radius-lg: 24px;
+            --shadow-glow: 0 0 25px rgba(99, 102, 241, 0.15);
+            --shadow-card: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            --badge-bg: rgba(99, 102, 241, 0.12);
+            --badge-text: #a5b4fc;
+        }
+
+        /* Color Themes Data Attributes */
+        [data-theme="indigo"] {
+            --primary: #6366f1;
+            --primary-hover: #4f46e5;
+            --primary-gradient: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+            --primary-glow: rgba(99, 102, 241, 0.25);
+            --badge-bg: rgba(99, 102, 241, 0.15);
+            --badge-text: #a5b4fc;
+        }
+
+        [data-theme="orange"] {
+            --primary: #f97316;
+            --primary-hover: #ea580c;
+            --primary-gradient: linear-gradient(135deg, #f97316 0%, #eab308 100%);
+            --primary-glow: rgba(249, 115, 22, 0.25);
+            --badge-bg: rgba(249, 115, 22, 0.15);
+            --badge-text: #fdba74;
+        }
+
+        [data-theme="yellow"] {
+            --primary: #eab308;
+            --primary-hover: #ca8a04;
+            --primary-gradient: linear-gradient(135deg, #eab308 0%, #ef4444 100%);
+            --primary-glow: rgba(234, 179, 8, 0.25);
+            --badge-bg: rgba(234, 179, 8, 0.15);
+            --badge-text: #fde047;
+        }
+
+        [data-theme="emerald"] {
+            --primary: #10b981;
+            --primary-hover: #059669;
+            --primary-gradient: linear-gradient(135deg, #10b981 0%, #06b6d4 100%);
+            --primary-glow: rgba(16, 185, 129, 0.25);
+            --badge-bg: rgba(16, 185, 129, 0.15);
+            --badge-text: #6ee7b7;
+        }
+
+        [data-theme="cyan"] {
+            --primary: #06b6d4;
+            --primary-hover: #0891b2;
+            --primary-gradient: linear-gradient(135deg, #06b6d4 0%, #3b82f6 100%);
+            --primary-glow: rgba(6, 182, 212, 0.25);
+            --badge-bg: rgba(6, 182, 212, 0.15);
+            --badge-text: #67e8f9;
+        }
+
+        [data-theme="violet"] {
+            --primary: #8b5cf6;
+            --primary-hover: #7c3aed;
+            --primary-gradient: linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%);
+            --primary-glow: rgba(139, 92, 246, 0.25);
+            --badge-bg: rgba(139, 92, 246, 0.15);
+            --badge-text: #c4b5fd;
+        }
+
+        [data-theme="rose"] {
+            --primary: #f43f5e;
+            --primary-hover: #e11d48;
+            --primary-gradient: linear-gradient(135deg, #f43f5e 0%, #d946ef 100%);
+            --primary-glow: rgba(244, 63, 94, 0.25);
+            --badge-bg: rgba(244, 63, 94, 0.15);
+            --badge-text: #fda4af;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: background-color 0.3s, border-color 0.3s, box-shadow 0.3s;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            min-height: 100vh;
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-image:
+                radial-gradient(circle at 10% 20%, var(--primary-glow) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(168, 85, 247, 0.08) 0%, transparent 40%);
+            background-attachment: fixed;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 40px 20px 80px 20px;
+        }
+
+        /* Top Header Navigation */
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .logo-icon-svg {
+            width: 44px;
+            height: 44px;
+            filter: drop-shadow(0 0 12px var(--primary-glow));
+            animation: logoPulse 3s infinite ease-in-out;
+        }
+
+        @keyframes logoPulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.06) rotate(2deg);
+            }
+        }
+
+        .logo-text {
+            font-weight: 800;
+            font-size: 24px;
+            letter-spacing: -0.5px;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .nav-btn {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border-normal);
+            padding: 10px 18px;
+            border-radius: var(--radius-sm);
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-btn:hover,
+        .nav-btn.active {
+            background: var(--badge-bg);
+            border-color: var(--primary);
+            color: #fff;
+            box-shadow: 0 0 15px var(--primary-glow);
+        }
+
+        /* Swatch Bar Banner (v2.2.3 Showcase) */
+        .theme-swatch-banner {
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid var(--border-glow);
+            border-radius: var(--radius-md);
+            padding: 16px 24px;
+            margin-bottom: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 16px;
+            box-shadow: var(--shadow-card);
+            backdrop-filter: blur(12px);
+        }
+
+        .swatch-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .v23-badge {
+            background: var(--primary-gradient);
+            color: #fff;
+            font-size: 0.72rem;
+            font-weight: 800;
+            padding: 4px 10px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            box-shadow: 0 0 10px var(--primary-glow);
+        }
+
+        .swatch-title {
+            font-size: 0.92rem;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        .swatch-bar {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .swatch-btn {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            border: 2px solid transparent;
+            cursor: pointer;
+            position: relative;
+            outline: none;
+            transition: transform 0.2s ease, border-color 0.2s ease;
+        }
+
+        .swatch-btn:hover {
+            transform: scale(1.2);
+        }
+
+        .swatch-btn.active {
+            border-color: #ffffff;
+            box-shadow: 0 0 12px rgba(255, 255, 255, 0.6);
+            transform: scale(1.15);
+        }
+
+        .swatch-btn[data-color="indigo"] {
+            background: linear-gradient(135deg, #6366f1, #a855f7);
+        }
+
+        .swatch-btn[data-color="orange"] {
+            background: linear-gradient(135deg, #f97316, #eab308);
+        }
+
+        .swatch-btn[data-color="yellow"] {
+            background: linear-gradient(135deg, #eab308, #ef4444);
+        }
+
+        .swatch-btn[data-color="emerald"] {
+            background: linear-gradient(135deg, #10b981, #06b6d4);
+        }
+
+        .swatch-btn[data-color="cyan"] {
+            background: linear-gradient(135deg, #06b6d4, #3b82f6);
+        }
+
+        .swatch-btn[data-color="violet"] {
+            background: linear-gradient(135deg, #8b5cf6, #ec4899);
+        }
+
+        .swatch-btn[data-color="rose"] {
+            background: linear-gradient(135deg, #f43f5e, #d946ef);
+        }
+
+        /* Hero Banner */
+        .hero {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .hero-title-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-glow);
+            padding: 6px 16px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            color: var(--badge-text);
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .hero h1 {
+            font-size: 3.2rem;
+            font-weight: 800;
+            letter-spacing: -1.2px;
+            margin-bottom: 18px;
+            line-height: 1.15;
+            background: linear-gradient(to right, #ffffff 40%, var(--text-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.15rem;
+            color: var(--text-secondary);
+            max-width: 720px;
+            margin: 0 auto 35px auto;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-bottom: 50px;
+        }
+
+        .stat-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-normal);
+            border-radius: var(--radius-md);
+            padding: 20px;
+            text-align: center;
+            box-shadow: var(--shadow-card);
+            backdrop-filter: blur(8px);
+        }
+
+        .stat-number {
+            font-size: 2.2rem;
+            font-weight: 800;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-family: 'JetBrains Mono', monospace;
+            line-height: 1.2;
+        }
+
+        .stat-label {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 4px;
+        }
+
+        /* Search & Filter Controls */
+        .controls-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-normal);
+            border-radius: var(--radius-lg);
+            padding: 24px;
+            margin-bottom: 45px;
+            box-shadow: var(--shadow-card);
+            backdrop-filter: blur(10px);
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .search-box-row {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        .search-input-wrapper {
+            position: relative;
+            flex: 1;
+            min-width: 260px;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            pointer-events: none;
+        }
+
+        .search-input {
+            width: 100%;
+            background: rgba(7, 10, 19, 0.7);
+            border: 1px solid var(--border-normal);
+            border-radius: var(--radius-md);
+            padding: 12px 16px 12px 46px;
+            color: #fff;
+            font-size: 0.95rem;
+            font-family: inherit;
+            outline: none;
+        }
+
+        .search-input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 15px var(--primary-glow);
+        }
+
+        .action-btns-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .action-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-normal);
+            color: var(--text-secondary);
+            padding: 10px 16px;
+            border-radius: var(--radius-md);
+            font-size: 0.88rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .action-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            border-color: var(--primary);
+        }
+
+        .filter-tags {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .filter-chip {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-normal);
+            color: var(--text-secondary);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .filter-chip:hover {
+            border-color: var(--primary);
+            color: #fff;
+        }
+
+        .filter-chip.active {
+            background: var(--primary-gradient);
+            color: #fff;
+            border-color: transparent;
+            box-shadow: 0 0 12px var(--primary-glow);
+        }
+
+        /* Timeline & Release Cards */
+        .timeline {
+            position: relative;
+            padding-left: 32px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 11px;
+            top: 24px;
+            bottom: 24px;
+            width: 3px;
+            background: linear-gradient(to bottom, var(--primary) 0%, rgba(99, 102, 241, 0.1) 100%);
+            border-radius: 2px;
+        }
+
+        .release-item {
+            position: relative;
+            margin-bottom: 40px;
+        }
+
+        .release-item.hidden {
+            display: none !important;
+        }
+
+        .timeline-node {
+            position: absolute;
+            left: -32px;
+            top: 24px;
+            transform: translateX(-50%);
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: var(--bg-dark);
+            border: 3px solid var(--primary);
+            box-shadow: 0 0 12px var(--primary-glow);
+            z-index: 2;
+        }
+
+        .release-item.latest .timeline-node {
+            background: var(--primary);
+            box-shadow: 0 0 20px var(--primary);
+            animation: pulseNode 2s infinite;
+        }
+
+        @keyframes pulseNode {
+            0% {
+                box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.7);
+            }
+
+            70% {
+                box-shadow: 0 0 0 10px rgba(99, 102, 241, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(99, 102, 241, 0);
+            }
+        }
+
+        .release-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-normal);
+            border-radius: var(--radius-lg);
+            padding: 30px;
+            box-shadow: var(--shadow-card);
+            backdrop-filter: blur(12px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .release-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--primary-gradient);
+            opacity: 0.6;
+        }
+
+        .release-card:hover {
+            border-color: var(--primary);
+            box-shadow: var(--shadow-glow), var(--shadow-card);
+        }
+
+        .release-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+
+        .version-meta {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .version-tag {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #fff;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .release-date {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .release-badges {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .tag-badge {
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 4px 12px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .tag-badge.latest {
+            background: var(--primary-gradient);
+            color: #fff;
+            box-shadow: 0 0 10px var(--primary-glow);
+        }
+
+        .tag-badge.major {
+            background: rgba(168, 85, 247, 0.15);
+            color: #c084fc;
+            border: 1px solid rgba(168, 85, 247, 0.3);
+        }
+
+        .tag-badge.minor {
+            background: rgba(59, 130, 246, 0.15);
+            color: #93c5fd;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+        }
+
+        .tag-badge.patch {
+            background: rgba(16, 185, 129, 0.15);
+            color: #6ee7b7;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        .tag-badge.security {
+            background: rgba(239, 68, 68, 0.15);
+            color: #fca5a5;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+
+        .release-title {
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 12px;
+        }
+
+        .release-summary {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .feature-bullets {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 24px;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            padding: 10px 14px;
+            border-radius: var(--radius-sm);
+        }
+
+        .feature-icon {
+            font-size: 1.1rem;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+
+        .card-actions {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 16px;
+            border-top: 1px solid var(--border-normal);
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .card-action-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .card-action-btn:hover {
+            color: var(--primary);
+        }
+
+        /* Interactive Live Demo Box inside v2.2.3 Card */
+        .v23-interactive-box {
+            background: rgba(7, 10, 19, 0.6);
+            border: 1px dashed var(--border-glow);
+            border-radius: var(--radius-md);
+            padding: 18px;
+            margin-top: 16px;
+            margin-bottom: 20px;
+        }
+
+        .v23-box-header {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--badge-text);
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .theme-swatch-list {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .color-pill-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-normal);
+            color: var(--text-secondary);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .color-pill-btn:hover,
+        .color-pill-btn.active {
+            border-color: var(--primary);
+            color: #fff;
+            background: var(--badge-bg);
+        }
+
+        .color-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: rgba(15, 23, 42, 0.95);
+            border: 1px solid var(--primary);
+            color: #fff;
+            padding: 12px 22px;
+            border-radius: var(--radius-md);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px var(--primary-glow);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 1000;
+        }
+
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 60px;
+            padding-top: 30px;
+            border-top: 1px solid var(--border-normal);
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        footer a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        footer a:hover {
+            color: var(--primary);
+        }
+
+        /* No Results State */
+        .no-results {
+            text-align: center;
+            padding: 60px 20px;
+            background: var(--bg-card);
+            border: 1px dashed var(--border-normal);
+            border-radius: var(--radius-lg);
+            color: var(--text-secondary);
+            display: none;
+        }
+
+        .no-results-icon {
+            font-size: 3rem;
+            margin-bottom: 12px;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .timeline {
+                padding-left: 20px;
+            }
+
+            .timeline-node {
+                left: -20px;
+            }
+
+            .swatch-banner {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <!-- Top Navigation Header -->
+        <header>
+            <a href="index.html" class="logo-container">
+                <svg class="logo-icon-svg" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <filter id="vector-glow" x="-20%" y="-20%" width="140%" height="140%">
+                            <feGaussianBlur stdDeviation="12" result="blur" />
+                            <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                        </filter>
+                        <linearGradient id="tile-gradient-fill" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="var(--primary)" />
+                            <stop offset="100%" stop-color="#a855f7" />
+                        </linearGradient>
+                    </defs>
+                    <g transform="translate(256, 256) rotate(85) scale(1.2) translate(-256, -256)"
+                        filter="url(#vector-glow)">
+                        <g>
+                            <path d="M 180,240 V 170 C 180,120 220,80 270,80 C 320,80 360,120 360,170 V 175" fill="none"
+                                stroke="url(#tile-gradient-fill)" stroke-width="33" stroke-linecap="round" />
+                            <rect x="130" y="230" width="252" height="192" rx="35" fill="none"
+                                stroke="url(#tile-gradient-fill)" stroke-width="35.75" />
+                            <path d="M 230,326 L 210,326 M 282,326 L 302,326 M 256,290 V 362" stroke="#10b981"
+                                stroke-width="27.5" stroke-linecap="round" />
+                            <circle cx="256" cy="326" r="30" fill="none" stroke="#10b981" stroke-width="13.75" />
+                            <path d="M 256,246 L 256,230 M 256,406 L 256,422" stroke="#10b981" stroke-width="4"
+                                stroke-linecap="round" />
+                        </g>
+                    </g>
+                </svg>
+                <span class="logo-text">CodeSavvy</span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-btn">🏠 Home</a>
+                <a href="sandbox.html" class="nav-btn">⚡ Sandboxes</a>
+                <a href="privacy.html" class="nav-btn">🛡️ Privacy Policy</a>
+                <a href="changelog.html" class="nav-btn active">📜 Changelog</a>
+            </div>
+        </header>
+
+        <!-- Theme Swatch Banner (v2.2.3 Showcase) -->
+        <div class="theme-swatch-banner">
+            <div class="swatch-info">
+                <span class="v23-badge">NEW IN v2.2.3</span>
+                <span class="swatch-title">Interactive Theme Accent Palettes</span>
+            </div>
+            <div class="swatch-bar" id="swatchBar">
+                <button class="swatch-btn active" data-color="indigo" title="Indigo Theme"></button>
+                <button class="swatch-btn" data-color="orange" title="Orange Theme"></button>
+                <button class="swatch-btn" data-color="yellow" title="Yellow Theme"></button>
+                <button class="swatch-btn" data-color="emerald" title="Emerald Theme"></button>
+                <button class="swatch-btn" data-color="cyan" title="Cyan Theme"></button>
+                <button class="swatch-btn" data-color="violet" title="Violet Theme"></button>
+                <button class="swatch-btn" data-color="rose" title="Rose Theme"></button>
+            </div>
+        </div>
+
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-title-badge">
+                <span>🚀 Latest Release v2.2.3</span>
+                <span>•</span>
+                <span>Updated July 30, 2026</span>
+            </div>
+            <h1>Release Changelog</h1>
+            <p>
+                Follow the complete release history of CodeSavvy developer toolbox — from initial launch to custom AI
+                presets,
+                Incognito mode privacy controls, and dynamic color theme palettes.
+            </p>
+        </section>
+
+        <!-- Metrics Dashboard -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number" id="totalReleasesCount">10</div>
+                <div class="stat-label">Total Releases</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">v2.2.3</div>
+                <div class="stat-label">Current Version</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">7</div>
+                <div class="stat-label">Theme Accents</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">100%</div>
+                <div class="stat-label">Local & Private</div>
+            </div>
+        </div>
+
+        <!-- Search & Filter Controls -->
+        <div class="controls-card">
+            <div class="search-box-row">
+                <div class="search-input-wrapper">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" id="searchInput" class="search-input"
+                        placeholder="Search changelog (e.g. Gemini, Incognito, Theme, DOM, v2.0)...">
+                </div>
+                <div class="action-btns-group">
+                    <button class="action-btn" id="expandAllBtn">
+                        <span>📖</span> Expand All
+                    </button>
+                    <button class="action-btn" id="collapseAllBtn">
+                        <span>📁</span> Collapse All
+                    </button>
+                    <button class="action-btn" id="copyMarkdownBtn">
+                        <span>📋</span> Copy Notes
+                    </button>
+                </div>
+            </div>
+            <div class="filter-tags" id="filterChips">
+                <span class="filter-chip active" data-filter="all">All Releases</span>
+                <span class="filter-chip" data-filter="v2">v2.x Releases</span>
+                <span class="filter-chip" data-filter="v1">v1.x Releases</span>
+                <span class="filter-chip" data-filter="major">⭐ Major Overhauls</span>
+                <span class="filter-chip" data-filter="ai">🤖 AI Features</span>
+                <span class="filter-chip" data-filter="security">🛡️ Security & Privacy</span>
+            </div>
+        </div>
+
+        <!-- No Search Results Fallback -->
+        <div class="no-results" id="noResultsState">
+            <div class="no-results-icon">🔎</div>
+            <h3>No release entries found</h3>
+            <p>Try searching for a different keyword like "Gemini", "Theme", "Preset", or "1.0".</p>
+        </div>
+
+        <!-- Releases Timeline -->
+        <div class="timeline" id="changelogTimeline">
+
+            <!-- Release 2.3 -->
+            <article class="release-item latest" id="v2.2.3" data-version="2.2.3" data-cat="v2 major theme ui">
+                <div class="timeline-node"></div>
+                <div class="release-card">
+                    <div class="release-header">
+                        <div class="version-meta">
+                            <span class="version-tag">[2.2.3]</span>
+                            <span class="release-date">📅 2026-07-30</span>
+                        </div>
+                        <div class="release-badges">
+                            <span class="tag-badge latest">LATEST RELEASE</span>
+                            <span class="tag-badge major">CUSTOMIZATION</span>
+                        </div>
+                    </div>
+                    <h2 class="release-title">Customizable Theme Accent Color Palettes & Dynamic Styling</h2>
+                    <p class="release-summary">
+                        Introduces 7 vibrant theme accent color palettes (Indigo, Orange, Yellow, Emerald, Cyan, Violet,
+                        Rose), dynamic SVG & CSS variable styling engine, interactive swatch bar in Popup and Options,
+                        and persistent preference storage across browser sessions.
+                    </p>
+                    <div class="v23-interactive-box">
+                        <div class="v23-box-header">
+                            <span>✨ Try Theme Accent Palettes Live (v2.2.3 Feature)</span>
+                        </div>
+                        <div class="theme-swatch-list">
+                            <button class="color-pill-btn active" data-pill-color="indigo">
+                                <span class="color-dot" style="background:#6366f1"></span> Indigo
+                            </button>
+                            <button class="color-pill-btn" data-pill-color="orange">
+                                <span class="color-dot" style="background:#f97316"></span> Orange
+                            </button>
+                            <button class="color-pill-btn" data-pill-color="yellow">
+                                <span class="color-dot" style="background:#eab308"></span> Yellow
+                            </button>
+                            <button class="color-pill-btn" data-pill-color="emerald">
+                                <span class="color-dot" style="background:#10b981"></span> Emerald
+                            </button>
+                            <button class="color-pill-btn" data-pill-color="cyan">
+                                <span class="color-dot" style="background:#06b6d4"></span> Cyan
+                            </button>
+                            <button class="color-pill-btn" data-pill-color="violet">
+                                <span class="color-dot" style="background:#8b5cf6"></span> Violet
+                            </button>
+                            <button class="color-pill-btn" data-pill-color="rose">
+                                <span class="color-dot" style="background:#f43f5e"></span> Rose
+                            </button>
+                        </div>
+                    </div>
+                    <ul class="feature-bullets">
+                        <li class="feature-item">
+                            <span class="feature-icon">🎨</span>
+                            <div><strong>7 Color Theme Presets:</strong> Choose between Classic Indigo, Sunset Orange,
+                                Amber Yellow, Emerald Green, Ocean Cyan, Electric Violet, and Neon Rose accents.</div>
+                        </li>
+                        <li class="feature-item">
+                            <span class="feature-icon">⚡</span>
+                            <div><strong>Dynamic Styling Engine:</strong> Live CSS variable and SVG gradient fill
+                                updates across popups, options, and extension interfaces.</div>
+                        </li>
+                        <li class="feature-item">
+                            <span class="feature-icon">🎛️</span>
+                            <div><strong>Interactive Swatch Bar:</strong> Sleek color swatch bar integrated into Popup
+                                header and Options modal.</div>
+                        </li>
+                        <li class="feature-item">
+                            <span class="feature-icon">💾</span>
+                            <div><strong>Storage Persistence:</strong> Automatic saving and restoration of selected
+                                theme preferences using `chrome.storage.local`.</div>
+                        </li>
+                    </ul>
+                    <div class="card-actions">
+                        <button class="card-action-btn copy-entry-btn">
+                            📄 Copy Release Details
+                        </button>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Release 2.2.1 -->
+            <article class="release-item" id="v2.2.1" data-version="2.2.1" data-cat="v2 security ai privacy patch">
+                <div class="timeline-node"></div>
+                <div class="release-card">
+                    <div class="release-header">
+                        <div class="version-meta">
+                            <span class="version-tag">[2.2.1]</span>
+                            <span class="release-date">📅 2026-07-26</span>
+                        </div>
+                        <div class="release-badges">
+                            <span class="tag-badge security">PRIVACY & PATCH</span>
+                        </div>
+                    </div>
+                    <h2 class="release-title">History Privacy Modes & Custom AI Prompt Preset Modal</h2>
+                    <p class="release-summary">
+                        Introduces stealth privacy controls for history logging, automated log retention policies, and
+                        an interactive custom AI prompt preset modal editor in Options.
+                    </p>
+                    <ul class="feature-bullets">
+                        <li class="feature-item">
+                            <span class="feature-icon">🕵️</span>
+                            <div><strong>History Privacy Modes:</strong> One-click header toggle between Full Logging
+                                and Incognito Mode to temporarily suspend history recording.</div>
+                        </li>
+                        <li class="feature-item">
+                            <span class="feature-icon">📅</span>
+                            <div><strong>Auto-Delete Log Retention:</strong> Configurable retention policies (Keep
+                                Forever, 7, 30, 90 days, or instant wipe on exit).</div>
+                        </li>
+                        <li class="feature-item">
+                            <span class="feature-icon">⚙️</span>
+                            <div><strong>Custom AI Prompt Editor:</strong> Built-in modal editor in Options for
+                                creating, updating, and managing custom AI context menu presets.</div>
+                        </li>
+                    </ul>
+                    <div class="card-actions">
+                        <button class="card-action-btn copy-entry-btn">
+                            📄 Copy Release Details
+                        </button>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Release 2.2.0 -->
+            <article class="release-item" id="v2.2.0" data-version="2.2.0" data-cat="v2 minor ai theme">
+                <div class="timeline-node"></div>
+                <div class="release-card">
+                    <div class="release-header">
+                        <div class="version-meta">
+                            <span class="version-tag">[2.2.0]</span>
+                            <span class="release-date">📅 2026-07-19</span>
+                        </div>
+                        <div class="release-badges">
+                            <span class="tag-badge minor">MINOR RELEASE</span>
+                            <span class="tag-badge major">AI SYSTEM</span>
+                        </div>
+                    </div>
+                    <h2 class="release-title">Custom AI Presets, Dark/Light Theme Switcher & History JSON Export</h2>
+                    <p class="release-summary">
+                        Major upgrade adding custom AI preset manager, System/Dark/Light theme switcher, animated toast
+                        notifications, and History Log viewer with JSON export.
+                    </p>
+                    <ul class="feature-bullets">
+                        <li class="feature-item">
+                            <span class="feature-icon">🧠</span>
+                            <div><strong>Custom AI Presets System:</strong> Define custom prompt templates with
+                                placeholders for tailored code refactoring and text translation.</div>
+                        </li>
+                        <li class="feature-item">
+                            <span class="feature-icon">🌓</span>
+                            <div><strong>Theme Switcher:</strong> Native support for System Default, Dark, and Light UI
+                                themes.</div>
+                        </li>
+                        <li class="feature-item">
+                            <span class="feature-icon">🔔</span>
+                            <div><strong>Toast System:</strong> Non-intrusive animated toast messages for user feedback
+                                and action confirmation.</div>
+                        </li>
+                        <li class="feature-item">
+                            <span class="feature-icon">📊</span>
+                            <div><strong>History Viewer & Export:</strong> Inspect prompt history and export full log
+                                archives in structured JSON format.</div>
+                        </li>
+                    </ul>
+                    <div class="card-actions">
+                        <button class="card-action-btn copy-entry-btn">
+                            📄 Copy Release Details
+                        </button>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Release 2.1.0 -->
+            <article class="release-item" id="v2.1.0" data-version="2.1.0" data-cat="v2 minor security">
+                <div class="timeline-node"></div>
+                <div class="release-card">
+                    <div class="release-header">
+                        <div class="version-meta">
+                            <span class="version-tag">[2.1.0]</span>
+                            <span class="release-date">📅 2026-07-10</span>
+                        </div>
+                        <div class="release-badges">
+                            <span class="tag-badge minor">MINOR RELEASE</span>
+                            <span class="tag-badge security">RESTRICTION UNLOCK</span>
+                        </div>
+                    </div>
+                    <h2 class="release-title">Web Restriction Overrides & Quick Toolbar Actions</h2>
+                    <p class="release-summary">
+                        Unlocks restricted website capabilities including right-click interceptors, text selection, and
+                        copy-paste blocking, alongside popup toolbar improvements.
+                    </p>
+                    <ul class="feature-bullets">
+                        <li class="feature-item">
+                            <span class="feature-icon">🔓</span>
+                            <div><strong>Web Restriction Overrides:</strong> Force Right-Click unlock, Text Selection
+                                unlock, and Copy/Cut/Paste unlock on protected sites.</div>
+                        </li>
+                        <li class="feature-item">
+                            <span class="feature-icon">⚡</span>
+                            <div><strong>Quick Toolbar Buttons:</strong> Instant toggle shortcuts integrated directly
+                                into `popup.html`.</div>
+                        </li>
+                        <li class="feature-item">
+                            <span class="feature-icon">📄</span>
+                            <div><strong>Store Documentation:</strong> Added `STORE_DESCRIPTION.md` for Chrome Web Store
+                                listing compliance.</div>
+                        </li>
+                    </ul>
+                    <div class="card-actions">
+                        <button class="card-action-btn copy-entry-btn">
+                            📄 Copy Release Details
+                        </button>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Release 2.0.1 -->
+            <article class="release-item" id="v2.0.1" data-version="2.0.1" data-cat="v2 patch security ai">
+                <div class="timeline-node"></div>
+                <div class="release-card">
+                    <div class="release-header">
+                        <div class="version-meta">
+                            <span class="version-tag">[2.0.1]</span>
+                            <span class="release-date">📅 2026-06-23 to 2026-07-02</span>
+                        </div>
+                        <div class="release-badges">
+                            <span class="tag-badge patch">PATCH RELEASE</span>
+                            <span class="tag-badge security">API SECURITY</span>
+                        </div>
+                    </div>
+                    <h2 class="release-title">Gemini API Key Security Enhancement & Web Store Updates</h2>
+                    <p class="release-summary">
+                        Strengthens API security by switching authentication to HTTP request headers and updates Web
+                        Store verification metadata.
+                    </p>
+                    <ul class="feature-bullets">
+                        <li class="feature-item">
+                            <span class="feature-icon">🔑</span>
+                            <div><strong>API Header Security:</strong> Upgraded Gemini API authentication to use
+                                explicit `x-goog-api-key` HTTP headers instead of URL query parameters.</div>
+                        </li>
+                        <li class="feature-item">
+                            <span class="feature-icon">🏆</span>
+                            <div><strong>Chrome Web Store Compliance:</strong> Updated store developer badges and
+                                version metadata.</div>
+                        </li>
+                        <li class="feature-item">
+                            <span class="feature-icon">🧹</span>
+                            <div><strong>Code Cleanup:</strong> Standardized error handling, redundant folder removal,
+                                and memory cleanup routines.</div>
+                        </li>
+                    </ul>
+                    <div class="card-actions">
+                        <button class="card-action-btn copy-entry-btn">
+                            📄 Copy Release Details
+                        </button>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Release 2.0.0 -->
+            <article class="release-item" id="v2.0.0" data-version="2.0.0" data-cat="v2 major ai ui">
+                <div class="timeline-node"></div>
+                <div class="release-card">
+                    <div class="release-header">
+                        <div class="version-meta">
+                            <span class="version-tag">[2.0.0]</span>
+                            <span class="release-date">📅 2026-06-02 to 2026-06-18</span>
+                        </div>
+                        <div class="release-badges">
+                            <span class="tag-badge major">MAJOR OVERHAUL</span>
+                            <span class="tag-badge latest">V2 ARCHITECTURE</span>
+                        </div>
+                    </div>
+                    <h2 class="release-title">Full UI Overhaul, Glassmorphism Design System & Gemini AI</h2>
+                    <p class="release-summary">
+                        A milestone release rebuilding CodeSavvy from the ground up with a glassmorphism design system,
+                        Google Gemini AI integration, test sandboxes, and modular project structure.
+                    </p>
+                    <ul class="feature-bullets">
+                        <li class="feature-item">
+                            <span class="feature-icon">💎</span>
+                            <div><strong>Glassmorphism UI Overhaul:</strong> Premium dark mode design system with SVG
+                                brand logo, smooth glow effects, and modern typography.</div>
+                        </li>
+                        <li class="feature-item">
+                            <span class="feature-icon">🤖</span>
+                            <div><strong>Google Gemini AI Integration:</strong> Smart context-menu text actions for
+                                summary, refactoring, proofreading, and custom prompts.</div>
+                        </li>
+                        <li class="feature-item">
+                            <span class="feature-icon">🧪</span>
+                            <div><strong>Interactive Test Sandboxes:</strong> Live test suite (`sandbox.html`) for
+                                evaluating extension tools in real time.</div>
+                        </li>
+                        <li class="feature-item">
+                            <span class="feature-icon">📂</span>
+                            <div><strong>Modular Architecture:</strong> Codebase restructuring into modular `src/`
+                                component directories (`src/background/`, `src/popup/`, `src/options/`).</div>
+                        </li>
+                    </ul>
+                    <div class="card-actions">
+                        <button class="card-action-btn copy-entry-btn">
+                            📄 Copy Release Details
+                        </button>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Release 1.3.0 -->
+            <article class="release-item" id="v1.3.0" data-version="1.3.0" data-cat="v1 minor ai">
+                <div class="timeline-node"></div>
+                <div class="release-card">
+                    <div class="release-header">
+                        <div class="version-meta">
+                            <span class="version-tag">[1.3.0]</span>
+                            <span class="release-date">📅 2026-01-27 to 2026-02-08</span>
+                        </div>
+                        <div class="release-badges">
+                            <span class="tag-badge minor">MINOR RELEASE</span>
+                            <span class="tag-badge">AI ENHANCEMENT</span>
+                        </div>
+                    </div>
+                    <h2 class="release-title">Streamlined Gemini Integration & "Brutal Mode" Prompting</h2>
+                    <p class="release-summary">
+                        Optimized API execution performance, refined context menu prompt engineering with "Brutal Mode",
+                        and added automatic fallback preservation of original selection text.
+                    </p>
+                    <ul class="feature-bullets">
+                        <li class="feature-item">
+                            <span class="feature-icon">⚡</span>
+                            <div><strong>Streamlined API Integration:</strong> Refactored integration to focus
+                                exclusively on Google Gemini API for maximum accuracy and speed.</div>
+                        </li>
+                        <li class="feature-item">
+                            <span class="feature-icon">💥</span>
+                            <div><strong>"Brutal Mode" Prompt Refinement:</strong> Added uncompromising code review and
+                                text critique prompt preset.</div>
+                        </li>
+                        <li class="feature-item">
+                            <span class="feature-icon">🛡️</span>
+                            <div><strong>Fallback Text Protection:</strong> Fail-safe mechanism to safeguard user's
+                                original highlighted text if network errors occur.</div>
+                        </li>
+                    </ul>
+                    <div class="card-actions">
+                        <button class="card-action-btn copy-entry-btn">
+                            📄 Copy Release Details
+                        </button>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Release 1.2.0 -->
+            <article class="release-item" id="v1.2.0" data-version="1.2.0" data-cat="v1 minor ai security">
+                <div class="timeline-node"></div>
+                <div class="release-card">
+                    <div class="release-header">
+                        <div class="version-meta">
+                            <span class="version-tag">[1.2.0]</span>
+                            <span class="release-date">📅 2025-10-09 to 2025-12-15</span>
+                        </div>
+                        <div class="release-badges">
+                            <span class="tag-badge minor">MINOR RELEASE</span>
+                        </div>
+                    </div>
+                    <h2 class="release-title">Dual AI Failover Engine, Arabic-English Layout & Sarcastic Mode</h2>
+                    <p class="release-summary">
+                        High-availability update featuring dual AI provider failover, Arabic-English keyboard layout
+                        text converter (Beta), Sarcastic AI personality, and key visibility controls.
+                    </p>
+                    <ul class="feature-bullets">
+                        <li class="feature-item">
+                            <span class="feature-icon">🔄</span>
+                            <div><strong>Dual AI Failover Engine:</strong> Automatic failover fallback system ensuring
+                                uninterrupted AI services.</div>
+                        </li>
+                        <li class="feature-item">
+                            <span class="feature-icon">🌐</span>
+                            <div><strong>Arabic-English Layout Converter (Beta):</strong> Fixes text typed when keyboard
+                                language was misconfigured.</div>
+                        </li>
+                        <li class="feature-item">
+                            <span class="feature-icon">😏</span>
+                            <div><strong>Sarcastic AI Mode:</strong> Entertaining witty responses option for text and
+                                code reviews.</div>
+                        </li>
+                        <li class="feature-item">
+                            <span class="feature-icon">👁️</span>
+                            <div><strong>API Key Visibility Toggle:</strong> Show/hide eye icon for sensitive API key
+                                inputs in Options page.</div>
+                        </li>
+                        <li class="feature-item">
+                            <span class="feature-icon">📥</span>
+                            <div><strong>Downloads Permission:</strong> Chrome downloads permission integration for
+                                exporting log files.</div>
+                        </li>
+                    </ul>
+                    <div class="card-actions">
+                        <button class="card-action-btn copy-entry-btn">
+                            📄 Copy Release Details
+                        </button>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Release 1.1.0 -->
+            <article class="release-item" id="v1.1.0" data-version="1.1.0" data-cat="v1 minor ai">
+                <div class="timeline-node"></div>
+                <div class="release-card">
+                    <div class="release-header">
+                        <div class="version-meta">
+                            <span class="version-tag">[1.1.0]</span>
+                            <span class="release-date">📅 2025-03-25 to 2025-05-30</span>
+                        </div>
+                        <div class="release-badges">
+                            <span class="tag-badge minor">MINOR RELEASE</span>
+                        </div>
+                    </div>
+                    <h2 class="release-title">Professional AI Context Presets, Hotkeys & Options Page</h2>
+                    <p class="release-summary">
+                        Expanded developer productivity with global hotkey mappings, dedicated options configuration
+                        page, pro context menu presets, and dynamic quote generator.
+                    </p>
+                    <ul class="feature-bullets">
+                        <li class="feature-item">
+                            <span class="feature-icon">💼</span>
+                            <div><strong>Professional AI Context Presets:</strong> Developer-focused preset library
+                                ("Enhance Professionally", "Add Humor", "Prompt Engineer").</div>
+                        </li>
+                        <li class="feature-item">
+                            <span class="feature-icon">⌨️</span>
+                            <div><strong>Hotkey Mappings:</strong> Global keyboard shortcuts (`Ctrl+Shift+E`,
+                                `Ctrl+Shift+Y`, `Ctrl+Shift+L`, `Ctrl+Shift+R`) for instant action execution.</div>
+                        </li>
+                        <li class="feature-item">
+                            <span class="feature-icon">⚙️</span>
+                            <div><strong>Dedicated Options Page:</strong> Comprehensive settings panel (`options.html`)
+                                for API keys and preference overrides.</div>
+                        </li>
+                        <li class="feature-item">
+                            <span class="feature-icon">💬</span>
+                            <div><strong>Dynamic Quote Generator:</strong> Inspirational developer quotes with custom
+                                topic and style filters.</div>
+                        </li>
+                    </ul>
+                    <div class="card-actions">
+                        <button class="card-action-btn copy-entry-btn">
+                            📄 Copy Release Details
+                        </button>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Release 1.0.0 -->
+            <article class="release-item" id="v1.0.0" data-version="1.0.0" data-cat="v1 major">
+                <div class="timeline-node"></div>
+                <div class="release-card">
+                    <div class="release-header">
+                        <div class="version-meta">
+                            <span class="version-tag">[1.0.0]</span>
+                            <span class="release-date">📅 2024-12-10 to 2025-01-21</span>
+                        </div>
+                        <div class="release-badges">
+                            <span class="tag-badge major">INITIAL LAUNCH</span>
+                        </div>
+                    </div>
+                    <h2 class="release-title">Initial Launch of CodeSavvy Developer Toolbox</h2>
+                    <p class="release-summary">
+                        The debut release of CodeSavvy developer toolbox — bringing essential web DOM unlocking,
+                        password revealing, Google Font switching, and page editing tools to developers.
+                    </p>
+                    <ul class="feature-bullets">
+                        <li class="feature-item">
+                            <span class="feature-icon">🛠️</span>
+                            <div><strong>DOM Element Unlocker:</strong> Bypass `disabled`, `readonly`, and
+                                `aria-disabled` element locks on web forms.</div>
+                        </li>
+                        <li class="feature-item">
+                            <span class="feature-icon">👁️</span>
+                            <div><strong>Input Password Toggle:</strong> Instantly switch password fields to plain text
+                                and back.</div>
+                        </li>
+                        <li class="feature-item">
+                            <span class="feature-icon">🔤</span>
+                            <div><strong>Google Fonts Switcher:</strong> Inject custom readability fonts dynamically
+                                across any webpage.</div>
+                        </li>
+                        <li class="feature-item">
+                            <span class="feature-icon">✏️</span>
+                            <div><strong>Design Mode Toggle:</strong> Enable interactive inline editing
+                                (`document.designMode`) on any web document.</div>
+                        </li>
+                        <li class="feature-item">
+                            <span class="feature-icon">🔠</span>
+                            <div><strong>Case Converter & Highlighter:</strong> Context menu utilities for uppercase,
+                                lowercase, camelCase, and text highlighting.</div>
+                        </li>
+                    </ul>
+                    <div class="card-actions">
+                        <button class="card-action-btn copy-entry-btn">
+                            📄 Copy Release Details
+                        </button>
+                    </div>
+                </div>
+            </article>
+
+        </div>
+
+        <!-- Footer -->
+        <footer>
+            <p>&copy; 2026 CodeSavvy. All rights reserved. Created by <a href="https://github.com/mahdialaaaldin"
+                    target="_blank" rel="noopener noreferrer">mahdialaaaldin</a>.</p>
+        </footer>
+    </div>
+
+    <!-- Toast Notification Element -->
+    <div class="toast" id="toastNotification">
+        <span id="toastIcon">✨</span>
+        <span id="toastMessage">Action completed successfully</span>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Theme accent switcher logic
+            const body = document.body;
+            const swatchBtns = document.querySelectorAll('.swatch-btn');
+            const pillBtns = document.querySelectorAll('.color-pill-btn');
+
+            function setTheme (themeName) {
+                if (themeName === 'default' || themeName === 'indigo') {
+                    body.removeAttribute('data-theme');
+                    themeName = 'indigo';
+                } else {
+                    body.setAttribute('data-theme', themeName);
+                }
+                localStorage.setItem('codesavvy_theme_accent', themeName);
+
+                // Update active state on swatch buttons
+                swatchBtns.forEach(btn => {
+                    btn.classList.toggle('active', btn.dataset.color === themeName);
+                });
+
+                // Update active state on pill buttons in v2.2.3 card
+                pillBtns.forEach(btn => {
+                    btn.classList.toggle('active', btn.dataset.pillColor === themeName);
+                });
+
+                showToast(`🎨 Theme accent changed to ${themeName.toUpperCase()}`, '🎨');
+            }
+
+            // Restore saved theme preference
+            const savedTheme = localStorage.getItem('codesavvy_theme_accent');
+            if (savedTheme) {
+                setTheme(savedTheme);
+            }
+
+            swatchBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    setTheme(btn.dataset.color);
+                });
+            });
+
+            pillBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    setTheme(btn.dataset.pillColor);
+                });
+            });
+
+            // Toast notification helper
+            function showToast (message, icon = '✨') {
+                const toast = document.getElementById('toastNotification');
+                const toastMsg = document.getElementById('toastMessage');
+                const toastIcon = document.getElementById('toastIcon');
+
+                toastMsg.textContent = message;
+                toastIcon.textContent = icon;
+                toast.classList.add('show');
+
+                setTimeout(() => {
+                    toast.classList.remove('show');
+                }, 3000);
+            }
+
+            // Search and Filter functionality
+            const searchInput = document.getElementById('searchInput');
+            const filterChips = document.querySelectorAll('.filter-chip');
+            const releaseItems = document.querySelectorAll('.release-item');
+            const noResultsState = document.getElementById('noResultsState');
+            const totalCountEl = document.getElementById('totalReleasesCount');
+
+            let currentFilter = 'all';
+
+            function filterReleases () {
+                const query = searchInput.value.toLowerCase().trim();
+                let visibleCount = 0;
+
+                releaseItems.forEach(item => {
+                    const textContent = item.textContent.toLowerCase();
+                    const version = item.dataset.version || '';
+                    const categories = item.dataset.cat || '';
+
+                    let matchesSearch = query === '' || textContent.includes(query) || version.includes(query);
+                    let matchesFilter = true;
+
+                    if (currentFilter === 'v2') {
+                        matchesFilter = version.startsWith('2.');
+                    } else if (currentFilter === 'v1') {
+                        matchesFilter = version.startsWith('1.');
+                    } else if (currentFilter === 'major') {
+                        matchesFilter = categories.includes('major');
+                    } else if (currentFilter === 'ai') {
+                        matchesFilter = categories.includes('ai');
+                    } else if (currentFilter === 'security') {
+                        matchesFilter = categories.includes('security');
+                    }
+
+                    if (matchesSearch && matchesFilter) {
+                        item.classList.remove('hidden');
+                        visibleCount++;
+                    } else {
+                        item.classList.add('hidden');
+                    }
+                });
+
+                totalCountEl.textContent = visibleCount;
+                if (visibleCount === 0) {
+                    noResultsState.style.display = 'block';
+                } else {
+                    noResultsState.style.display = 'none';
+                }
+            }
+
+            searchInput.addEventListener('input', filterReleases);
+
+            filterChips.forEach(chip => {
+                chip.addEventListener('click', () => {
+                    filterChips.forEach(c => c.classList.remove('active'));
+                    chip.classList.add('active');
+                    currentFilter = chip.dataset.filter;
+                    filterReleases();
+                });
+            });
+
+            // Expand / Collapse All
+            const expandAllBtn = document.getElementById('expandAllBtn');
+            const collapseAllBtn = document.getElementById('collapseAllBtn');
+
+            expandAllBtn.addEventListener('click', () => {
+                document.querySelectorAll('.feature-bullets').forEach(el => el.style.display = 'flex');
+                document.querySelectorAll('.release-summary').forEach(el => el.style.display = 'block');
+                showToast('Expanded all release details', '📖');
+            });
+
+            collapseAllBtn.addEventListener('click', () => {
+                document.querySelectorAll('.feature-bullets').forEach(el => el.style.display = 'none');
+                document.querySelectorAll('.release-summary').forEach(el => el.style.display = 'none');
+                showToast('Collapsed all release details', '📁');
+            });
+
+            // Copy Markdown notes of all releases
+            const copyMarkdownBtn = document.getElementById('copyMarkdownBtn');
+            copyMarkdownBtn.addEventListener('click', () => {
+                const markdownText = `[2.3] - 2026-07-30: Customizable Theme Accent Color Palettes (7 color themes: Indigo, Orange, Yellow, Emerald, Cyan, Violet, Rose), dynamic SVG & CSS variable styling, interactive swatch bar, and storage persistence.
+[2.2.1] - 2026-07-26: History Privacy Modes (Full Logging vs Incognito Mode header button), Auto-Delete log retention policies (7/30/90 days or on exit), custom AI prompt preset modal editor in Options.
+[2.2.0] - 2026-07-19: Upgrade to v2.2 with custom AI presets system, System/Dark/Light theme switcher, animated toast notification system, and History Log viewer with JSON export.
+[2.1.0] - 2026-07-10: Web restriction overrides (Force Right-Click unlock, Text Selection unlock, Copy/Paste unlock), quick toolbar buttons in popup.html, and STORE_DESCRIPTION.md.
+[2.0.1] - 2026-06-23 to 2026-07-02: Gemini API key security enhancement (x-goog-api-key HTTP headers), Chrome Web Store badge updates, and code cleanup.
+[2.0.0] - 2026-06-02 to 2026-06-18: Full UI overhaul with glassmorphism design system & brand SVG logos, Gemini AI integration, interactive test sandbox page (sandbox.html), and codebase restructuring into modular folders (src/).
+[1.3.0] - 2026-01-27 to 2026-02-08: Streamlined Gemini API integration, context menu prompt refinement ("Brutal Mode"), and fallback logic to safeguard original user text.
+[1.2.0] - 2025-10-09 to 2025-12-15: Dual AI failover fallback engine, Arabic-English layout conversion (Beta), Sarcastic AI mode, API key show/hide eye toggle, and downloads permissions.
+[1.1.0] - 2025-03-25 to 2025-05-30: Professional AI context menu presets, hotkey mappings (Ctrl+Shift+E, Ctrl+Shift+Y, etc.), dedicated Options page, and dynamic quote generator.
+[1.0.0] - 2024-12-10 to 2025-01-21: Initial launch of CodeSavvy developer toolbox — DOM element unlocker (disabled, readonly, aria-disabled), Input text/password toggle, Google Fonts switcher, Design Mode toggle, case converter, and text highlighter.`;
+
+                navigator.clipboard.writeText(markdownText).then(() => {
+                    showToast('Full changelog text copied to clipboard!', '📋');
+                }).catch(() => {
+                    showToast('Failed to copy to clipboard', '⚠️');
+                });
+            });
+
+            // Copy Entry Buttons
+
+
+            document.querySelectorAll('.copy-entry-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const card = btn.closest('.release-card');
+                    const title = card.querySelector('.release-title').textContent;
+                    const version = card.querySelector('.version-tag').textContent;
+                    const date = card.querySelector('.release-date').textContent;
+                    const summary = card.querySelector('.release-summary').textContent.trim();
+                    const text = `${version} ${date}\n${title}\n${summary}`;
+
+                    navigator.clipboard.writeText(text).then(() => {
+                        showToast(`Copied details for ${version}`, '📄');
+                    });
+                });
+            });
+
+            // Handle Direct URL Anchors (e.g. #v2.2.3)
+            if (window.location.hash) {
+                const targetId = window.location.hash.substring(1);
+                const targetEl = document.getElementById(targetId);
+                if (targetEl) {
+                    setTimeout(() => {
+                        targetEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        const card = targetEl.querySelector('.release-card');
+                        if (card) {
+                            card.style.borderColor = 'var(--primary)';
+                            card.style.boxShadow = '0 0 30px var(--primary-glow)';
+                        }
+                    }, 200);
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

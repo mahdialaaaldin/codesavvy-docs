@@ -4,13 +4,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CodeSavvy Extension - Interactive Sandbox</title>
+    <title>CodeSavvy Sandbox — Classic Workbench</title>
+    <meta name="description" content="The all-in-one CodeSavvy testing workbench featuring real-time DOM state trackers and interactive sandboxes for all extension tools.">
     <link rel="icon" type="image/png" sizes="48x48" href="assets/icons/icon48.png">
 
     <!-- Google Fonts -->
     <link
         href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
         rel="stylesheet">
+
+    <!-- Theme system -->
+    <script src="theme.js"></script>
+    <link rel="stylesheet" href="theme.css">
 
     <style>
         /* Modern CSS Design System */
@@ -730,11 +735,22 @@
                     <span>← Back to Hub</span>
                 </a>
                 <a href="index.html" class="logo-group">
-                    <img src="assets/icons/icon128.png" alt="CodeSavvy Logo" class="logo"
-                        onerror="this.src='https://img.icons8.com/color/96/000000/google-code.png';">
+                    <svg viewBox="0 0 512 512" class="logo" style="width:64px;height:64px;" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <filter id="sbf" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="12" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+                            <linearGradient id="sbfg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#6366f1"/><stop offset="100%" stop-color="#a855f7"/></linearGradient>
+                        </defs>
+                        <g transform="translate(256,256) rotate(85) scale(1.2) translate(-256,-256)" filter="url(#sbf)">
+                            <path d="M 180,240 V 170 C 180,120 220,80 270,80 C 320,80 360,120 360,170 V 175" fill="none" stroke="url(#sbfg)" stroke-width="33" stroke-linecap="round"/>
+                            <rect x="130" y="230" width="252" height="192" rx="35" fill="none" stroke="url(#sbfg)" stroke-width="35.75"/>
+                            <path d="M 230,326 L 210,326 M 282,326 L 302,326 M 256,290 V 362" stroke="#10b981" stroke-width="27.5" stroke-linecap="round"/>
+                            <circle cx="256" cy="326" r="30" fill="none" stroke="#10b981" stroke-width="13.75"/>
+                            <path d="M 256,246 L 256,230 M 256,406 L 256,422" stroke="#10b981" stroke-width="4" stroke-linecap="round"/>
+                        </g>
+                    </svg>
                     <div class="brand-title">
-                        <h1>CodeSavvy Extension Sandbox</h1>
-                        <p>The ultimate workbench to test, debug, and demonstrate your extension features in real-time.</p>
+                        <h1>CodeSavvy Classic Sandbox</h1>
+                        <p>All-in-one workbench — test, debug, and demo extension features in real-time.</p>
                     </div>
                 </a>
             </div>

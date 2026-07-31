@@ -11,6 +11,9 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
         rel="stylesheet">
+    <!-- Theme system -->
+    <script src="theme.js"></script>
+    <link rel="stylesheet" href="theme.css">
     <style>
         :root {
             --primary: #6366f1;
@@ -31,18 +34,30 @@
             --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
         }
 
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --text: #f8fafc;
-                --text-light: #cbd5e1;
-                --text-muted: #94a3b8;
-                --bg: #090d16;
-                --bg-elevated: #0f172a;
-                --card-bg: rgba(15, 23, 42, 0.6);
-                --border: rgba(148, 163, 184, 0.08);
-                --shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.3);
-                --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.4), 0 10px 10px -5px rgba(0, 0, 0, 0.3);
-            }
+        /* Manual dark mode override — takes priority over media query */
+        html[data-theme="dark"] {
+            --text: #f8fafc;
+            --text-light: #cbd5e1;
+            --text-muted: #94a3b8;
+            --bg: #090d16;
+            --bg-elevated: #0f172a;
+            --card-bg: rgba(15, 23, 42, 0.6);
+            --border: rgba(148, 163, 184, 0.08);
+            --shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.3);
+            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.4), 0 10px 10px -5px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Manual light mode override — forces light even when OS is dark */
+        html[data-theme="light"] {
+            --text: #0f172a;
+            --text-light: #475569;
+            --text-muted: #64748b;
+            --bg: #f8fafc;
+            --bg-elevated: #ffffff;
+            --card-bg: rgba(255, 255, 255, 0.85);
+            --border: rgba(148, 163, 184, 0.15);
+            --shadow: 0 4px 20px -2px rgba(99, 102, 241, 0.05), 0 2px 10px -1px rgba(0, 0, 0, 0.03);
+            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
         }
 
         * {
@@ -405,7 +420,10 @@
                 </svg>
                 <span class="logo-text">CodeSavvy</span>
             </a>
-            <span class="last-updated">Last Updated: June 13, 2026</span>
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <a href="changelog.html" style="background: rgba(255, 255, 255, 0.04); border: 1px solid var(--border); padding: 8px 16px; border-radius: 8px; font-size: 0.85rem; color: var(--text-light); text-decoration: none; font-weight: 600;">📜 Changelog</a>
+                <span class="last-updated">Last Updated: June 13, 2026</span>
+            </div>
         </header>
 
         <!-- Hero -->
@@ -483,23 +501,17 @@
                 <div class="permission-item">
                     <span class="permission-badge">activeTab</span>
                     <span class="permission-desc">Required to apply modifications (like font changes, design mode
-                        editing, and input unlocking) exclusively to the active webpage you are currently
-                        viewing.</span>
+                        editing, and input unlocking) exclusively to the active webpage you explicitly interact with.</span>
                 </div>
                 <div class="permission-item">
                     <span class="permission-badge">scripting</span>
-                    <span class="permission-desc">Enables the extension to inject code to change font styling, unlock
-                        disabled inputs, and remove character length restrictions.</span>
+                    <span class="permission-desc">Enables the extension to execute scripts for font styling, unlocking
+                        disabled inputs, and removing character length restrictions on demand.</span>
                 </div>
                 <div class="permission-item">
                     <span class="permission-badge">storage</span>
-                    <span class="permission-desc">Used to save and retrieve your custom API key and option selections
-                        securely on your local device.</span>
-                </div>
-                <div class="permission-item">
-                    <span class="permission-badge">tabs</span>
-                    <span class="permission-desc">Needed to identify active tabs in order to trigger the cache clearing
-                        reloads and screenshots securely.</span>
+                    <span class="permission-desc">Used to save and retrieve your custom API key, prompt presets, and option selections
+                        strictly on your local device via chrome.storage.local.</span>
                 </div>
                 <div class="permission-item">
                     <span class="permission-badge">browsingData</span>
@@ -508,20 +520,23 @@
                 </div>
                 <div class="permission-item">
                     <span class="permission-badge">contextMenus</span>
-                    <span class="permission-desc">Allows the registration of right-click context menu options to enable
-                        rapid text transformations (case conversions and AI adjustments).</span>
+                    <span class="permission-desc">Allows registering right-click context menu options to enable
+                        rapid text transformations (case conversions, AI prompt adjustments, and highlighting).</span>
                 </div>
                 <div class="permission-item">
                     <span class="permission-badge">notifications</span>
-                    <span class="permission-desc">Displays minor non-intrusive alerts when background operations
+                    <span class="permission-desc">Displays minor non-intrusive desktop alerts when operations
                         complete (e.g. confirming cache clear).</span>
                 </div>
                 <div class="permission-item">
                     <span class="permission-badge">downloads</span>
-                    <span class="permission-desc">Allows you to instantly download captured webpage screenshots directly
-                        to your computer.</span>
+                    <span class="permission-desc">Allows saving captured webpage screenshots directly
+                        to your computer's downloads folder.</span>
                 </div>
             </div>
+            <p style="margin-top: 20px; font-size: 14px; color: var(--text-muted);">
+                🔒 <strong>Data Minimization Commitment:</strong> CodeSavvy intentionally does <strong>not</strong> request the broad <code>tabs</code> permission (which would grant access to your browser history and all open tabs). We strictly adhere to Google Chrome Web Store's Principle of Least Privilege.
+            </p>
         </div>
 
         <div class="content-section">

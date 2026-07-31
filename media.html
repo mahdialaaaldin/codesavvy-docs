@@ -4,13 +4,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CodeSavvy Sandbox - Media & Screenshots</title>
+    <title>CodeSavvy Sandbox — Media &amp; Screenshots</title>
+    <meta name="description" content="Test CodeSavvy's Screenshot capture, Fullscreen toggle, and responsive scaling tools on a rich media dashboard.">
     <link rel="icon" type="image/png" sizes="16x16" href="assets/icons/icon16.png">
     <link rel="icon" type="image/png" sizes="48x48" href="assets/icons/icon48.png">
     <link rel="icon" type="image/png" sizes="128x128" href="assets/icons/icon128.png">
     <link
         href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
         rel="stylesheet">
+    <!-- Theme system -->
+    <script src="theme.js"></script>
+    <link rel="stylesheet" href="theme.css">
     <style>
         :root {
             --bg-dark: #070a13;
@@ -317,10 +321,20 @@
         <!-- Header -->
         <header>
             <a href="index.html" class="logo-group">
-                <img src="assets/icons/icon128.png" alt="CodeSavvy Logo" class="logo-img"
-                    onerror="this.src='https://img.icons8.com/color/96/000000/google-code.png';">
+                <svg viewBox="0 0 512 512" style="width:36px;height:36px;flex-shrink:0;filter:drop-shadow(0 0 6px rgba(99,102,241,0.4));" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <filter id="mf" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="12" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+                        <linearGradient id="mfg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#6366f1"/><stop offset="100%" stop-color="#a855f7"/></linearGradient>
+                    </defs>
+                    <g transform="translate(256,256) rotate(85) scale(1.2) translate(-256,-256)" filter="url(#mf)">
+                        <path d="M 180,240 V 170 C 180,120 220,80 270,80 C 320,80 360,120 360,170 V 175" fill="none" stroke="url(#mfg)" stroke-width="33" stroke-linecap="round"/>
+                        <rect x="130" y="230" width="252" height="192" rx="35" fill="none" stroke="url(#mfg)" stroke-width="35.75"/>
+                        <path d="M 230,326 L 210,326 M 282,326 L 302,326 M 256,290 V 362" stroke="#10b981" stroke-width="27.5" stroke-linecap="round"/>
+                        <circle cx="256" cy="326" r="30" fill="none" stroke="#10b981" stroke-width="13.75"/>
+                    </g>
+                </svg>
                 <div class="logo-title">
-                    <h1>Media Sandbox</h1>
+                    <h1 style="font-size:1.25rem;font-weight:800;background:linear-gradient(135deg,#fff,#94a3b8);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Media &amp; Screenshots Sandbox</h1>
                 </div>
             </a>
             <a href="index.html" class="back-btn">
