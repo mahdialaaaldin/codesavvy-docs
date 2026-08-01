@@ -920,26 +920,26 @@
         <!-- Hero Section -->
         <section class="hero">
             <div class="hero-title-badge">
-                <span>🚀 Latest Release v2.2.3</span>
+                <span>🚀 Latest Release v2.2.4</span>
                 <span>•</span>
-                <span>Updated July 30, 2026</span>
+                <span>Updated August 1, 2026</span>
             </div>
             <h1>Release Changelog</h1>
             <p>
                 Follow the complete release history of CodeSavvy developer toolbox — from initial launch to custom AI
                 presets,
-                Incognito mode privacy controls, and dynamic color theme palettes.
+                Incognito mode privacy controls, settings backup/restore, and dynamic color theme palettes.
             </p>
         </section>
 
         <!-- Metrics Dashboard -->
         <div class="stats-grid">
             <div class="stat-card">
-                <div class="stat-number" id="totalReleasesCount">10</div>
+                <div class="stat-number" id="totalReleasesCount">11</div>
                 <div class="stat-label">Total Releases</div>
             </div>
             <div class="stat-card">
-                <div class="stat-number">v2.2.3</div>
+                <div class="stat-number">v2.2.4</div>
                 <div class="stat-label">Current Version</div>
             </div>
             <div class="stat-card">
@@ -992,8 +992,56 @@
         <!-- Releases Timeline -->
         <div class="timeline" id="changelogTimeline">
 
-            <!-- Release 2.3 -->
-            <article class="release-item latest" id="v2.2.3" data-version="2.2.3" data-cat="v2 major theme ui">
+            <!-- Release 2.2.4 -->
+            <article class="release-item latest" id="v2.2.4" data-version="2.2.4" data-cat="v2 major ai backup ui">
+                <div class="timeline-node"></div>
+                <div class="release-card">
+                    <div class="release-header">
+                        <div class="version-meta">
+                            <span class="version-tag">[2.2.4]</span>
+                            <span class="release-date">📅 2026-08-01</span>
+                        </div>
+                        <div class="release-badges">
+                            <span class="tag-badge latest">LATEST RELEASE</span>
+                            <span class="tag-badge major">BACKUP &amp; AI MODELS</span>
+                        </div>
+                    </div>
+                    <h2 class="release-title">Settings Backup &amp; Restore, Preset Reordering, Latest Gemini Models &amp; Options UX</h2>
+                    <p class="release-summary">
+                        Introduces full Settings Export (.json download) and Import with auto-save, Drag &amp; Drop preset reordering, latest Gemini models (3.5 Flash Lite, 3.6 Flash, 3.5 Flash) grouped by tier, factory reset to defaults, and history Copy actions.
+                    </p>
+                    <ul class="feature-bullets">
+                        <li class="feature-item">
+                            <span class="feature-icon">💾</span>
+                            <div><strong>Settings Backup &amp; Restore:</strong> Export extension settings and custom prompts to JSON files (API key safely excluded for privacy) and import backups instantly across browsers.</div>
+                        </li>
+                        <li class="feature-item">
+                            <span class="feature-icon">↕️</span>
+                            <div><strong>Preset Drag &amp; Drop Reordering:</strong> Easily reorder custom AI right-click prompt items using drag handles (`⠿`) or Move Up/Down (`▲`/`▼`) buttons.</div>
+                        </li>
+                        <li class="feature-item">
+                            <span class="feature-icon">🤖</span>
+                            <div><strong>Latest Gemini AI Models:</strong> Organized model selector into Flash Lite, Flash, and Pro tiers, adding Gemini 3.5 Flash Lite (Recommended Default), Gemini 3.6 Flash, and Gemini 3.5 Flash.</div>
+                        </li>
+                        <li class="feature-item">
+                            <span class="feature-icon">📋</span>
+                            <div><strong>History Copy Actions:</strong> Replaced selection restore buttons with direct "Copy Original" and "Copy Enhanced" clipboard buttons featuring animated toast feedback.</div>
+                        </li>
+                        <li class="feature-item">
+                            <span class="feature-icon">✨</span>
+                            <div><strong>Modern Options UX &amp; Cross-Browser:</strong> Full tab option layout (`open_in_tab: true`) optimized for Edge &amp; Chrome, replacing native popups with glassmorphic Toast notifications and button state feedback.</div>
+                        </li>
+                    </ul>
+                    <div class="card-actions">
+                        <button class="card-action-btn copy-entry-btn">
+                            📄 Copy Release Details
+                        </button>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Release 2.2.3 -->
+            <article class="release-item" id="v2.2.3" data-version="2.2.3" data-cat="v2 major theme ui">
                 <div class="timeline-node"></div>
                 <div class="release-card">
                     <div class="release-header">
@@ -1002,7 +1050,6 @@
                             <span class="release-date">📅 2026-07-30</span>
                         </div>
                         <div class="release-badges">
-                            <span class="tag-badge latest">LATEST RELEASE</span>
                             <span class="tag-badge major">CUSTOMIZATION</span>
                         </div>
                     </div>
@@ -1653,7 +1700,8 @@
             // Copy Markdown notes of all releases
             const copyMarkdownBtn = document.getElementById('copyMarkdownBtn');
             copyMarkdownBtn.addEventListener('click', () => {
-                const markdownText = `[2.3] - 2026-07-30: Customizable Theme Accent Color Palettes (7 color themes: Indigo, Orange, Yellow, Emerald, Cyan, Violet, Rose), dynamic SVG & CSS variable styling, interactive swatch bar, and storage persistence.
+                const markdownText = `[2.2.4] - 2026-08-01: Settings Backup & Restore (.json export/import), Preset Drag & Drop reordering, latest Gemini models (3.5 Flash Lite default, 3.6 Flash), factory reset to defaults, and history Copy actions.
+[2.2.3] - 2026-07-30: Customizable Theme Accent Color Palettes (7 color themes: Indigo, Orange, Yellow, Emerald, Cyan, Violet, Rose), dynamic SVG & CSS variable styling, interactive swatch bar, and storage persistence.
 [2.2.1] - 2026-07-26: History Privacy Modes (Full Logging vs Incognito Mode header button), Auto-Delete log retention policies (7/30/90 days or on exit), custom AI prompt preset modal editor in Options.
 [2.2.0] - 2026-07-19: Upgrade to v2.2 with custom AI presets system, System/Dark/Light theme switcher, animated toast notification system, and History Log viewer with JSON export.
 [2.1.0] - 2026-07-10: Web restriction overrides (Force Right-Click unlock, Text Selection unlock, Copy/Paste unlock), quick toolbar buttons in popup.html, and STORE_DESCRIPTION.md.
