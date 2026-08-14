@@ -1135,6 +1135,124 @@
                 </p>
             </div>
 
+            <!-- SECTION: V2.3.0 NEW POWER TOOLS & AI STUDIO -->
+            <div class="section-tag" style="grid-column: 1 / -1; margin-top: 24px;">
+                <span>✨</span> New in v2.3.0: AI Studio, CSS Inspector, Color Studio &amp; Utilities
+            </div>
+
+            <!-- Card: Element Zapper & Sticky Overlays Test -->
+            <div class="card" id="card-zapper">
+                <div class="card-header">
+                    <div class="card-title">
+                        <span class="card-icon">⚡</span>
+                        <div>
+                            <h2>Element Zapper &amp; Paywall Bypass</h2>
+                            <p style="font-size: 0.75rem; color: var(--text-secondary);">Test vaporizing sticky overlays, paywalls &amp; banners with Undo (Ctrl+Z)</p>
+                        </div>
+                    </div>
+                    <span id="zapper-badge" class="status-pill warning">READY TO ZAP</span>
+                </div>
+
+                <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 12px;">
+                    <button class="btn" style="flex: 1; min-width: 140px; padding: 8px 12px; font-size: 0.8rem; background: rgba(99,102,241,0.15); border: 1px solid var(--primary);" onclick="spawnFakePaywall()">
+                        🚨 Spawn Annoying Paywall Modal
+                    </button>
+                    <button class="btn" style="flex: 1; min-width: 140px; padding: 8px 12px; font-size: 0.8rem; background: rgba(239,68,68,0.15); border: 1px solid var(--danger);" onclick="spawnStickyBanner()">
+                        🍪 Spawn Floating Cookie Banner
+                    </button>
+                </div>
+
+                <div class="zapper-test-target" id="inline-zap-target" style="padding: 16px; border: 2px dashed rgba(239,68,68,0.4); border-radius: var(--radius-md); background: rgba(239,68,68,0.06); text-align: center;">
+                    <div style="font-size: 1.1rem; font-weight: 700; color: var(--danger); margin-bottom: 4px;">🎯 Annoying Inline Ad Box</div>
+                    <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 4px;">Click <strong>Zap Element</strong> in CodeSavvy popup, hover here, and click to vaporize this box! Then press <code>Ctrl+Z</code> (or the on-screen Undo button) to restore it.</p>
+                </div>
+            </div>
+
+            <!-- Card: CSS & Box Model Inspector Test -->
+            <div class="card" id="card-box-inspector">
+                <div class="card-header">
+                    <div class="card-title">
+                        <span class="card-icon">📐</span>
+                        <div>
+                            <h2>Non-Destructive CSS Inspector</h2>
+                            <p style="font-size: 0.75rem; color: var(--text-secondary);">Test live dimensions, padding, margin, typography &amp; click-to-copy</p>
+                        </div>
+                    </div>
+                    <span class="status-pill" style="background: rgba(99,102,241,0.15); color: var(--primary);">INSPECTABLE</span>
+                </div>
+
+                <div class="inspector-demo-card" style="padding: 24px 18px 16px 12px; margin: 10px 0; border: 2px solid #6366f1; border-radius: 12px; background: linear-gradient(135deg, rgba(99,102,241,0.08), rgba(168,85,247,0.12)); font-family: 'JetBrains Mono', monospace;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                        <span style="font-size: 0.85rem; font-weight: 700; color: #a855f7;">.nested-css-component</span>
+                        <span style="font-size: 0.75rem; color: var(--text-muted); background: rgba(0,0,0,0.3); padding: 2px 6px; border-radius: 4px;">display: flex</span>
+                    </div>
+                    <p style="font-size: 0.8rem; color: var(--text-secondary); line-height: 1.5; margin-bottom: 8px;">
+                        Hover over this element with <strong>Box Inspector</strong> enabled in the popup. View real-time computed margin, padding, color tokens, and click to copy the CSS declaration!
+                    </p>
+                    <div style="font-size: 0.75rem; color: #10b981; font-weight: 600;">color: #10b981 | font-size: 12px</div>
+                </div>
+            </div>
+
+            <!-- Card: Color Studio & Eyedropper Test -->
+            <div class="card" id="card-color-studio">
+                <div class="card-header">
+                    <div class="card-title">
+                        <span class="card-icon">🎨</span>
+                        <div>
+                            <h2>Color Studio &amp; 0ms Eyedropper</h2>
+                            <p style="font-size: 0.75rem; color: var(--text-secondary);">Sample exact pixel colors from palette tiles</p>
+                        </div>
+                    </div>
+                    <span class="status-pill" style="background: rgba(16,185,129,0.15); color: var(--secondary);">PALETTE ACTIVE</span>
+                </div>
+
+                <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin: 12px 0;">
+                    <div style="background: #6366f1; height: 44px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-family: monospace; font-size: 10.5px; font-weight: bold; color: white;" title="Classic Indigo">#6366F1</div>
+                    <div style="background: #00e676; height: 44px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-family: monospace; font-size: 10.5px; font-weight: bold; color: #070a13;" title="Emerald Green">#00E676</div>
+                    <div style="background: #ff6b00; height: 44px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-family: monospace; font-size: 10.5px; font-weight: bold; color: white;" title="Sunset Orange">#FF6B00</div>
+                    <div style="background: #00f0ff; height: 44px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-family: monospace; font-size: 10.5px; font-weight: bold; color: #070a13;" title="Ocean Cyan">#00F0FF</div>
+                    <div style="background: #b955ff; height: 44px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-family: monospace; font-size: 10.5px; font-weight: bold; color: white;" title="Electric Violet">#B955FF</div>
+                    <div style="background: #ff2a70; height: 44px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-family: monospace; font-size: 10.5px; font-weight: bold; color: white;" title="Neon Rose">#FF2A70</div>
+                    <div style="background: #ffd000; height: 44px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-family: monospace; font-size: 10.5px; font-weight: bold; color: #070a13;" title="Amber Yellow">#FFD000</div>
+                    <div style="background: #1e293b; height: 44px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-family: monospace; font-size: 10.5px; font-weight: bold; color: white; border: 1px solid rgba(255,255,255,0.1);" title="Slate Dark">#1E293B</div>
+                </div>
+                <p style="font-size: 0.78rem; color: var(--text-muted);">
+                    Click the <strong>Eyedropper pen</strong> inside Color Studio to sample any of the colors above instantly with 0ms delay!
+                </p>
+            </div>
+
+            <!-- Card: Site Storage & Cookies Wiper Test -->
+            <div class="card" id="card-storage-wiper">
+                <div class="card-header">
+                    <div class="card-title">
+                        <span class="card-icon">🧹</span>
+                        <div>
+                            <h2>Site Storage &amp; Cookies Wiper</h2>
+                            <p style="font-size: 0.75rem; color: var(--text-secondary);">Seed and verify 1-click domain storage clearing</p>
+                        </div>
+                    </div>
+                    <span id="storage-status-badge" class="status-pill success">0 ITEMS</span>
+                </div>
+
+                <div style="display: flex; gap: 8px; margin: 10px 0; flex-wrap: wrap;">
+                    <button class="btn" style="flex: 1; padding: 6px 10px; font-size: 0.75rem; background: rgba(255,255,255,0.06); box-shadow: none;" onclick="seedStorageData()">
+                        🌱 Seed Test Storage
+                    </button>
+                    <button class="btn" style="flex: 1; padding: 6px 10px; font-size: 0.75rem; background: rgba(255,255,255,0.06); box-shadow: none;" onclick="updateStorageCounts()">
+                        🔄 Refresh Counters
+                    </button>
+                </div>
+
+                <div style="background: rgba(0,0,0,0.25); border-radius: var(--radius-sm); padding: 10px 14px; font-family: monospace; font-size: 0.8rem; display: flex; justify-content: space-around; text-align: center;">
+                    <div>LocalStorage: <strong id="ls-count" style="color: var(--primary);">0</strong></div>
+                    <div>SessionStorage: <strong id="ss-count" style="color: var(--secondary);">0</strong></div>
+                    <div>Cookies: <strong id="ck-count" style="color: var(--warning);">0</strong></div>
+                </div>
+                <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 8px;">
+                    Click <strong>Seed Test Storage</strong>, then open CodeSavvy popup and click <strong>Wipe Storage</strong> to test instant domain storage wipe!
+                </p>
+            </div>
+
         </div>
 
         <!-- Logging Console -->
@@ -1455,6 +1573,87 @@
             }
         }
 
+        // --- 7. Element Zapper & Storage Wiper Simulation Helpers (v2.3.0) ---
+        function spawnFakePaywall() {
+            document.getElementById('fake-paywall-modal')?.remove();
+            const modal = document.createElement('div');
+            modal.id = 'fake-paywall-modal';
+            modal.style.cssText = 'position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.85); backdrop-filter: blur(8px); z-index: 99999; display: flex; align-items: center; justify-content: center; padding: 20px;';
+            modal.innerHTML = `
+                <div style="background: #0f172a; border: 2px solid #ef4444; border-radius: 16px; max-width: 480px; width: 100%; padding: 32px; text-align: center; box-shadow: 0 20px 40px rgba(0,0,0,0.6);">
+                    <div style="font-size: 40px; margin-bottom: 12px;">🔒</div>
+                    <h2 style="color: #ef4444; font-size: 1.4rem; font-weight: 800; margin-bottom: 8px;">PREMIUM CONTENT PAYWALL</h2>
+                    <p style="color: #94a3b8; font-size: 0.85rem; margin-bottom: 20px; line-height: 1.5;">You've reached your free article limit. To continue reading, please subscribe for $99/mo or use <strong>CodeSavvy Zap Element</strong> to vaporize this overlay!</p>
+                    <div style="display: flex; gap: 10px; justify-content: center;">
+                        <button style="background: #ef4444; color: white; border: none; padding: 10px 20px; border-radius: 8px; font-weight: 700; cursor: pointer;">Subscribe Now</button>
+                        <button onclick="this.closest('#fake-paywall-modal').remove()" style="background: rgba(255,255,255,0.1); color: #94a3b8; border: 1px solid rgba(255,255,255,0.2); padding: 10px 16px; border-radius: 8px; font-weight: 600; cursor: pointer;">Cancel</button>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(modal);
+            logAction("🚨 SIMULATION: Annoying modal paywall spawned. Use Zap Element to vaporize it!", false);
+        }
+
+        function spawnStickyBanner() {
+            document.getElementById('fake-sticky-banner')?.remove();
+            const banner = document.createElement('div');
+            banner.id = 'fake-sticky-banner';
+            banner.style.cssText = 'position: fixed; bottom: 0; left: 0; width: 100vw; background: #1e1b4b; border-top: 2px solid #6366f1; color: white; padding: 16px 24px; z-index: 99998; display: flex; align-items: center; justify-content: space-between; gap: 16px; box-shadow: 0 -10px 30px rgba(0,0,0,0.5);';
+            banner.innerHTML = `
+                <div style="display: flex; align-items: center; gap: 12px;">
+                    <span style="font-size: 24px;">🍪</span>
+                    <div>
+                        <strong style="font-size: 0.9rem;">We use tracking cookies & analytics!</strong>
+                        <p style="font-size: 0.75rem; color: #a5b4fc; margin-top: 2px;">By continuing to browse this page, you agree to our complex multi-page policy.</p>
+                    </div>
+                </div>
+                <div style="display: flex; gap: 8px;">
+                    <button style="background: #6366f1; color: white; border: none; padding: 8px 16px; border-radius: 6px; font-weight: 700; font-size: 0.8rem; cursor: pointer;">Accept All</button>
+                    <button onclick="this.closest('#fake-sticky-banner').remove()" style="background: transparent; color: #94a3b8; border: 1px solid #4338ca; padding: 8px 12px; border-radius: 6px; font-size: 0.8rem; cursor: pointer;">Dismiss</button>
+                </div>
+            `;
+            document.body.appendChild(banner);
+            logAction("🍪 SIMULATION: Floating sticky cookie bar spawned. Use Zap Element to remove it!", false);
+        }
+
+        function seedStorageData() {
+            try {
+                localStorage.setItem('codesavvy_test_token', 'jwt_sample_token_xyz987');
+                localStorage.setItem('codesavvy_user_profile', JSON.stringify({ name: 'Developer', role: 'Tester' }));
+                sessionStorage.setItem('codesavvy_session_active', 'true');
+                sessionStorage.setItem('codesavvy_temp_filter', 'all');
+                document.cookie = 'codesavvy_cookie=valid_session_123; path=/; SameSite=Lax';
+                document.cookie = 'codesavvy_analytics=tracked; path=/; SameSite=Lax';
+                updateStorageCounts();
+                logAction("🌱 STORAGE: Seeded LocalStorage, SessionStorage & Cookies for testing!", true);
+            } catch (err) {
+                console.error(err);
+            }
+        }
+
+        function updateStorageCounts() {
+            try {
+                const ls = localStorage.length;
+                const ss = sessionStorage.length;
+                const ck = document.cookie ? document.cookie.split(';').filter(c => c.trim()).length : 0;
+                
+                const lsEl = document.getElementById('ls-count');
+                const ssEl = document.getElementById('ss-count');
+                const ckEl = document.getElementById('ck-count');
+                const badge = document.getElementById('storage-status-badge');
+
+                if (lsEl) lsEl.innerText = ls;
+                if (ssEl) ssEl.innerText = ss;
+                if (ckEl) ckEl.innerText = ck;
+
+                const total = ls + ss + ck;
+                if (badge) {
+                    badge.innerText = `${total} ITEMS`;
+                    badge.className = total > 0 ? 'status-pill warning' : 'status-pill success';
+                }
+            } catch (err) {}
+        }
+
         // Setup observer check loops (since chrome.scripting modifies attributes directly)
         setInterval(() => {
             checkUnlockState();
@@ -1465,13 +1664,15 @@
             checkRightClickBypass();
             checkSelectionBypass();
             checkCopyPasteBypass();
+            updateStorageCounts();
         }, 400);
 
-        // Keep initial font baseline
+        // Keep initial font baseline & storage counts
         window.addEventListener('load', () => {
             const computedStyle = window.getComputedStyle(fontPreviewBox);
             lastAppliedFont = computedStyle.fontFamily.replace(/['"]/g, '').split(',')[0];
             fontBadgeStatus.innerText = lastAppliedFont;
+            updateStorageCounts();
         });
     </script>
 </body>

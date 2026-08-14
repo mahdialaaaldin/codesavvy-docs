@@ -64,4 +64,4 @@ We may update this Privacy Policy from time to time to reflect changes in our Ex
 
 ## 7. Contact Us
 If you have any questions or suggestions about this Privacy Policy, please contact us at:
-* **Email**: [mahdialaaaldin+codesavvy@gmail.com](mailto:mahdialaaaldin+codesavvy@gmail.com)
+* **Email**: [malaadin192+codesavvy@gmail.com](mailto:malaadin192+codesavvy@gmail.com)

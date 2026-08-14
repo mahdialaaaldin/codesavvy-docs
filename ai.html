@@ -465,39 +465,45 @@
                 </div>
             </div>
 
-            <!-- Card 2: Local Text Utility -->
-            <div class="card">
+            <!-- Card 3: AI Page Studio Live Target Article (v2.3.0) -->
+            <div class="card" style="grid-column: 1 / -1; margin-top: 12px;" id="ai-page-studio-target">
                 <div class="card-header">
                     <div>
-                        <h2>Case &amp; Utility Transformations</h2>
-                        <div class="sub">Local JavaScript — no API key required</div>
+                        <h2>🧠 AI Page Studio Live Target (v2.3.0)</h2>
+                        <div class="sub">Open CodeSavvy popup → AI Page Studio → test TL;DR, Tech Stack, Key Takeaways &amp; Q&amp;A</div>
                     </div>
-                    <span class="card-tag local">⚡ Local</span>
+                    <span class="card-tag gemini">⚡ Page Intelligence</span>
                 </div>
 
-                <div class="selection-box">
-                    <span class="selection-label">Case Conversion Candidate</span>
-                    Convert this plain text into title case or sentence case instantly using the context menu. Try all seven case styles: UPPER, lower, Title, Capitalized, aLtErNaTiNg, iNvErSe, and slug-form.
-                </div>
+                <article style="background: rgba(0,0,0,0.25); border: 1px solid var(--border-normal); border-radius: var(--radius-md); padding: 24px; line-height: 1.7;">
+                    <h3 style="color: var(--primary); font-size: 1.25rem; font-weight: 800; margin-bottom: 8px;">
+                        Distributed Cache Invalidation Strategies in Modern Cloud Architectures
+                    </h3>
+                    <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 14px;">
+                        Maintaining cache consistency across geographically replicated database nodes is one of the classic challenges in distributed systems. When write throughput surges, naive Time-To-Live (TTL) cache invalidations frequently lead to cache stampedes, where thousands of simultaneous queries bypass an expired cache and overwhelm the underlying primary SQL database.
+                    </p>
 
-                <div class="selection-box">
-                    <span class="selection-label">Slugify Candidate</span>
-                    My Awesome Blog Post Title — Convert This To A URL Friendly Slug
-                </div>
+                    <h4 style="color: #a855f7; font-size: 1rem; font-weight: 700; margin: 14px 0 6px 0;">💻 System Architecture &amp; Tech Stack</h4>
+                    <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px;">
+                        <span style="background: rgba(99,102,241,0.15); color: var(--primary); padding: 4px 10px; border-radius: 6px; font-size: 0.8rem; font-weight: 600;">Node.js v22</span>
+                        <span style="background: rgba(16,185,129,0.15); color: var(--secondary); padding: 4px 10px; border-radius: 6px; font-size: 0.8rem; font-weight: 600;">Redis Sentinel</span>
+                        <span style="background: rgba(245,158,11,0.15); color: var(--warning); padding: 4px 10px; border-radius: 6px; font-size: 0.8rem; font-weight: 600;">PostgreSQL 16</span>
+                        <span style="background: rgba(239,68,68,0.15); color: #ef4444; padding: 4px 10px; border-radius: 6px; font-size: 0.8rem; font-weight: 600;">Apache Kafka</span>
+                        <span style="background: rgba(168,85,247,0.15); color: #a855f7; padding: 4px 10px; border-radius: 6px; font-size: 0.8rem; font-weight: 600;">Docker &amp; Kubernetes</span>
+                        <span style="background: rgba(6,182,212,0.15); color: #06b6d4; padding: 4px 10px; border-radius: 6px; font-size: 0.8rem; font-weight: 600;">Gemini 3.5 Flash API</span>
+                    </div>
 
-                <div class="selection-box">
-                    <span class="selection-label">Text Highlighting Target</span>
-                    CodeSavvy's <strong>Highlight Text</strong> utility wraps your selected words with a bright yellow marker. Select any sentence in this box, right-click, and choose <em>Highlight Text</em> from the CodeSavvy menu to mark it.
-                </div>
+                    <h4 style="color: var(--secondary); font-size: 1rem; font-weight: 700; margin: 14px 0 6px 0;">📌 Key Engineering Takeaways</h4>
+                    <ul style="padding-left: 20px; color: var(--text-secondary); font-size: 0.88rem; margin-bottom: 14px;">
+                        <li><strong>Probabilistic Early Expiration (XFetch):</strong> Recomputes hot keys dynamically before expiry to eliminate cache stampedes with sub-5ms latency.</li>
+                        <li><strong>Event-Driven Invalidation via Kafka:</strong> Decouples database write triggers from edge CDN caching layers with guaranteed message delivery.</li>
+                        <li><strong>Write-Through vs Cache-Aside:</strong> Cache-aside delivers 40% lower memory footprint for read-heavy workloads exceeding 50,000 QPS.</li>
+                    </ul>
 
-                <div class="selection-box">
-                    <span class="selection-label">Arabic Layout (Beta)</span>
-                    ىثقف ثب ف — If you accidentally typed in the wrong keyboard layout, select this text and use "Convert Arabic to English" to recover the original English string.
-                </div>
-
-                <div class="how-to">
-                    💡 <strong>Custom Presets:</strong> You can add your own AI prompts under <em>Settings → AI Right-Click Preset Prompts</em>. They appear directly in the context menu with a ✦ prefix.
-                </div>
+                    <p style="font-size: 0.85rem; color: var(--text-muted);">
+                        🧪 <strong>Test Instructions:</strong> Open the CodeSavvy extension popup on this page, click <strong>AI Page Studio</strong>, and try clicking <em>⚡ TL;DR Summary</em>, <em>💻 Tech Stack</em>, <em>📌 Key Takeaways</em>, or asking a question like <em>"What is XFetch?"</em> in the custom question box!
+                    </p>
+                </article>
             </div>
 
         </div>
