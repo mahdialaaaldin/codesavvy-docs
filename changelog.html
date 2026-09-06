@@ -105,6 +105,85 @@
             --badge-text: #fda4af;
         }
 
+        /* ── Full Light Mode Overrides ────────────────────────────────────── */
+        html[data-theme="light"] {
+            --bg-dark: #f1f5f9;
+            --bg-card: #ffffff;
+            --bg-card-hover: #f8fafc;
+            --border-glow: rgba(99, 102, 241, 0.25);
+            --border-normal: rgba(148, 163, 184, 0.28);
+            --text-main: #0f172a;
+            --text-secondary: #475569;
+            --text-muted: #64748b;
+            --shadow-card: 0 4px 18px rgba(0, 0, 0, 0.06);
+            --shadow-glow: 0 0 20px rgba(99, 102, 241, 0.15);
+            --badge-bg: rgba(99, 102, 241, 0.1);
+            --badge-text: #4f46e5;
+        }
+
+        html[data-theme="light"] body {
+            background-color: #f1f5f9;
+            color: #0f172a;
+            background-image:
+                radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.06) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.05) 0%, transparent 40%);
+        }
+
+        html[data-theme="light"] .hero h1 {
+            background: linear-gradient(to right, #0f172a 40%, #475569);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        html[data-theme="light"] .version-tag {
+            color: #0f172a;
+        }
+
+        html[data-theme="light"] .search-input {
+            background: #ffffff;
+            color: #0f172a;
+            border-color: rgba(148, 163, 184, 0.35);
+        }
+
+        html[data-theme="light"] .stat-card,
+        html[data-theme="light"] .controls-card,
+        html[data-theme="light"] .release-card,
+        html[data-theme="light"] .theme-swatch-banner,
+        html[data-theme="light"] header {
+            background-color: #ffffff;
+            border-color: rgba(148, 163, 184, 0.25);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+        }
+
+        html[data-theme="light"] .swatch-title {
+            color: #0f172a;
+        }
+
+        html[data-theme="light"] .timeline-node {
+            background: #ffffff;
+        }
+
+        html[data-theme="light"] .action-btn,
+        html[data-theme="light"] .filter-chip,
+        html[data-theme="light"] .nav-btn {
+            background: #f8fafc;
+            border-color: rgba(148, 163, 184, 0.3);
+            color: #475569;
+        }
+
+        html[data-theme="light"] .action-btn:hover,
+        html[data-theme="light"] .filter-chip:hover,
+        html[data-theme="light"] .nav-btn:hover {
+            background: rgba(99, 102, 241, 0.1);
+            color: #4f46e5;
+        }
+
+        html[data-theme="light"] .history-console {
+            background: #f8fafc;
+            color: #334155;
+            border: 1px solid rgba(148, 163, 184, 0.25);
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -893,10 +972,10 @@
                 <span class="logo-text">CodeSavvy</span>
             </a>
             <div class="nav-links">
-                <a href="index.html" class="nav-btn">🏠 Home</a>
-                <a href="sandbox.html" class="nav-btn">⚡ Sandboxes</a>
+                <a href="index.html" class="nav-btn">📖 Guide &amp; Testing Suite</a>
                 <a href="privacy.html" class="nav-btn">🛡️ Privacy Policy</a>
                 <a href="changelog.html" class="nav-btn active">📜 Changelog</a>
+                <a href="https://chromewebstore.google.com/detail/codesavvy/jenendhnlcnokliclhccikgeohdgfhml" class="nav-btn" target="_blank" rel="noopener noreferrer">🛒 Web Store</a>
             </div>
         </header>
 

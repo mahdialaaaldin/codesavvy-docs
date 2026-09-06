@@ -1,67 +1,127 @@
 # Privacy Policy for CodeSavvy
 
-**Last Updated: June 13, 2026**
-
-Your privacy is extremely important to us. This Privacy Policy describes how the **CodeSavvy** Chrome Extension (the "Extension") handles your data.
-
----
-
-## 1. Overview
-CodeSavvy is a developer toolbox designed to assist with web page manipulation, debugging, and text enhancements. The Extension is designed with a **privacy-first architecture**:
-* It operates directly within your browser.
-* It does **not** collect, store, or transmit your personal or sensitive user data to any external servers owned by the developer.
+**Effective Date:** June 13, 2026  
+**Last Updated:** September 6, 2026  
+**Extension Name:** CodeSavvy  
+**Extension ID / Chrome Web Store URL:** [CodeSavvy on Chrome Web Store](https://chromewebstore.google.com/detail/codesavvy/jenendhnlcnokliclhccikgeohdgfhml)  
+**Developer / Publisher:** Mahdi Al-Alaaldin ([mahdialaaaldin](https://github.com/mahdialaaaldin))  
+**Contact Email:** [malaadin192+codesavvy@gmail.com](mailto:malaadin192+codesavvy@gmail.com)  
+**Online Web Version:** [https://mahdialaaaldin.github.io/codesavvy-docs/privacy.html](https://mahdialaaaldin.github.io/codesavvy-docs/privacy.html)
 
 ---
 
-## 2. Information We Access and How It Is Used
-The Extension accesses only the data necessary to perform its core functions:
+## 1. Executive Summary & Core Philosophy
 
-### A. Local Storage (`chrome.storage.local`)
-* **What we store**: Your settings, preferences, and your Google Gemini API Key.
-* **How it is used**: To persist your preferences and allow the Extension to authenticate with Google's Gemini API.
-* **Security**: This data is stored strictly on your local device within the browser's sandbox. It is never transmitted to the developer or any unauthorized third parties.
+**CodeSavvy is engineered with a strict privacy-first, local-only architecture.** 
 
-### B. Selected Text (via Context Menu)
-* **What we access**: If you select text on a webpage, right-click, and choose an AI-powered text enhancement option (e.g., "Improve Text", "Roasted Mode"), the Extension reads the selected text.
-* **How it is used**: The selected text is sent directly to Google's Gemini API along with your API key to perform the requested text transformation.
-* **Destinations**: The text goes directly to Google's API endpoints. It is never routed through any intermediary servers. Please refer to [Google's Privacy Policy](https://policies.google.com/privacy) for details on how Google handles API requests.
+* **Zero External Developer Servers:** We do not operate any tracking servers, remote analytics databases, or logging infrastructure.
+* **Zero Telemetry or Tracking:** CodeSavvy does not collect, sell, monetize, transmit, or analyze your browsing history, clicks, search queries, or personal information.
+* **100% Local Browser Execution:** All DOM manipulation tools, CSS inspection, QR code generation, media extraction, storage wiping, and settings persistence run locally within your browser sandbox.
+* **Direct Client-to-API Communication:** When you choose to utilize AI-powered features (powered by Google Gemini), communication occurs directly from your browser's background service worker to Google's official API endpoints using your personal, locally stored API key.
 
 ---
 
-## 3. Extension Permissions and Justification
-In compliance with Chrome Web Store policies, we practice data minimization. We only request permissions necessary to provide the features:
+## 2. Information Handled & How It Is Used
 
-* **`activeTab`**: Allows the Extension to temporarily access the webpage you are viewing so you can use features like "Unlock Elements", "Change Font", and "Toggle Edit Mode".
-* **`scripting`**: Required to inject content scripts that modify fonts, unlock disabled buttons, and alter styles on the active webpage.
-* **`storage`**: Needed to save your local settings, preferences, and Gemini API Key via `chrome.storage.local`.
-* **`browsingData`**: Necessary to clear the browser cache when you click the "Clear Cache" button.
-* **`contextMenus`**: Allows CodeSavvy to register context menu items so you can perform AI text enhancements and case transformations by right-clicking selected text.
-* **`notifications`**: Displays brief desktop alerts for status changes (e.g., when the cache is successfully cleared).
-* **`downloads`**: Used to download and save screenshot files to your local system when using the "Take Screenshot" tool.
+CodeSavvy accesses and processes only the minimum data strictly required to deliver its functionality:
 
-*(Note: CodeSavvy does **not** request broad `tabs` permissions, ensuring your browser history and tab URLs remain completely private.)*
+### A. Local Extension Settings & API Keys (`chrome.storage.local`)
+* **What is stored:**
+  * User interface preferences (Light / Dark / System theme, chosen accent color palette, quote visibility).
+  * Custom prompt presets and custom keyboard shortcut preferences.
+  * Your personal Google Gemini API Key (if provided by you).
+  * Transformation history logs (stored only if you enable history logging).
+* **How it is used:** Persists your settings locally across browser sessions and authenticates direct API requests to Google Gemini.
+* **Security & Storage Location:** Stored exclusively on your device within the isolated `chrome.storage.local` sandbox allocated by Chromium to CodeSavvy. This data is never transmitted to the developer or any unauthorized party.
+
+### B. Selected Text for AI Text Actions (Context Menu)
+* **What is accessed:** When you highlight text on any webpage, right-click, and select an AI enhancement (e.g., "Improve Text", "Make Casual", "Roasted Mode", or a custom user prompt), the extension reads only the highlighted string.
+* **How it is used:** The text string is packaged into a secure API payload and sent directly to Google Gemini's official endpoint (`https://generativelanguage.googleapis.com/`) to execute the requested rewrite.
+* **Destinations:** Sent directly from your browser's service worker to Google LLC. It never touches any intermediary server or proxy. Please consult the [Google Privacy Policy](https://policies.google.com/privacy) and the [Google API Services User Data Policy](https://developers.google.com/terms/api-services-user-data-policy).
+
+### C. Active Webpage Content for AI Page Studio
+* **What is accessed:** When you open the popup and click "AI Page Studio" (for TL;DR Summary, Key Takeaways, Tech Stack Breakdown, ELI5, or Ask Page), CodeSavvy extracts the visible article/main text of the active tab (filtering out ads, scripts, nav, and footers).
+* **How it is used:** Sent directly to Google Gemini using your API key to generate the requested summary or answer your question.
+* **Destinations:** Sent directly to Google Gemini. No page text is stored permanently or sent to any developer server.
+
+### D. Transformation History & Portability
+* **User Control:** You have absolute control over your transformation history. You can:
+  * Enable or Disable history logging at any time.
+  * Activate **Incognito Mode** via the popup header icon to temporarily suspend history recording.
+  * Configure an **Auto-Retention Policy** (e.g., auto-delete records older than 1 day, 3 days, 1 week, or 1 month).
+  * Export your history to a standard `.json` backup file or import/merge past backup files with automatic deduplication.
+  * Clear all transformation logs instantly with the 1-click "Clear All" action.
 
 ---
 
-## 4. Third-Party Services
-If you use the AI features of the Extension, you must provide your own **Google Gemini API Key**. 
-* The Extension connects directly to Google's API servers.
-* We do not control Google's data processing. You can learn more about how Google handles developer/user data in the [Google API Services User Data Policy](https://developers.google.com/terms/api-services-user-data-policy).
+## 3. Chrome Web Store Permissions Justification
+
+In strict adherence to Google's **Single Purpose Policy** and the **Principle of Least Privilege**, CodeSavvy requests only the permissions necessary for its advertised features:
+
+| Permission | Technical Purpose & Justification |
+| :--- | :--- |
+| **`activeTab`** | Grants temporary, user-initiated permission to interact with the current webpage when you click the extension action or trigger a keyboard shortcut. Required to unlock elements, inspect CSS, zap banners, toggle design mode, and inject fonts. |
+| **`scripting`** | Allows the extension to execute utility scripts (such as removing `disabled` attributes, stripping `maxlength`, toggling `document.designMode`, and attaching the non-destructive CSS Inspector HUD) into the active tab upon user command. |
+| **`storage`** | Enables saving your local preferences, theme choices, custom AI prompt presets, your Gemini API key, and transformation history locally via `chrome.storage.local`. |
+| **`browsingData`** | Required exclusively for the "Clear Cache & Hard Reload" feature (`Ctrl+Shift+R`), which invokes `chrome.browsingData.remove({ since: 0 }, { cache: true })` to purge cached files on demand. |
+| **`contextMenus`** | Used to create right-click context menu items for AI text enhancements (e.g., Improve Text, Advanced Edit, Roast) and offline case transformations (UPPERCASE, lowercase, camelCase, snake_case). |
+| **`notifications`** | Displays brief, non-intrusive desktop status alerts (such as confirming that browser cache was purged or notifying if an API key is missing). |
+| **`downloads`** | Permits saving screenshot images captured with the "Screenshot" tool, PNG files generated by the offline QR Code generator, and JSON backup exports directly to your local downloads folder. |
+
+### Data Minimization Commitment
+> **CodeSavvy intentionally does NOT request the broad `tabs` permission or `<all_urls>` background host permissions.**  
+> CodeSavvy cannot monitor your general browsing history, view background tabs, or track your activity across the web. Access is restricted strictly to the active tab upon your explicit invocation.
 
 ---
 
-## 5. Security of Your Data
-We employ industry-standard local sandboxing:
-* Your API Key is kept in your private extension storage.
-* Network requests are executed inside the Extension's background service worker, ensuring host pages cannot intercept your API Key.
+## 4. Third-Party Services & Google Gemini API
+
+CodeSavvy integrates with the Google Gemini API to deliver AI intelligence features:
+* **User-Owned Credentials:** You provide your own Google Gemini API key obtained from Google AI Studio.
+* **Direct Network Calls:** Requests are dispatched directly from the extension's background service worker (`src/background/background.js`) to `https://generativelanguage.googleapis.com/`. 
+* **Host Page Isolation:** Host webpages cannot inspect or steal your API key because network requests occur inside the isolated extension service worker context.
+* **Google's Policies:** Use of the Gemini API is governed by Google's terms. Learn more by reviewing:
+  * [Google Privacy Policy](https://policies.google.com/privacy)
+  * [Google Gemini API Terms of Service](https://ai.google.dev/terms)
 
 ---
 
-## 6. Changes to This Policy
-We may update this Privacy Policy from time to time to reflect changes in our Extension or legal requirements. When we do, we will update the "Last Updated" date at the top of this page.
+## 5. Chrome Web Store Limited Use Policy Disclosure
+
+CodeSavvy's use and transfer to any other app of information received from Google APIs adheres to the **Chrome Web Store User Data Policy**, including the **Limited Use** requirements:
+1. We only use access to user data to provide or improve user-facing features that are prominent in the extension's user interface.
+2. We do not transfer the data to third parties, other than to Google Gemini API endpoints as explicitly initiated by the user for text processing.
+3. We do not use or transfer the data to serve personalized, re-targeted, or interest-based advertising.
+4. We do not allow humans to read the data unless you have given explicit affirmative agreement for specific troubleshooting or as required by law.
 
 ---
 
-## 7. Contact Us
-If you have any questions or suggestions about this Privacy Policy, please contact us at:
-* **Email**: [malaadin192+codesavvy@gmail.com](mailto:malaadin192+codesavvy@gmail.com)
+## 6. Security of Your Data
+
+We employ industry best practices to safeguard your information:
+* **Manifest V3 Architecture:** Built entirely on Manifest V3 with zero remote code execution (`unsafe-eval` and remote scripts are completely prohibited).
+* **Local Sandboxing:** API keys and preferences are stored in Chromium's isolated storage sandbox.
+* **Zero Analytics / Trackers:** No Google Analytics, Mixpanel, Sentry, Facebook Pixel, or tracking scripts are bundled with or loaded by the extension.
+* **Offline-Ready Capabilities:** Offline tools (QR Code Generator, CSS Inspector, Element Zapper, DOM Unlocker, Font Switcher, Color Studio, Storage Wiper) function 100% offline without any internet connection.
+
+---
+
+## 7. Children's Privacy
+
+CodeSavvy is a technical developer tool and does not address or knowingly collect data from children under the age of 13.
+
+---
+
+## 8. Updates to This Policy
+
+We may update this Privacy Policy from time to time to reflect changes in our extension features or legal requirements. When updates occur, the "Last Updated" date at the top of this document will be updated. We encourage users to periodically review this page.
+
+---
+
+## 9. Contact & Inquiries
+
+If you have questions, concerns, or feedback regarding this Privacy Policy or CodeSavvy's data practices, please contact:
+
+* **Developer:** Mahdi Al-Alaaldin
+* **Contact & Support Email:** [malaadin192+codesavvy@gmail.com](mailto:malaadin192+codesavvy@gmail.com)
+* **Documentation & Sandbox Portal:** [https://mahdialaaaldin.github.io/codesavvy-docs/](https://mahdialaaaldin.github.io/codesavvy-docs/)

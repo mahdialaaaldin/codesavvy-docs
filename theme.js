@@ -1,10 +1,6 @@
 /**
- * CodeSavvy Docs — Theme Manager
- * Handles light/dark theme toggle with localStorage persistence.
- * Applies theme immediately (synchronous) to prevent flash of incorrect theme.
- *
- * Default: dark (the docs' default aesthetic).
- * Privacy page exception is handled via its own CSS variable logic.
+ * CodeSavvy Docs & Interactive Guide — Theme Manager
+ * Provides zero-FOUC theme application, persistent storage, and reactive toggling.
  */
 (function () {
     'use strict';
@@ -13,39 +9,61 @@
     const DARK = 'dark';
     const LIGHT = 'light';
 
-    // ── Apply saved theme immediately (before paint) to prevent FOUC ─────────
+    // Apply theme immediately before render to prevent flash of wrong theme
     const saved = localStorage.getItem(STORAGE_KEY);
-    // If no saved preference, default to dark (matches the docs' dark aesthetic)
-    const theme = saved || DARK;
-    document.documentElement.setAttribute('data-theme', theme);
+    const initialTheme = saved === LIGHT ? LIGHT : DARK;
+    document.documentElement.setAttribute('data-theme', initialTheme);
 
-    // ── Inject toggle button after DOM is ready ───────────────────────────────
-    document.addEventListener('DOMContentLoaded', function () {
-        const btn = document.createElement('button');
-        btn.id = 'cs-theme-toggle';
-        btn.setAttribute('aria-label', 'Toggle light/dark theme');
-        btn.setAttribute('title', 'Toggle Light / Dark Theme');
-        updateBtn(btn, theme);
-
-        btn.addEventListener('click', function () {
-            const current = document.documentElement.getAttribute('data-theme');
-            const next = current === LIGHT ? DARK : LIGHT;
+    window.CodeSavvyTheme = {
+        get: function () {
+            return document.documentElement.getAttribute('data-theme') || DARK;
+        },
+        set: function (theme) {
+            const next = theme === LIGHT ? LIGHT : DARK;
             document.documentElement.setAttribute('data-theme', next);
             localStorage.setItem(STORAGE_KEY, next);
-            updateBtn(btn, next);
+            updateToggleBtns(next);
+            window.dispatchEvent(new CustomEvent('codesavvy-theme-change', { detail: { theme: next } }));
+        },
+        toggle: function () {
+            const current = this.get();
+            const next = current === LIGHT ? DARK : LIGHT;
+            this.set(next);
+            return next;
+        }
+    };
+
+    function updateToggleBtns(theme) {
+        // Navbar pill buttons (contain text)
+        document.querySelectorAll('.cs-theme-toggle-btn').forEach(btn => {
+            btn.innerHTML = theme === LIGHT ? '🌙 <span class="theme-label">Dark</span>' : '☀️ <span class="theme-label">Light</span>';
+            btn.setAttribute('aria-label', theme === LIGHT ? 'Switch to Dark Mode' : 'Switch to Light Mode');
+            btn.setAttribute('title', theme === LIGHT ? 'Switch to Dark Mode' : 'Switch to Light Mode');
         });
 
-        document.body.appendChild(btn);
-    });
-
-    /**
-     * Updates the button emoji and aria-label for the given theme.
-     * @param {HTMLButtonElement} btn
-     * @param {string} theme - 'light' | 'dark'
-     */
-    function updateBtn(btn, theme) {
-        // Show opposite icon (what you'll switch TO on click)
-        btn.textContent = theme === LIGHT ? '🌙' : '☀️';
-        btn.setAttribute('aria-label', theme === LIGHT ? 'Switch to dark theme' : 'Switch to light theme');
+        // Floating circular buttons (EMOJI ONLY — never inject text)
+        document.querySelectorAll('#cs-theme-toggle, .cs-theme-floating-toggle').forEach(btn => {
+            btn.textContent = theme === LIGHT ? '🌙' : '☀️';
+            btn.setAttribute('aria-label', theme === LIGHT ? 'Switch to Dark Mode' : 'Switch to Light Mode');
+            btn.setAttribute('title', theme === LIGHT ? 'Switch to Dark Mode' : 'Switch to Light Mode');
+        });
     }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        // Wire any pre-existing theme toggle buttons
+        document.querySelectorAll('.cs-theme-toggle-btn').forEach(btn => {
+            btn.addEventListener('click', () => window.CodeSavvyTheme.toggle());
+        });
+
+        // Only create a floating circular button if NO navbar theme button exists on the page
+        if (!document.querySelector('.cs-theme-toggle-btn') && !document.getElementById('cs-theme-toggle')) {
+            const floatBtn = document.createElement('button');
+            floatBtn.id = 'cs-theme-toggle';
+            floatBtn.className = 'cs-theme-floating-toggle';
+            floatBtn.addEventListener('click', () => window.CodeSavvyTheme.toggle());
+            document.body.appendChild(floatBtn);
+        }
+
+        updateToggleBtns(window.CodeSavvyTheme.get());
+    });
 })();

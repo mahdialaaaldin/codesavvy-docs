@@ -1,82 +1,52 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CodeSavvy — Developer Toolbox Documentation</title>
-    <meta name="description" content="CodeSavvy is a browser extension developer toolbox. Explore interactive sandboxes for DOM unlocking, font switching, AI text tools, screenshots, and more.">
+    <title>CodeSavvy — Interactive Extension Guide &amp; Testing Suite</title>
+    <meta name="description"
+        content="The comprehensive documentation guide and interactive live testing suite for CodeSavvy browser extension. Test DOM unlocking, CSS inspection, AI text tools, offline QR, storage wiping, and restriction bypasses.">
     <link rel="icon" type="image/png" sizes="16x16" href="assets/icons/icon16.png">
     <link rel="icon" type="image/png" sizes="48x48" href="assets/icons/icon48.png">
     <link rel="icon" type="image/png" sizes="128x128" href="assets/icons/icon128.png">
+
+    <!-- Google Fonts -->
     <link
-        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap"
         rel="stylesheet">
-    <!-- Theme system (load before CSS to prevent flash of incorrect theme) -->
+
+    <!-- Theme System -->
     <script src="theme.js"></script>
     <link rel="stylesheet" href="theme.css">
+
     <style>
-        :root {
-            --bg-dark: #070a13;
-            --bg-card: rgba(15, 23, 42, 0.65);
-            --bg-card-hover: rgba(23, 37, 84, 0.35);
-            --border-glow: rgba(99, 102, 241, 0.15);
-            --border-normal: rgba(255, 255, 255, 0.08);
-            --primary: #6366f1;
-            --primary-gradient: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
-            --secondary: #10b981;
-            --secondary-glow: rgba(16, 185, 129, 0.15);
-            --primary-glow: rgba(99, 102, 241, 0.15);
-            --text-main: #f8fafc;
-            --text-secondary: #94a3b8;
-            --text-muted: #64748b;
-            --radius-sm: 8px;
-            --radius-md: 16px;
-            --radius-lg: 24px;
-            --shadow-glow: 0 0 25px rgba(99, 102, 241, 0.15);
-            --shadow-card: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-            background-color: var(--bg-dark);
-            color: var(--text-main);
+        /* Layout Structure */
+        .app-layout {
+            display: flex;
             min-height: 100vh;
-            line-height: 1.6;
-            overflow-x: hidden;
-            background-image:
-                radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.08) 0%, transparent 40%),
-                radial-gradient(circle at 90% 80%, rgba(168, 85, 247, 0.08) 0%, transparent 40%);
-            background-attachment: fixed;
         }
 
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: rgba(15, 23, 42, 0.5); }
-        ::-webkit-scrollbar-thumb { background: rgba(99, 102, 241, 0.3); border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: rgba(99, 102, 241, 0.6); }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 40px 20px;
-        }
-
-        /* ── Header ─────────────────────────────── */
-        header {
+        /* Top Bar Header */
+        .top-navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: var(--header-height);
+            background: var(--bg-card);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border-subtle);
+            z-index: 1000;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-bottom: 72px;
+            padding: 0 24px;
+            transition: background 0.3s ease;
         }
 
-        .logo-container {
+        .nav-brand {
             display: flex;
             align-items: center;
             gap: 12px;
@@ -84,627 +54,2045 @@
             color: inherit;
         }
 
-        .logo-icon-svg {
-            width: 46px;
-            height: 46px;
-            filter: drop-shadow(0 0 8px var(--primary-glow));
-            animation: logoPulse 3s infinite ease-in-out;
+        .brand-logo-svg {
+            width: 38px;
+            height: 38px;
+            filter: drop-shadow(0 0 10px var(--primary-glow));
             flex-shrink: 0;
+            transition: transform 0.25s ease;
         }
 
-        @keyframes logoPulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05) rotate(3deg); }
+        .brand-logo-svg:hover {
+            transform: scale(1.08) rotate(4deg);
         }
 
-        .logo-text {
+        .brand-name {
+            font-size: 1.3rem;
             font-weight: 800;
-            font-size: 24px;
             letter-spacing: -0.5px;
-            background: linear-gradient(135deg, var(--primary), #a855f7, var(--secondary));
+            background: linear-gradient(135deg, #6366f1, #a855f7, #10b981);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        .nav-links {
-            display: flex;
-            gap: 8px;
-        }
-
-        .nav-btn {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid var(--border-normal);
-            padding: 9px 18px;
-            border-radius: var(--radius-sm);
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.2s ease;
-        }
-
-        .nav-btn:hover {
-            background: rgba(99, 102, 241, 0.1);
-            border-color: var(--primary);
-            color: #fff;
-        }
-
-        /* ── Version Badge ───────────────────────── */
-        .version-ribbon {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(99, 102, 241, 0.1);
-            border: 1px solid rgba(99, 102, 241, 0.25);
-            border-radius: 999px;
-            padding: 5px 14px;
-            font-size: 0.78rem;
-            font-weight: 700;
-            color: #a5b4fc;
-            margin-bottom: 24px;
+        .version-pill {
             font-family: 'JetBrains Mono', monospace;
-            letter-spacing: 0.5px;
-        }
-
-        .version-dot {
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            background: var(--secondary);
-            box-shadow: 0 0 6px var(--secondary);
-            animation: blink 2s ease-in-out infinite;
-        }
-
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.4; }
-        }
-
-        /* ── Hero ────────────────────────────────── */
-        .hero {
-            text-align: center;
-            margin-bottom: 72px;
-        }
-
-        .hero h1 {
-            font-size: clamp(2.2rem, 5vw, 3.4rem);
-            font-weight: 800;
-            letter-spacing: -1.5px;
-            margin-bottom: 20px;
-            line-height: 1.15;
-            background: linear-gradient(160deg, #ffffff 40%, #94a3b8 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .hero p {
-            font-size: 1.1rem;
-            color: var(--text-secondary);
-            max-width: 620px;
-            margin: 0 auto 32px;
-            line-height: 1.7;
-        }
-
-        .hero-cta {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            background: var(--primary-gradient);
-            color: #fff;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 0.95rem;
-            padding: 13px 28px;
-            border-radius: var(--radius-sm);
-            box-shadow: 0 4px 20px rgba(99, 102, 241, 0.35);
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-
-        .hero-cta:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(99, 102, 241, 0.5);
-        }
-
-        /* ── Feature Pills ───────────────────────── */
-        .feature-pills {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-bottom: 72px;
-        }
-
-        .pill {
-            display: flex;
-            align-items: center;
-            gap: 7px;
-            background: var(--bg-card);
-            border: 1px solid var(--border-normal);
-            border-radius: 999px;
-            padding: 7px 16px;
-            font-size: 0.82rem;
-            font-weight: 600;
-            color: var(--text-secondary);
-            backdrop-filter: blur(8px);
-            transition: border-color 0.2s, color 0.2s;
-        }
-
-        .pill:hover {
-            border-color: var(--primary);
-            color: #fff;
-        }
-
-        .pill-icon {
-            font-size: 1rem;
-        }
-
-        /* ── Section Labels ──────────────────────── */
-        .section-label {
             font-size: 0.72rem;
-            font-weight: 800;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: var(--text-muted);
-            margin-bottom: 20px;
+            font-weight: 700;
+            background: rgba(99, 102, 241, 0.12);
+            color: #818cf8;
+            border: 1px solid rgba(99, 102, 241, 0.25);
+            padding: 3px 8px;
+            border-radius: 999px;
+            letter-spacing: 0.3px;
         }
 
-        /* ── Grid ────────────────────────────────── */
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-            margin-bottom: 24px;
-        }
-
-        /* ── Sandbox Cards ───────────────────────── */
-        .card-link {
-            text-decoration: none;
-            color: inherit;
-            display: flex;
-        }
-
-        .card {
-            background-color: var(--bg-card);
-            border: 1px solid var(--border-normal);
-            border-radius: var(--radius-lg);
-            padding: 28px;
-            box-shadow: var(--shadow-card);
-            display: flex;
-            flex-direction: column;
-            gap: 14px;
-            width: 100%;
+        .nav-search-bar {
             position: relative;
-            overflow: hidden;
-            transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1),
-                        border-color 0.25s ease,
-                        box-shadow 0.25s ease,
-                        background-color 0.25s ease;
+            width: 320px;
+            max-width: 100%;
         }
 
-        .card::before {
-            content: '';
+        .nav-search-input {
+            width: 100%;
+            background: var(--bg-input);
+            border: 1px solid var(--border-medium);
+            border-radius: 999px;
+            padding: 8px 16px 8px 38px;
+            font-size: 0.85rem;
+            color: var(--text-primary);
+            outline: none;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .nav-search-input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px var(--primary-glow);
+        }
+
+        .nav-search-icon {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 4px;
-            height: 100%;
-            background: var(--primary-gradient);
-            opacity: 0;
-            transition: opacity 0.3s ease;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            pointer-events: none;
         }
 
-        .card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(99, 102, 241, 0.35);
-            box-shadow: var(--shadow-glow), var(--shadow-card);
-            background: var(--bg-card-hover);
-        }
-
-        .card:hover::before {
-            opacity: 1;
-        }
-
-        .card-icon {
-            font-size: 1.6rem;
-            background: rgba(255, 255, 255, 0.03);
-            width: 50px;
-            height: 50px;
-            border-radius: 12px;
+        .nav-right-controls {
             display: flex;
             align-items: center;
-            justify-content: center;
-            border: 1px solid var(--border-normal);
-            transition: background 0.25s, border-color 0.25s;
+            gap: 12px;
         }
 
-        .card:hover .card-icon {
-            background: var(--primary-glow);
-            border-color: var(--primary);
-        }
-
-        .card h2 {
-            font-size: 1.15rem;
+        .btn-reset-all {
+            background: rgba(239, 68, 68, 0.12);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            color: #f87171;
+            font-size: 0.82rem;
             font-weight: 700;
-            color: #fff;
-        }
-
-        .card p {
-            font-size: 0.88rem;
-            color: var(--text-secondary);
-            line-height: 1.55;
-            flex: 1;
-        }
-
-        .card-footer-action {
-            font-size: 0.8rem;
-            font-weight: 700;
-            color: var(--primary);
+            padding: 7px 14px;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
             display: flex;
             align-items: center;
             gap: 6px;
-        }
-
-        /* ── Policy Banners ──────────────────────── */
-        .banners {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 16px;
-            margin-bottom: 60px;
-        }
-
-        .policy-banner {
-            background: var(--bg-card);
-            border: 1px solid var(--border-normal);
-            border-radius: var(--radius-md);
-            padding: 24px 28px;
-            box-shadow: var(--shadow-card);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 20px;
-            transition: border-color 0.2s ease;
-        }
-
-        .policy-banner:hover {
-            border-color: var(--secondary);
-        }
-
-        .policy-banner-left {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-        }
-
-        .policy-icon {
-            font-size: 1.5rem;
-            color: var(--secondary);
-            width: 48px;
-            height: 48px;
-            border-radius: 12px;
-            background: var(--secondary-glow);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 1px solid rgba(16, 185, 129, 0.2);
-            flex-shrink: 0;
-        }
-
-        .policy-text-group h3 {
-            font-size: 1rem;
-            font-weight: 700;
-            color: #fff;
-            margin-bottom: 3px;
-        }
-
-        .policy-text-group p {
-            font-size: 0.82rem;
-            color: var(--text-secondary);
-        }
-
-        .banner-btn {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid var(--border-normal);
-            padding: 9px 18px;
-            border-radius: var(--radius-sm);
-            font-size: 0.82rem;
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-weight: 600;
-            white-space: nowrap;
             transition: all 0.2s ease;
         }
 
-        .banner-btn:hover {
-            background: rgba(16, 185, 129, 0.1);
-            border-color: var(--secondary);
-            color: #fff;
+        .btn-reset-all:hover {
+            background: var(--danger);
+            color: #ffffff;
+            box-shadow: 0 0 15px var(--danger-glow);
         }
 
-        /* ── Keyboard Shortcuts Strip ─────────────── */
-        .shortcuts-strip {
-            background: var(--bg-card);
-            border: 1px solid var(--border-normal);
-            border-radius: var(--radius-md);
-            padding: 20px 28px;
-            margin-bottom: 60px;
+        .top-link-btn {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border-subtle);
+            color: var(--text-secondary);
+            text-decoration: none;
+            padding: 7px 14px;
+            border-radius: var(--radius-sm);
+            font-size: 0.82rem;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .top-link-btn:hover {
+            background: rgba(99, 102, 241, 0.1);
+            border-color: var(--primary);
+            color: var(--text-primary);
+        }
+
+        .btn-cws {
+            background: linear-gradient(135deg, #6366f1, #a855f7);
+            color: #ffffff;
+            border: none;
+            font-weight: 700;
+            box-shadow: 0 2px 10px rgba(99, 102, 241, 0.3);
+        }
+
+        .btn-cws:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 18px rgba(99, 102, 241, 0.45);
+            color: #ffffff;
+        }
+
+        /* Sidebar Navigation */
+        .sidebar {
+            width: var(--sidebar-width);
+            background: var(--bg-surface);
+            border-right: 1px solid var(--border-subtle);
+            position: fixed;
+            top: var(--header-height);
+            bottom: 0;
+            left: 0;
+            overflow-y: auto;
+            padding: 24px 16px 40px;
             display: flex;
-            flex-wrap: wrap;
-            gap: 20px 32px;
-            align-items: center;
+            flex-direction: column;
+            gap: 20px;
+            z-index: 900;
         }
 
-        .shortcuts-title {
-            font-size: 0.75rem;
+        .sidebar-section-title {
+            font-size: 0.72rem;
             font-weight: 800;
             text-transform: uppercase;
-            letter-spacing: 1.5px;
+            letter-spacing: 1.2px;
             color: var(--text-muted);
-            flex-basis: 100%;
-            margin-bottom: 4px;
+            margin: 12px 10px 6px;
         }
 
-        .shortcut-item {
+        .sidebar-nav-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+
+        .sidebar-link {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 8px 12px;
+            border-radius: var(--radius-sm);
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: all 0.15s ease;
+        }
+
+        .sidebar-link-inner {
             display: flex;
             align-items: center;
             gap: 10px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .sidebar-link:hover {
+            background: rgba(99, 102, 241, 0.08);
+            color: var(--text-primary);
+        }
+
+        .sidebar-link.active {
+            background: rgba(99, 102, 241, 0.15);
+            color: #818cf8;
+            font-weight: 700;
+            border-left: 3px solid var(--primary);
+        }
+
+        /* Main Content Area */
+        .main-content {
+            margin-left: var(--sidebar-width);
+            margin-top: var(--header-height);
+            flex: 1;
+            padding: 40px 48px 100px;
+            max-width: 1160px;
+        }
+
+        /* Hero Banner */
+        .hero-section {
+            background: var(--bg-card);
+            border: 1px solid var(--border-medium);
+            border-radius: var(--radius-lg);
+            padding: 40px 36px;
+            margin-bottom: 48px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 320px;
+            height: 320px;
+            background: radial-gradient(circle, var(--primary-glow) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero-header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .hero-title {
+            font-size: clamp(2rem, 3.5vw, 2.8rem);
+            font-weight: 800;
+            letter-spacing: -1px;
+            line-height: 1.15;
+            margin-bottom: 12px;
+        }
+
+        .hero-subtitle {
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+            max-width: 720px;
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+
+        .hero-metrics-strip {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .metric-badge {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-sm);
+            padding: 6px 14px;
+            font-size: 0.82rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-secondary);
+        }
+
+        .metric-badge strong {
+            color: var(--text-primary);
+        }
+
+        /* Category Header Block */
+        .category-group {
+            margin-bottom: 60px;
+            scroll-margin-top: calc(var(--header-height) + 24px);
+        }
+
+        .category-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 24px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border-medium);
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .category-title-wrap {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .category-icon {
+            font-size: 1.6rem;
+            width: 44px;
+            height: 44px;
+            border-radius: var(--radius-sm);
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .category-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            color: var(--text-primary);
+        }
+
+        .category-desc {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-top: 2px;
+        }
+
+        /* Tool Feature Card */
+        .tool-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            padding: 28px;
+            margin-bottom: 28px;
+            box-shadow: var(--shadow-sm);
+            transition: border-color 0.25s ease, box-shadow 0.25s ease;
+            scroll-margin-top: calc(var(--header-height) + 24px);
+        }
+
+        .tool-card:hover {
+            border-color: var(--border-glow);
+            box-shadow: var(--shadow-md);
+        }
+
+        .tool-card-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 16px;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+        }
+
+        .tool-heading {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .tool-emoji {
+            font-size: 1.5rem;
+            background: var(--bg-surface);
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--border-subtle);
+        }
+
+        .tool-name {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .tool-tags {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        /* Guide Explanations */
+        .tool-guide-body {
+            color: var(--text-secondary);
+            font-size: 0.94rem;
+            line-height: 1.65;
+            margin-bottom: 20px;
+        }
+
+        .tool-guide-body p {
+            margin-bottom: 10px;
+        }
+
+        .tech-callout {
+            background: rgba(99, 102, 241, 0.07);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            border-left: 4px solid var(--primary);
+            border-radius: var(--radius-sm);
+            padding: 12px 16px;
+            font-size: 0.88rem;
+            margin: 14px 0;
+            color: var(--text-secondary);
+        }
+
+        .tech-callout strong {
+            color: var(--text-primary);
+        }
+
+        .steps-list {
+            margin-left: 20px;
+            margin-bottom: 14px;
+        }
+
+        .steps-list li {
+            margin-bottom: 6px;
+        }
+
+        /* Testing Arena Specifics */
+        .arena-controls-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 12px;
+        }
+
+        .arena-input {
+            background: var(--bg-input);
+            border: 1px solid var(--border-medium);
+            color: var(--text-primary);
+            padding: 8px 12px;
+            border-radius: var(--radius-sm);
+            font-size: 0.9rem;
+            font-family: inherit;
+            outline: none;
+            transition: border-color 0.2s ease;
+        }
+
+        .arena-input:focus {
+            border-color: var(--primary);
+        }
+
+        .arena-btn-action {
+            background: var(--primary);
+            color: #ffffff;
+            border: none;
+            padding: 8px 16px;
+            border-radius: var(--radius-sm);
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .arena-btn-action:hover {
+            background: var(--primary-hover);
+            box-shadow: 0 0 12px var(--primary-glow);
+        }
+
+        /* Locked Element Simulations */
+        .sim-locked-button {
+            opacity: 0.45;
+            cursor: not-allowed;
+            pointer-events: none;
+            background: #334155;
+            color: #94a3b8;
+            border: 1px solid #475569;
+            padding: 8px 16px;
+            border-radius: var(--radius-sm);
+            font-size: 0.85rem;
+        }
+
+        /* Zapper Overlay Simulation */
+        .zapper-test-overlay {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.15), rgba(245, 158, 11, 0.15));
+            border: 2px dashed #f59e0b;
+            border-radius: var(--radius-md);
+            padding: 20px;
+            text-align: center;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .zapper-test-overlay:hover {
+            border-color: #ef4444;
+            background: rgba(239, 68, 68, 0.2);
+        }
+
+        /* Inspector Targets */
+        .inspect-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+        }
+
+        .inspect-box {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-medium);
+            border-radius: var(--radius-md);
+            padding: 16px;
+            text-align: center;
+            cursor: default;
+            transition: transform 0.2s ease;
+        }
+
+        .inspect-box:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Keyboard Shortcuts Strip */
+        .shortcuts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 14px;
+            margin: 20px 0;
+        }
+
+        .shortcut-card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-sm);
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .shortcut-card span {
             font-size: 0.85rem;
             color: var(--text-secondary);
         }
 
-        .shortcut-item strong {
-            color: var(--text-main);
-            font-weight: 600;
+        .shortcut-card strong {
+            color: var(--text-primary);
         }
 
-        kbd {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.72rem;
-            background: rgba(255, 255, 255, 0.06);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            border-bottom-width: 2px;
-            border-radius: 5px;
-            padding: 2px 8px;
-            color: #a5b4fc;
-            white-space: nowrap;
+        /* Responsive Mobile Drawer */
+        .mobile-menu-btn {
+            display: none;
+            background: transparent;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.4rem;
+            cursor: pointer;
         }
 
-        /* ── Footer ──────────────────────────────── */
-        footer {
-            text-align: center;
-            padding-top: 24px;
-            border-top: 1px solid var(--border-normal);
-            color: var(--text-muted);
-            font-size: 0.85rem;
-        }
+        @media (max-width: 960px) {
+            .mobile-menu-btn {
+                display: block;
+            }
 
-        footer a {
-            color: var(--primary);
-            text-decoration: none;
-            font-weight: 600;
-        }
+            .sidebar {
+                transform: translateX(-100%);
+                transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            }
 
-        footer a:hover {
-            text-decoration: underline;
-        }
+            .sidebar.open {
+                transform: translateX(0);
+                box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
+            }
 
-        @media (max-width: 600px) {
-            .policy-banner { flex-direction: column; align-items: flex-start; }
-            .banner-btn { width: 100%; text-align: center; }
-            .shortcuts-strip { flex-direction: column; gap: 12px; }
+            .main-content {
+                margin-left: 0;
+                padding: 30px 20px 80px;
+            }
+
+            .nav-search-bar {
+                display: none;
+            }
         }
     </style>
 </head>
 
 <body>
-    <div class="container">
-
-        <!-- Header -->
-        <header>
-            <a href="#" class="logo-container">
-                <svg viewBox="0 0 512 512" class="logo-icon-svg" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- Top Navigation Header -->
+    <header class="top-navbar">
+        <div style="display: flex; align-items: center; gap: 14px;">
+            <button class="mobile-menu-btn" id="mobileMenuToggle" aria-label="Toggle navigation menu">☰</button>
+            <a href="index.html" class="nav-brand">
+                <svg viewBox="0 0 512 512" class="brand-logo-svg" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <defs>
-                        <filter id="vector-glow" x="-20%" y="-20%" width="140%" height="140%">
+                        <filter id="nav-v-glow" x="-20%" y="-20%" width="140%" height="140%">
                             <feGaussianBlur stdDeviation="12" result="blur" />
                             <feMerge>
                                 <feMergeNode in="blur" />
                                 <feMergeNode in="SourceGraphic" />
                             </feMerge>
                         </filter>
-                        <linearGradient id="tile-gradient-fill" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <linearGradient id="nav-t-grad" x1="0%" y1="0%" x2="100%" y2="100%">
                             <stop offset="0%" stop-color="#6366f1" />
                             <stop offset="100%" stop-color="#a855f7" />
                         </linearGradient>
                     </defs>
-                    <g transform="translate(256, 256) rotate(85) scale(1.2) translate(-256, -256)"
-                        filter="url(#vector-glow)">
-                        <g>
-                            <path d="M 180,240 V 170 C 180,120 220,80 270,80 C 320,80 360,120 360,170 V 175" fill="none"
-                                stroke="url(#tile-gradient-fill)" stroke-width="33" stroke-linecap="round" />
-                            <rect x="130" y="230" width="252" height="192" rx="35" fill="none"
-                                stroke="url(#tile-gradient-fill)" stroke-width="35.75" />
-                            <path d="M 230,326 L 210,326 M 282,326 L 302,326 M 256,290 V 362" stroke="#10b981"
-                                stroke-width="27.5" stroke-linecap="round" />
-                            <circle cx="256" cy="326" r="30" fill="none" stroke="#10b981" stroke-width="13.75" />
-                            <path d="M 256,246 L 256,230 M 256,406 L 256,422" stroke="#10b981" stroke-width="4"
-                                stroke-linecap="round" />
-                        </g>
+                    <g transform="translate(256, 256) rotate(85) scale(1.2) translate(-256, -256)" filter="url(#nav-v-glow)">
+                        <path d="M 180,240 V 170 C 180,120 220,80 270,80 C 320,80 360,120 360,170 V 175" fill="none"
+                            stroke="url(#nav-t-grad)" stroke-width="33" stroke-linecap="round" />
+                        <rect x="130" y="230" width="252" height="192" rx="35" fill="none" stroke="url(#nav-t-grad)"
+                            stroke-width="35.75" />
+                        <path d="M 230,326 L 210,326 M 282,326 L 302,326 M 256,290 V 362" stroke="#10b981"
+                            stroke-width="27.5" stroke-linecap="round" />
+                        <circle cx="256" cy="326" r="30" fill="none" stroke="#10b981" stroke-width="13.75" />
                     </g>
                 </svg>
-                <span class="logo-text">CodeSavvy</span>
+                <span class="brand-name">CodeSavvy</span>
+                <span class="version-pill">v2.3.0</span>
             </a>
-            <nav class="nav-links">
-                <a href="changelog.html" class="nav-btn">📜 Changelog</a>
-                <a href="privacy.html" class="nav-btn">🛡️ Privacy</a>
-            </nav>
-        </header>
+        </div>
 
-        <!-- Hero -->
-        <section class="hero">
-            <div class="version-ribbon">
-                <div class="version-dot"></div>
-                v2.3.0 — Manifest V3
-            </div>
-            <h1>CodeSavvy<br>Developer Toolbox</h1>
-            <p>
-                A powerful browser extension packed with DOM manipulation tools, AI-powered page &amp; text intelligence
-                via Google Gemini, CSS inspection, offline QR generator, and customizable themes — built for developers and power users.
-            </p>
+        <!-- Filter / Quick Search -->
+        <div class="nav-search-bar">
+            <span class="nav-search-icon">🔍</span>
+            <input type="text" id="toolSearchInput" class="nav-search-input"
+                placeholder="Search tools, shortcuts, tests (e.g. zapper, css)..." autocomplete="off" />
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="nav-right-controls">
+            <button class="btn-reset-all" id="btnResetAllFixtures" title="Reset all sandbox test fixtures to default locked state">
+                <span>🔄</span> Reset All Tests
+            </button>
+            <button class="top-link-btn cs-theme-toggle-btn" title="Toggle theme">🌙 Mode</button>
+            <a href="privacy.html" class="top-link-btn">🛡️ Privacy</a>
+            <a href="changelog.html" class="top-link-btn">📜 Changelog</a>
             <a href="https://chromewebstore.google.com/detail/codesavvy/jenendhnlcnokliclhccikgeohdgfhml"
-               class="hero-cta" target="_blank" rel="noopener noreferrer">
-                🔗 Get on Chrome Web Store
+                target="_blank" rel="noopener noreferrer" class="top-link-btn btn-cws">
+                Get Extension ↗
             </a>
-        </section>
-
-        <!-- Feature Pills -->
-        <div class="feature-pills">
-            <div class="pill"><span class="pill-icon">🧠</span> AI Page Studio</div>
-            <div class="pill"><span class="pill-icon">🎨</span> Color Studio &amp; Eyedropper</div>
-            <div class="pill"><span class="pill-icon">⚡</span> Element Zapper &amp; Undo</div>
-            <div class="pill"><span class="pill-icon">📐</span> CSS Box Inspector</div>
-            <div class="pill"><span class="pill-icon">📱</span> Offline QR Code</div>
-            <div class="pill"><span class="pill-icon">🖼️</span> Media Extractor</div>
-            <div class="pill"><span class="pill-icon">🧹</span> Site Storage Wiper</div>
-            <div class="pill"><span class="pill-icon">🔓</span> Unlock DOM Elements</div>
-            <div class="pill"><span class="pill-icon">∞</span> Remove Input Limits</div>
-            <div class="pill"><span class="pill-icon">👁️</span> Reveal Passwords</div>
-            <div class="pill"><span class="pill-icon">✍️</span> Edit Mode</div>
-            <div class="pill"><span class="pill-icon">🔤</span> Custom Font Injection</div>
-            <div class="pill"><span class="pill-icon">🤖</span> Gemini AI Models</div>
-            <div class="pill"><span class="pill-icon">🎨</span> 7 Color Themes</div>
         </div>
+    </header>
 
-        <!-- Sandbox Environments -->
-        <div class="section-label">Interactive Sandbox Environments</div>
-        <div class="grid" style="margin-bottom: 60px;">
+    <div class="app-layout">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar" id="appSidebar">
+            <div class="sidebar-section-title">Overview</div>
+            <ul class="sidebar-nav-list">
+                <li><a href="#quickstart" class="sidebar-link active"><span class="sidebar-link-inner">🚀 Quickstart &amp; Shortcuts</span></a></li>
+            </ul>
 
-            <!-- Card 1: Classic Sandbox -->
-            <a href="sandbox.html" class="card-link">
-                <div class="card">
-                    <div class="card-icon">⚡</div>
-                    <h2>Classic Sandbox</h2>
-                    <p>The all-in-one testing workbench featuring interactive fields, a real-time stats tracker,
-                        and quick-access demos for the extension's main tool categories.</p>
-                    <span class="card-footer-action">Open Sandbox →</span>
-                </div>
-            </a>
+            <div class="sidebar-section-title">DOM Manipulation</div>
+            <ul class="sidebar-nav-list">
+                <li><a href="#tool-unlock" class="sidebar-link"><span class="sidebar-link-inner">🔓 Unlock Elements</span></a></li>
+                <li><a href="#tool-maxlength" class="sidebar-link"><span class="sidebar-link-inner">∞ Remove Limits</span></a></li>
+                <li><a href="#tool-passwords" class="sidebar-link"><span class="sidebar-link-inner">👁️ Reveal Passwords</span></a></li>
+                <li><a href="#tool-zapper" class="sidebar-link"><span class="sidebar-link-inner">⚡ Element Zapper</span></a></li>
+                <li><a href="#tool-inspector" class="sidebar-link"><span class="sidebar-link-inner">📐 CSS Box Inspector</span></a></li>
+                <li><a href="#tool-darkmode" class="sidebar-link"><span class="sidebar-link-inner">🌙 Smart Dark Mode</span></a></li>
+            </ul>
 
-            <!-- Card 2: Forms & Inputs -->
-            <a href="forms.html" class="card-link">
-                <div class="card">
-                    <div class="card-icon">🔓</div>
-                    <h2>Forms &amp; Inputs</h2>
-                    <p>Test the <strong>Elements</strong> unlocker, <strong>Remove Limits</strong>
-                        on maxlength fields, <strong>Passwords</strong> reveal,
-                        and disabled checkbox bypasses on real form controls.</p>
-                    <span class="card-footer-action">Open Sandbox →</span>
-                </div>
-            </a>
+            <div class="sidebar-section-title">Typography &amp; Editing</div>
+            <ul class="sidebar-nav-list">
+                <li><a href="#tool-editmode" class="sidebar-link"><span class="sidebar-link-inner">✍️ Design Mode (In-Page)</span></a></li>
+                <li><a href="#tool-fonts" class="sidebar-link"><span class="sidebar-link-inner">🔤 Font Injection</span></a></li>
+            </ul>
 
-            <!-- Card 3: Typography & Edit Mode -->
-            <a href="typography.html" class="card-link">
-                <div class="card">
-                    <div class="card-icon">✍️</div>
-                    <h2>Typography &amp; Edit Mode</h2>
-                    <p>Test the <strong>Change Font</strong> injection across 30+ typefaces
-                        and <strong>Edit Mode</strong> (Design Mode) for live in-page
-                        content editing.</p>
-                    <span class="card-footer-action">Open Sandbox →</span>
-                </div>
-            </a>
+            <div class="sidebar-section-title">Restriction Bypasses</div>
+            <ul class="sidebar-nav-list">
+                <li><a href="#tool-rightclick" class="sidebar-link"><span class="sidebar-link-inner">🖱️ Force Right-Click</span></a></li>
+                <li><a href="#tool-userselect" class="sidebar-link"><span class="sidebar-link-inner">📄 Force Text Selection</span></a></li>
+                <li><a href="#tool-copypaste" class="sidebar-link"><span class="sidebar-link-inner">📋 Force Copy &amp; Paste</span></a></li>
+            </ul>
 
-            <!-- Card 4: Media & Screenshots -->
-            <a href="media.html" class="card-link">
-                <div class="card">
-                    <div class="card-icon">📸</div>
-                    <h2>Media &amp; Screenshots</h2>
-                    <p>Test viewport <strong>Screenshot</strong> capture with automatic
-                        download, <strong>Fullscreen</strong> toggle, and responsive
-                        scaling controls.</p>
-                    <span class="card-footer-action">Open Sandbox →</span>
-                </div>
-            </a>
+            <div class="sidebar-section-title">Designer &amp; Colors</div>
+            <ul class="sidebar-nav-list">
+                <li><a href="#tool-colorstudio" class="sidebar-link"><span class="sidebar-link-inner">🎨 Color Studio &amp; Eyedropper</span></a></li>
+            </ul>
 
-            <!-- Card 5: AI & Text Utility -->
-            <a href="ai.html" class="card-link">
-                <div class="card">
-                    <div class="card-icon">🤖</div>
-                    <h2>AI &amp; Text Utility</h2>
-                    <p>Select text from sample content, right-click, and test <strong>Gemini AI</strong>
-                        enhancements (Improve Text, Enhance Professionally, Add Humor, Roasted Mode…)
-                        and local case transformations via the context menu.</p>
-                    <span class="card-footer-action">Open Sandbox →</span>
-                </div>
-            </a>
+            <div class="sidebar-section-title">Developer &amp; Media</div>
+            <ul class="sidebar-nav-list">
+                <li><a href="#tool-qrcode" class="sidebar-link"><span class="sidebar-link-inner">📱 Offline QR Code</span></a></li>
+                <li><a href="#tool-media" class="sidebar-link"><span class="sidebar-link-inner">🖼️ Media Extractor</span></a></li>
+                <li><a href="#tool-storagewiper" class="sidebar-link"><span class="sidebar-link-inner">🧹 Site Storage Wiper</span></a></li>
+                <li><a href="#tool-cache" class="sidebar-link"><span class="sidebar-link-inner">🔄 Cache Wiper &amp; Reload</span></a></li>
+            </ul>
 
-            <!-- Card 6: Security & Restrictions -->
-            <a href="security.html" class="card-link">
-                <div class="card">
-                    <div class="card-icon">🛡️</div>
-                    <h2>Security &amp; Restrictions</h2>
-                    <p>Test <strong>Right Click</strong> unlocker, <strong>Select Text</strong>
-                        and <strong>Copy-Paste</strong> restorer against right-click
-                        interceptors and clipboard-blocking scripts.</p>
-                    <span class="card-footer-action">Open Sandbox →</span>
-                </div>
-            </a>
+            <div class="sidebar-section-title">AI &amp; Intelligence</div>
+            <ul class="sidebar-nav-list">
+                <li><a href="#tool-aistudio" class="sidebar-link"><span class="sidebar-link-inner">🧠 AI Page Studio</span></a></li>
+                <li><a href="#tool-contextai" class="sidebar-link"><span class="sidebar-link-inner">🤖 Context Menu AI &amp; Case</span></a></li>
+            </ul>
 
-        </div>
+            <div class="sidebar-section-title">Settings &amp; Policies</div>
+            <ul class="sidebar-nav-list">
+                <li><a href="#tool-history" class="sidebar-link"><span class="sidebar-link-inner">📂 History &amp; Incognito</span></a></li>
+                <li><a href="#tool-themes" class="sidebar-link"><span class="sidebar-link-inner">🎨 7 Color Accent Themes</span></a></li>
+                <li><a href="privacy.html" class="sidebar-link"><span class="sidebar-link-inner">🛡️ Chrome Store Privacy</span></a></li>
+            </ul>
+        </aside>
 
-        <!-- Keyboard Shortcuts -->
-        <div class="shortcuts-strip">
-            <div class="shortcuts-title">⌨️ Global Keyboard Shortcuts</div>
-            <div class="shortcut-item">
-                <kbd>Ctrl+Shift+E</kbd>
-                <span><strong>Unlock Elements</strong></span>
-            </div>
-            <div class="shortcut-item">
-                <kbd>Ctrl+Shift+Y</kbd>
-                <span><strong>Toggle Edit Mode</strong></span>
-            </div>
-            <div class="shortcut-item">
-                <kbd>Ctrl+Shift+L</kbd>
-                <span><strong>Improve Selected Text</strong> (Gemini)</span>
-            </div>
-            <div class="shortcut-item">
-                <kbd>Ctrl+Shift+R</kbd>
-                <span><strong>Clear Cache &amp; Reload</strong></span>
-            </div>
-        </div>
-
-        <!-- Banners -->
-        <div class="banners">
-            <!-- Changelog -->
-            <div class="policy-banner">
-                <div class="policy-banner-left">
-                    <div class="policy-icon">📜</div>
-                    <div class="policy-text-group">
-                        <h3>Release Changelog</h3>
-                        <p>Full version history from v1.0 to v2.3.0 — AI Page Studio, Color Studio, CSS Inspector &amp; theme releases.</p>
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Hero Introduction -->
+            <section class="hero-section" id="quickstart">
+                <div class="hero-header-row">
+                    <div>
+                        <span class="badge badge-primary" style="margin-bottom: 12px;">Official Documentation &amp; Live Testbench</span>
+                        <h1 class="hero-title">Master CodeSavvy &amp;<br>Test Every Feature Live</h1>
+                        <p class="hero-subtitle">
+                            CodeSavvy is an all-in-one developer toolbox extension powered by Manifest V3, local DOM manipulation, and Google Gemini AI.
+                            This guide explains how every single tool works technically and provides <strong>interactive live sandboxes to test everything on the spot</strong>.
+                        </p>
                     </div>
                 </div>
-                <a href="changelog.html" class="banner-btn">View Notes →</a>
-            </div>
 
-            <!-- Privacy Policy -->
-            <div class="policy-banner">
-                <div class="policy-banner-left">
-                    <div class="policy-icon">🛡️</div>
-                    <div class="policy-text-group">
-                        <h3>Privacy Policy</h3>
-                        <p>Local-first storage — your API keys and settings never leave your browser.</p>
+                <!-- Global Keyboard Shortcuts Cheatsheet -->
+                <div style="margin-top: 14px;">
+                    <div style="font-size: 0.78rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); margin-bottom: 8px;">
+                        ⌨️ Core Keyboard Shortcuts
+                    </div>
+                    <div class="shortcuts-grid">
+                        <div class="shortcut-card">
+                            <span>Unlock Disabled Elements</span>
+                            <kbd>Ctrl+Shift+E</kbd>
+                        </div>
+                        <div class="shortcut-card">
+                            <span>Toggle In-Page Edit Mode</span>
+                            <kbd>Ctrl+Shift+Y</kbd>
+                        </div>
+                        <div class="shortcut-card">
+                            <span>Improve Selected Text (AI)</span>
+                            <kbd>Ctrl+Shift+L</kbd>
+                        </div>
+                        <div class="shortcut-card">
+                            <span>Hard Clear Cache &amp; Reload</span>
+                            <kbd>Ctrl+Shift+R</kbd>
+                        </div>
                     </div>
                 </div>
-                <a href="privacy.html" class="banner-btn">View Policy →</a>
-            </div>
-        </div>
 
-        <!-- Footer -->
-        <footer>
-            <p>&copy; 2026 CodeSavvy. All rights reserved. Created by <a href="https://github.com/mahdialaaaldin"
-                    target="_blank" rel="noopener noreferrer">mahdialaaaldin</a>.</p>
-        </footer>
+                <div class="hero-metrics-strip" style="margin-top: 20px;">
+                    <div class="metric-badge"><span>⚡</span> <strong>100% Local</strong> Execution</div>
+                    <div class="metric-badge"><span>🔒</span> <strong>Zero</strong> User Tracking</div>
+                    <div class="metric-badge"><span>🛡️</span> <strong>Principle</strong> of Least Privilege</div>
+                    <div class="metric-badge"><span>🤖</span> <strong>Gemini 3.5</strong> Flash Lite &amp; Pro</div>
+                </div>
+            </section>
 
+            <!-- ========================================================================= -->
+            <!-- CATEGORY 1: DOM MANIPULATION & DEBUGGER -->
+            <!-- ========================================================================= -->
+            <section class="category-group" id="group-dom">
+                <div class="category-header">
+                    <div class="category-title-wrap">
+                        <div class="category-icon">🛠️</div>
+                        <div>
+                            <h2 class="category-title">Webpage Manipulation &amp; DOM Debugger</h2>
+                            <div class="category-desc">Unlock stubborn inputs, zap modals with undo, inspect CSS, and force dark mode.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 1.1 Unlock Elements -->
+                <article class="tool-card" id="tool-unlock" data-keywords="unlock disabled readonly aria pointer-events">
+                    <div class="tool-card-header">
+                        <div class="tool-heading">
+                            <span class="tool-emoji">🔓</span>
+                            <div>
+                                <h3 class="tool-name">Unlock Elements</h3>
+                                <div style="font-size: 0.8rem; color: var(--text-muted);">Popup: Tools Panel • Shortcut: <kbd>Ctrl+Shift+E</kbd></div>
+                            </div>
+                        </div>
+                        <div class="tool-tags">
+                            <span class="badge badge-primary">DOM Override</span>
+                            <span class="badge badge-secondary">Zero Latency</span>
+                        </div>
+                    </div>
+                    <div class="tool-guide-body">
+                        <p>
+                            Web applications often disable buttons, inputs, dropdowns, and checkboxes using HTML attributes (<code>disabled</code>, <code>readonly</code>, <code>aria-disabled</code>), custom CSS classes (e.g. <code>.disabled</code>, <code>.divDisabled</code>), or CSS properties like <code>pointer-events: none</code> and <code>user-select: none</code>.
+                        </p>
+                        <div class="tech-callout">
+                            <strong>Under the Hood:</strong> CodeSavvy traverses the DOM tree, removes <code>disabled</code>, <code>readonly</code>, and <code>aria-disabled</code>, strips disabled class tokens, forces <code>style.pointerEvents = 'auto'</code>, resets <code>style.userSelect = 'auto'</code>, and converts <code>contenteditable="false"</code> to <code>"true"</code>.
+                        </div>
+                    </div>
+
+                    <!-- Live Test Arena -->
+                    <div class="test-arena" id="arena-unlock">
+                        <div class="test-arena-header">
+                            <div class="test-arena-title">🧪 Live Test Arena: Element Unlocker</div>
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <span class="test-arena-status" id="status-unlock" style="color: #f87171;">● 4 Elements Locked</span>
+                                <button class="test-arena-btn" onclick="resetUnlockArena()">Reset Fixture</button>
+                            </div>
+                        </div>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-top: 10px;">
+                            <div>
+                                <label style="font-size: 0.8rem; color: var(--text-muted); display: block; margin-bottom: 4px;">Disabled Button</label>
+                                <button id="fixture-unlock-btn" class="sim-locked-button" disabled>Locked Submit</button>
+                            </div>
+                            <div>
+                                <label style="font-size: 0.8rem; color: var(--text-muted); display: block; margin-bottom: 4px;">Readonly Input</label>
+                                <input id="fixture-unlock-input" class="arena-input" type="text" value="System Readonly Key" readonly style="opacity: 0.6;" />
+                            </div>
+                            <div>
+                                <label style="font-size: 0.8rem; color: var(--text-muted); display: block; margin-bottom: 4px;">Pointer-Events: None Div</label>
+                                <div id="fixture-unlock-div" class="disabled-div" style="pointer-events: none; opacity: 0.5; padding: 8px; background: #334155; border-radius: 6px; font-size: 0.85rem;">
+                                    Cannot Click Me
+                                </div>
+                            </div>
+                            <div>
+                                <label style="font-size: 0.8rem; color: var(--text-muted); display: block; margin-bottom: 4px;">Aria-Disabled Checkbox</label>
+                                <label style="display: flex; align-items: center; gap: 6px; font-size: 0.85rem; color: var(--text-secondary);">
+                                    <input id="fixture-unlock-check" type="checkbox" aria-disabled="true" disabled /> I agree to terms
+                                </label>
+                            </div>
+                        </div>
+                        <div style="margin-top: 14px; font-size: 0.8rem; color: var(--text-muted);">
+                            👉 <strong>Test It:</strong> Click <strong>CodeSavvy Popup → Unlock Elements</strong> or press <kbd>Ctrl+Shift+E</kbd>. Watch the status change to green in real time!
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 1.2 Remove Input Limits -->
+                <article class="tool-card" id="tool-maxlength" data-keywords="maxlength minlength limit length input">
+                    <div class="tool-card-header">
+                        <div class="tool-heading">
+                            <span class="tool-emoji">∞</span>
+                            <div>
+                                <h3 class="tool-name">Remove Input Limits (Maxlength Stripper)</h3>
+                                <div style="font-size: 0.8rem; color: var(--text-muted);">Popup: Tools Panel</div>
+                            </div>
+                        </div>
+                        <span class="badge badge-primary">Form Testing</span>
+                    </div>
+                    <div class="tool-guide-body">
+                        <p>
+                            Frontend forms frequently enforce artificial character limits using <code>maxlength</code> attributes, frustrating QA engineers testing buffer overflows or users pasting long codes and addresses.
+                        </p>
+                        <div class="tech-callout">
+                            <strong>Under the Hood:</strong> CodeSavvy iterates through all <code>&lt;input&gt;</code> and <code>&lt;textarea&gt;</code> elements and explicitly calls <code>removeAttribute('maxlength')</code> and <code>removeAttribute('minlength')</code>.
+                        </div>
+                    </div>
+
+                    <!-- Live Test Arena -->
+                    <div class="test-arena" id="arena-maxlength">
+                        <div class="test-arena-header">
+                            <div class="test-arena-title">🧪 Live Test Arena: Maxlength Override</div>
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <span class="test-arena-status" id="status-maxlength" style="color: #f87171;">● Max Length = 5 chars</span>
+                                <button class="test-arena-btn" onclick="resetMaxlengthArena()">Reset Fixture</button>
+                            </div>
+                        </div>
+                        <div style="display: flex; gap: 14px; align-items: center; flex-wrap: wrap;">
+                            <input id="fixture-maxlength-input" class="arena-input" type="text" maxlength="5" placeholder="Try typing > 5 chars..." style="width: 260px;" />
+                            <span id="char-count-badge" class="badge badge-warning">0 / 5 chars</span>
+                        </div>
+                        <div style="margin-top: 14px; font-size: 0.8rem; color: var(--text-muted);">
+                            👉 <strong>Test It:</strong> Try typing in the box. You cannot type more than 5 characters. Now open CodeSavvy and click <strong>Remove Limits</strong>. The limit will immediately disappear!
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 1.3 Reveal Passwords -->
+                <article class="tool-card" id="tool-passwords" data-keywords="reveal password unmask unhide">
+                    <div class="tool-card-header">
+                        <div class="tool-heading">
+                            <span class="tool-emoji">👁️</span>
+                            <div>
+                                <h3 class="tool-name">Reveal Passwords</h3>
+                                <div style="font-size: 0.8rem; color: var(--text-muted);">Popup: Tools Panel</div>
+                            </div>
+                        </div>
+                        <span class="badge badge-primary">Security Testing</span>
+                    </div>
+                    <div class="tool-guide-body">
+                        <p>
+                            Password fields obscure characters with dots or asterisks (`••••••••`). CodeSavvy safely toggles input elements between <code>type="password"</code> and <code>type="text"</code> so you can verify prefilled passwords or complex credentials without opening devtools.
+                        </p>
+                    </div>
+
+                    <!-- Live Test Arena -->
+                    <div class="test-arena" id="arena-passwords">
+                        <div class="test-arena-header">
+                            <div class="test-arena-title">🧪 Live Test Arena: Password Unmasker</div>
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <span class="test-arena-status" id="status-password" style="color: #fbbf24;">● Type = password</span>
+                                <button class="test-arena-btn" onclick="resetPasswordArena()">Reset Fixture</button>
+                            </div>
+                        </div>
+                        <div style="display: flex; gap: 14px; align-items: center; flex-wrap: wrap;">
+                            <input id="fixture-password-input" class="arena-input" type="password" value="SuperSecretP@ssw0rd!2026" style="width: 280px; font-family: 'JetBrains Mono', monospace;" />
+                            <span id="password-visibility-badge" class="badge badge-warning">Masked (••••••)</span>
+                        </div>
+                        <div style="margin-top: 14px; font-size: 0.8rem; color: var(--text-muted);">
+                            👉 <strong>Test It:</strong> Click <strong>CodeSavvy Popup → Reveal Passwords</strong> to unmask the hidden secret instantly.
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 1.4 Element Zapper with Live Undo -->
+                <article class="tool-card" id="tool-zapper" data-keywords="zapper delete remove modal popup banner overlay undo">
+                    <div class="tool-card-header">
+                        <div class="tool-heading">
+                            <span class="tool-emoji">⚡</span>
+                            <div>
+                                <h3 class="tool-name">Element Zapper with Live Undo</h3>
+                                <div style="font-size: 0.8rem; color: var(--text-muted);">Popup: Tools Panel • Crosshair Tool</div>
+                            </div>
+                        </div>
+                        <div class="tool-tags">
+                            <span class="badge badge-primary">Vaporize Banners</span>
+                            <span class="badge badge-secondary">Live Undo (Ctrl+Z)</span>
+                        </div>
+                    </div>
+                    <div class="tool-guide-body">
+                        <p>
+                            Hover over annoying sticky headers, newsletter popups, cookie consent walls, or video overlays and vaporize them with one click.
+                        </p>
+                        <div class="tech-callout">
+                            <strong>Safety &amp; Live Undo:</strong> Includes built-in safety guards that prevent deleting the root <code>&lt;html&gt;</code> or <code>&lt;body&gt;</code> containers. Deleted elements are stored in a non-destructive LIFO history stack so you can restore them anytime using <kbd>Ctrl+Z</kbd> or the on-screen Undo button. Press <kbd>ESC</kbd> to exit zapper mode.
+                        </div>
+                    </div>
+
+                    <!-- Live Test Arena -->
+                    <div class="test-arena" id="arena-zapper">
+                        <div class="test-arena-header">
+                            <div class="test-arena-title">🧪 Live Test Arena: Zappable Sticky Banner</div>
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <span class="test-arena-status" id="status-zapper" style="color: #fbbf24;">● Banner Present</span>
+                                <button class="test-arena-btn" onclick="resetZapperArena()">Restore Banner</button>
+                            </div>
+                        </div>
+                        <div id="fixture-zapper-container">
+                            <div id="fixture-zapper-banner" class="zapper-test-overlay">
+                                <div style="font-size: 1.3rem; margin-bottom: 6px;">📢 Annoying Newsletter &amp; Cookie Consent Overlay</div>
+                                <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 12px;">
+                                    "Subscribe now to read 1 more article or accept all tracking cookies!"
+                                </p>
+                                <button class="sim-locked-button" style="pointer-events: none; opacity: 0.8; background: #dc2626; color: white;">Accept &amp; Subscribe</button>
+                            </div>
+                        </div>
+                        <div style="margin-top: 14px; font-size: 0.8rem; color: var(--text-muted);">
+                            👉 <strong>Test It:</strong> Click <strong>CodeSavvy Popup → Element Zapper</strong>. Hover over this yellow-dashed banner, click to vaporize it, then press <kbd>Ctrl+Z</kbd> to restore it!
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 1.5 Non-Destructive CSS & Box Model Inspector -->
+                <article class="tool-card" id="tool-inspector" data-keywords="inspector box model css computed hud dimensions padding margin">
+                    <div class="tool-card-header">
+                        <div class="tool-heading">
+                            <span class="tool-emoji">📐</span>
+                            <div>
+                                <h3 class="tool-name">Non-Destructive CSS &amp; Box Model Inspector</h3>
+                                <div style="font-size: 0.8rem; color: var(--text-muted);">Popup: Power Panel • HUD Tool</div>
+                            </div>
+                        </div>
+                        <span class="badge badge-primary">Glassmorphic HUD</span>
+                    </div>
+                    <div class="tool-guide-body">
+                        <p>
+                            Hover over any element on any webpage to inspect its exact computed dimensions, font family, weight, text color, background color, padding, and margin inside a floating glassmorphic HUD.
+                        </p>
+                        <div class="tech-callout">
+                            <strong>1-Click CSS Copy:</strong> Click any hovered element to automatically generate and copy a complete, formatted CSS declaration block to your clipboard. Press <kbd>ESC</kbd> to exit.
+                        </div>
+                    </div>
+
+                    <!-- Live Test Arena -->
+                    <div class="test-arena">
+                        <div class="test-arena-header">
+                            <div class="test-arena-title">🧪 Live Test Arena: CSS Inspection Targets</div>
+                            <span class="badge badge-primary">Click target to copy CSS snippet</span>
+                        </div>
+                        <div class="inspect-grid">
+                            <div class="inspect-box" style="padding: 24px; margin: 8px; border: 2px solid #6366f1; background: rgba(99, 102, 241, 0.1); border-radius: 14px;">
+                                <strong style="color: #818cf8; display: block; margin-bottom: 4px;">Indigo Flex Card</strong>
+                                <span style="font-size: 0.78rem; color: var(--text-secondary);">Padding: 24px • Radius: 14px</span>
+                            </div>
+                            <div class="inspect-box" style="padding: 12px 20px; border: 1px solid #10b981; background: rgba(16, 185, 129, 0.1); border-radius: 8px;">
+                                <strong style="color: #34d399; display: block; margin-bottom: 4px;">Emerald Pill</strong>
+                                <span style="font-size: 0.78rem; color: var(--text-secondary);">Display: Inline-Block</span>
+                            </div>
+                            <div class="inspect-box" style="padding: 18px; border: 1px dashed #f59e0b; background: rgba(245, 158, 11, 0.1); font-family: 'JetBrains Mono', monospace;">
+                                <strong style="color: #fbbf24; display: block; margin-bottom: 4px;">Monospace Target</strong>
+                                <span style="font-size: 0.78rem; color: var(--text-secondary);">Font: JetBrains Mono (600)</span>
+                            </div>
+                        </div>
+                        <div style="margin-top: 14px; font-size: 0.8rem; color: var(--text-muted);">
+                            👉 <strong>Test It:</strong> Click <strong>CodeSavvy Popup → Inspect Box</strong> and hover over the targets above. Observe computed metrics, then click to copy the CSS!
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 1.6 Smart Dark Mode -->
+                <article class="tool-card" id="tool-darkmode" data-keywords="dark mode invert filter contrast">
+                    <div class="tool-card-header">
+                        <div class="tool-heading">
+                            <span class="tool-emoji">🌙</span>
+                            <div>
+                                <h3 class="tool-name">Smart Dark Mode</h3>
+                                <div style="font-size: 0.8rem; color: var(--text-muted);">Popup: Power Panel</div>
+                            </div>
+                        </div>
+                        <span class="badge badge-primary">Media Protected</span>
+                    </div>
+                    <div class="tool-guide-body">
+                        <p>
+                            Forces an intelligent, high-contrast dark theme on websites that only offer blinding white themes.
+                        </p>
+                        <div class="tech-callout">
+                            <strong>Intelligent Exclusion:</strong> Unlike crude inversion extensions, CodeSavvy applies <code>filter: invert(90%) hue-rotate(180deg)</code> to the page while automatically counter-inverting images (<code>&lt;img&gt;</code>), videos, SVGs, canvases, and background-image assets so photos and graphics remain completely natural.
+                        </div>
+                    </div>
+
+                    <!-- Live Test Arena -->
+                    <div class="test-arena">
+                        <div class="test-arena-header">
+                            <div class="test-arena-title">🧪 Live Test Arena: Inversion &amp; Media Protection</div>
+                        </div>
+                        <div style="background: #ffffff; color: #000000; padding: 20px; border-radius: 10px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px;">
+                            <div>
+                                <h4 style="font-size: 1.1rem; font-weight: 800; color: #111827; margin-bottom: 4px;">Blinding Light Theme Box</h4>
+                                <p style="font-size: 0.85rem; color: #4b5563;">This white box will become dark slate, while the logo icon below remains in original color.</p>
+                            </div>
+                            <img src="assets/icons/icon48.png" alt="CodeSavvy Icon" style="width: 48px; height: 48px; border-radius: 8px;" />
+                        </div>
+                        <div style="margin-top: 14px; font-size: 0.8rem; color: var(--text-muted);">
+                            👉 <strong>Test It:</strong> Click <strong>CodeSavvy Popup → Smart Dark Mode</strong>. Watch the white card invert while the icon graphic stays pristine!
+                        </div>
+                    </div>
+                </article>
+            </section>
+
+            <!-- ========================================================================= -->
+            <!-- CATEGORY 2: TYPOGRAPHY & IN-PAGE EDITING -->
+            <!-- ========================================================================= -->
+            <section class="category-group" id="group-typography">
+                <div class="category-header">
+                    <div class="category-title-wrap">
+                        <div class="category-icon">✍️</div>
+                        <div>
+                            <h2 class="category-title">Typography &amp; In-Page Editing</h2>
+                            <div class="category-desc">Live in-browser content editing and custom typography injection.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2.1 Design Mode -->
+                <article class="tool-card" id="tool-editmode" data-keywords="design mode edit mode typography contenteditable">
+                    <div class="tool-card-header">
+                        <div class="tool-heading">
+                            <span class="tool-emoji">✍️</span>
+                            <div>
+                                <h3 class="tool-name">Toggle Edit Mode (Design Mode)</h3>
+                                <div style="font-size: 0.8rem; color: var(--text-muted);">Popup: Tools Panel • Shortcut: <kbd>Ctrl+Shift+Y</kbd></div>
+                            </div>
+                        </div>
+                        <span class="badge badge-primary">Direct In-Page Editing</span>
+                    </div>
+                    <div class="tool-guide-body">
+                        <p>
+                            Instantly transforms the entire webpage into an editable canvas. Perfect for prototyping copy, taking realistic screenshots for mockups, or proofreading content before publishing.
+                        </p>
+                        <div class="tech-callout">
+                            <strong>Under the Hood:</strong> Toggles browser-level <code>document.designMode = 'on' | 'off'</code>.
+                        </div>
+                    </div>
+
+                    <!-- Live Test Arena -->
+                    <div class="test-arena">
+                        <div class="test-arena-header">
+                            <div class="test-arena-title">🧪 Live Test Arena: In-Page Design Mode Target</div>
+                            <span class="test-arena-status" id="status-designmode" style="color: #94a3b8;">● designMode: OFF</span>
+                        </div>
+                        <div style="background: var(--bg-surface); border: 1px solid var(--border-medium); border-radius: 8px; padding: 20px;">
+                            <h4 style="font-size: 1.2rem; font-weight: 700; color: var(--text-primary); margin-bottom: 8px;">
+                                Editable Article Headline (Press Ctrl+Shift+Y to Edit Me)
+                            </h4>
+                            <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;">
+                                When Edit Mode is turned ON, you can click anywhere in this paragraph, delete words, add new sentences, or format bullet points just like a word processor.
+                            </p>
+                        </div>
+                        <div style="margin-top: 14px; font-size: 0.8rem; color: var(--text-muted);">
+                            👉 <strong>Test It:</strong> Press <kbd>Ctrl+Shift+Y</kbd> or click <strong>Edit Mode</strong> in the popup, then type directly in the box above!
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 2.2 Font Injection -->
+                <article class="tool-card" id="tool-fonts" data-keywords="font typography google fonts sans serif mono">
+                    <div class="tool-card-header">
+                        <div class="tool-heading">
+                            <span class="tool-emoji">🔤</span>
+                            <div>
+                                <h3 class="tool-name">Custom Font Injection</h3>
+                                <div style="font-size: 0.8rem; color: var(--text-muted);">Popup: Tools Panel • 30+ Google Fonts</div>
+                            </div>
+                        </div>
+                        <span class="badge badge-primary">Typography Studio</span>
+                    </div>
+                    <div class="tool-guide-body">
+                        <p>
+                            Override unreadable or ugly website fonts with over 30 handpicked Google Fonts and system font stacks organized by categories:
+                            <em>Modern Sans</em> (Inter, Poppins, Roboto), <em>Editorial Serif</em> (Playfair Display, Lora, Merriweather), <em>Monospace</em> (JetBrains Mono), and <em>Accessibility/Dyslexic</em> (Atkinson Hyperlegible, Andika, Lexend Deca).
+                        </p>
+                    </div>
+
+                    <!-- Live Test Arena -->
+                    <div class="test-arena">
+                        <div class="test-arena-header">
+                            <div class="test-arena-title">🧪 Live Test Arena: Typographic Specimens</div>
+                            <span class="badge badge-secondary">Active Tab Injection</span>
+                        </div>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px;">
+                            <div style="background: var(--bg-surface); padding: 14px; border-radius: 8px; border: 1px solid var(--border-subtle);">
+                                <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; margin-bottom: 4px;">Body Specimen</div>
+                                <div style="font-size: 0.95rem;">The quick brown fox jumps over the lazy dog 1234567890.</div>
+                            </div>
+                            <div style="background: var(--bg-surface); padding: 14px; border-radius: 8px; border: 1px solid var(--border-subtle);">
+                                <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; margin-bottom: 4px;">Code Specimen</div>
+                                <code style="font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: #818cf8;">const greeting = "Hello World!";</code>
+                            </div>
+                        </div>
+                        <div style="margin-top: 14px; font-size: 0.8rem; color: var(--text-muted);">
+                            👉 <strong>Test It:</strong> Click <strong>CodeSavvy Popup → Change Font</strong>, pick any typeface from the modal, and click <strong>Apply</strong>!
+                        </div>
+                    </div>
+                </article>
+            </section>
+
+            <!-- ========================================================================= -->
+            <!-- CATEGORY 3: RESTRICTION BYPASSES -->
+            <!-- ========================================================================= -->
+            <section class="category-group" id="group-security">
+                <div class="category-header">
+                    <div class="category-title-wrap">
+                        <div class="category-icon">🛡️</div>
+                        <div>
+                            <h2 class="category-title">Security &amp; Web Restriction Bypasses</h2>
+                            <div class="category-desc">Defeat anti-user scripts: blocked right-clicks, disabled text selection, and copy-paste preventers.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3.1 Force Right-Click -->
+                <article class="tool-card" id="tool-rightclick" data-keywords="right click context menu preventdefault bypass">
+                    <div class="tool-card-header">
+                        <div class="tool-heading">
+                            <span class="tool-emoji">🖱️</span>
+                            <div>
+                                <h3 class="tool-name">Force Right-Click</h3>
+                                <div style="font-size: 0.8rem; color: var(--text-muted);">Popup: Tools Panel</div>
+                            </div>
+                        </div>
+                        <span class="badge badge-danger">Anti-Interception</span>
+                    </div>
+                    <div class="tool-guide-body">
+                        <p>
+                            Many websites disable the context menu using aggressive scripts (e.g., <code>window.oncontextmenu = () => false;</code>) to prevent inspecting elements or copying text.
+                        </p>
+                        <div class="tech-callout">
+                            <strong>Under the Hood:</strong> CodeSavvy registers a capturing event listener for <code>contextmenu</code> that calls <code>e.stopImmediatePropagation()</code> and cleanses <code>document.oncontextmenu</code> and <code>document.body.oncontextmenu</code>.
+                        </div>
+                    </div>
+
+                    <!-- Live Test Arena -->
+                    <div class="test-arena" id="arena-rightclick">
+                        <div class="test-arena-header">
+                            <div class="test-arena-title">🧪 Live Test Arena: Anti-Right-Click Container</div>
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <span class="test-arena-status" id="status-rightclick" style="color: #f87171;">● Right-Click Blocked</span>
+                                <button class="test-arena-btn" onclick="resetRightClickArena()">Re-arm Blocker</button>
+                            </div>
+                        </div>
+                        <div id="fixture-rightclick-box"
+                            style="background: rgba(239, 68, 68, 0.1); border: 2px dashed #ef4444; border-radius: 8px; padding: 24px; text-align: center; cursor: context-menu;">
+                            <strong style="color: #f87171; display: block; font-size: 1rem; margin-bottom: 6px;">🚫 Right-Click Intercepted Inside This Box</strong>
+                            <span style="font-size: 0.85rem; color: var(--text-secondary);">Try right-clicking inside here. An alert or event block prevents your context menu from opening!</span>
+                        </div>
+                        <div style="margin-top: 14px; font-size: 0.8rem; color: var(--text-muted);">
+                            👉 <strong>Test It:</strong> Right-click inside the box (it will be blocked). Then click <strong>CodeSavvy Popup → Right Click</strong>. Right-click will work instantly!
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 3.2 Force Text Selection & Shadow DOM -->
+                <article class="tool-card" id="tool-userselect" data-keywords="select selection text shadow dom user-select">
+                    <div class="tool-card-header">
+                        <div class="tool-heading">
+                            <span class="tool-emoji">📄</span>
+                            <div>
+                                <h3 class="tool-name">Force Text Selection (Shadow DOM Penetration)</h3>
+                                <div style="font-size: 0.8rem; color: var(--text-muted);">Popup: Tools Panel</div>
+                            </div>
+                        </div>
+                        <div class="tool-tags">
+                            <span class="badge badge-primary">Deep Shadow DOM</span>
+                            <span class="badge badge-secondary">user-select Override</span>
+                        </div>
+                    </div>
+                    <div class="tool-guide-body">
+                        <p>
+                            Websites prevent copying by adding CSS rules like <code>user-select: none !important</code> and intercepting <code>selectstart</code> events. Modern sites even hide uncopyable text inside isolated <strong>Shadow DOM</strong> trees.
+                        </p>
+                        <div class="tech-callout">
+                            <strong>Under the Hood:</strong> CodeSavvy injects global styles into the document AND recursively penetrates open Shadow Roots (<code>injectIntoShadows()</code>), stripping <code>unselectable</code> attributes and overriding styles everywhere.
+                        </div>
+                    </div>
+
+                    <!-- Live Test Arena -->
+                    <div class="test-arena" id="arena-userselect">
+                        <div class="test-arena-header">
+                            <div class="test-arena-title">🧪 Live Test Arena: Selection Blocker &amp; Shadow DOM</div>
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <span class="test-arena-status" id="status-userselect" style="color: #f87171;">● Selection Disabled</span>
+                                <button class="test-arena-btn" onclick="resetUserSelectArena()">Re-arm Blocker</button>
+                            </div>
+                        </div>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px;">
+                            <!-- Standard user-select: none -->
+                            <div id="fixture-userselect-box"
+                                style="user-select: none; -webkit-user-select: none; background: rgba(239, 68, 68, 0.08); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 8px; padding: 16px;">
+                                <strong style="color: #f87171; display: block; margin-bottom: 4px;">Main DOM: user-select: none</strong>
+                                <p style="font-size: 0.88rem; color: var(--text-secondary);">
+                                    You cannot highlight or drag-select any text inside this container!
+                                </p>
+                            </div>
+
+                            <!-- Real Shadow DOM host -->
+                            <div id="fixture-shadow-host"
+                                style="background: rgba(168, 85, 247, 0.08); border: 1px solid rgba(168, 85, 247, 0.3); border-radius: 8px; padding: 16px;">
+                                <!-- Shadow DOM is attached via JS below -->
+                            </div>
+                        </div>
+                        <div style="margin-top: 14px; font-size: 0.8rem; color: var(--text-muted);">
+                            👉 <strong>Test It:</strong> Try selecting text in both boxes. Then click <strong>CodeSavvy Popup → Select Text</strong>. Both standard and Shadow DOM text become fully selectable!
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 3.3 Force Copy & Paste -->
+                <article class="tool-card" id="tool-copypaste" data-keywords="copy paste cut clipboard preventdefault">
+                    <div class="tool-card-header">
+                        <div class="tool-heading">
+                            <span class="tool-emoji">📋</span>
+                            <div>
+                                <h3 class="tool-name">Force Copy &amp; Paste</h3>
+                                <div style="font-size: 0.8rem; color: var(--text-muted);">Popup: Tools Panel</div>
+                            </div>
+                        </div>
+                        <span class="badge badge-primary">Clipboard Restorer</span>
+                    </div>
+                    <div class="tool-guide-body">
+                        <p>
+                            Bypasses scripts that intercept <code>copy</code>, <code>cut</code>, and <code>paste</code> events (common in banking portals, exam forms, and paywalled articles).
+                        </p>
+                    </div>
+
+                    <!-- Live Test Arena -->
+                    <div class="test-arena" id="arena-copypaste">
+                        <div class="test-arena-header">
+                            <div class="test-arena-title">🧪 Live Test Arena: Copy/Paste Blocker</div>
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <span class="test-arena-status" id="status-copypaste" style="color: #f87171;">● Copy/Paste Intercepted</span>
+                                <button class="test-arena-btn" onclick="resetCopyPasteArena()">Re-arm Blocker</button>
+                            </div>
+                        </div>
+                        <div style="display: flex; gap: 14px; flex-wrap: wrap;">
+                            <input id="fixture-copypaste-input" class="arena-input" type="text"
+                                value="Protected Security Token #88921" style="width: 320px;" />
+                            <span class="badge badge-danger" id="copypaste-badge">Copy &amp; Paste Blocked</span>
+                        </div>
+                        <div style="margin-top: 14px; font-size: 0.8rem; color: var(--text-muted);">
+                            👉 <strong>Test It:</strong> Select the text and press <kbd>Ctrl+C</kbd> or right-click copy (it will be blocked). Then click <strong>CodeSavvy Popup → Copy &amp; Paste</strong> to re-enable full clipboard access!
+                        </div>
+                    </div>
+                </article>
+            </section>
+
+            <!-- ========================================================================= -->
+            <!-- CATEGORY 4: COLOR STUDIO & DESIGNER TOOLS -->
+            <!-- ========================================================================= -->
+            <section class="category-group" id="group-color">
+                <div class="category-header">
+                    <div class="category-title-wrap">
+                        <div class="category-icon">🎨</div>
+                        <div>
+                            <h2 class="category-title">Color Studio &amp; Native Eyedropper</h2>
+                            <div class="category-desc">0ms screen color sampling, 10 palette swatches, and multi-format CSS conversions.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <article class="tool-card" id="tool-colorstudio" data-keywords="color picker eyedropper hex rgb hsl palette swatches">
+                    <div class="tool-card-header">
+                        <div class="tool-heading">
+                            <span class="tool-emoji">🎨</span>
+                            <div>
+                                <h3 class="tool-name">Color Studio &amp; Eyedropper</h3>
+                                <div style="font-size: 0.8rem; color: var(--text-muted);">Popup: Power Panel • Color Studio Modal</div>
+                            </div>
+                        </div>
+                        <div class="tool-tags">
+                            <span class="badge badge-primary">Native EyeDropper API</span>
+                            <span class="badge badge-secondary">HEX • RGB • HSL • CSS Var</span>
+                        </div>
+                    </div>
+                    <div class="tool-guide-body">
+                        <p>
+                            CodeSavvy provides a full-featured Color Studio: sample any pixel on your screen with 0ms latency via the native Chromium <code>EyeDropper</code> API, explore full-spectrum palettes, or pick from 10 popular designer swatches. Real-time conversions for HEX, RGB, HSL, and CSS Variables with 1-click clipboard copy.
+                        </p>
+                    </div>
+
+                    <!-- Live Test Arena -->
+                    <div class="test-arena">
+                        <div class="test-arena-header">
+                            <div class="test-arena-title">🧪 Live Test Arena: Eyedropper Color Target Blocks</div>
+                            <span class="badge badge-primary">Sample these pixels with Eyedropper</span>
+                        </div>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 12px;">
+                            <div style="background: #6366f1; border-radius: 8px; padding: 20px 10px; text-align: center; color: white; font-weight: 700; font-family: monospace;">#6366F1</div>
+                            <div style="background: #10b981; border-radius: 8px; padding: 20px 10px; text-align: center; color: white; font-weight: 700; font-family: monospace;">#10B981</div>
+                            <div style="background: #f59e0b; border-radius: 8px; padding: 20px 10px; text-align: center; color: white; font-weight: 700; font-family: monospace;">#F59E0B</div>
+                            <div style="background: #ef4444; border-radius: 8px; padding: 20px 10px; text-align: center; color: white; font-weight: 700; font-family: monospace;">#EF4444</div>
+                            <div style="background: #a855f7; border-radius: 8px; padding: 20px 10px; text-align: center; color: white; font-weight: 700; font-family: monospace;">#A855F7</div>
+                            <div style="background: #00f0ff; border-radius: 8px; padding: 20px 10px; text-align: center; color: black; font-weight: 700; font-family: monospace;">#00F0FF</div>
+                        </div>
+                        <div style="margin-top: 14px; font-size: 0.8rem; color: var(--text-muted);">
+                            👉 <strong>Test It:</strong> Click <strong>CodeSavvy Popup → Color Studio</strong>, tap the Eyedropper icon, and click any color block above.
+                        </div>
+                    </div>
+                </article>
+            </section>
+
+            <!-- ========================================================================= -->
+            <!-- CATEGORY 5: DEVELOPER & MEDIA POWER TOOLS -->
+            <!-- ========================================================================= -->
+            <section class="category-group" id="group-tools">
+                <div class="category-header">
+                    <div class="category-title-wrap">
+                        <div class="category-icon">⚡</div>
+                        <div>
+                            <h2 class="category-title">Developer &amp; Media Power Tools</h2>
+                            <div class="category-desc">Offline QR codes, deep media extraction, site storage wipes, cache clearing, and screenshots.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 5.1 Offline QR Code -->
+                <article class="tool-card" id="tool-qrcode" data-keywords="qr code offline generator mobile test url">
+                    <div class="tool-card-header">
+                        <div class="tool-heading">
+                            <span class="tool-emoji">📱</span>
+                            <div>
+                                <h3 class="tool-name">Offline QR Code Generator</h3>
+                                <div style="font-size: 0.8rem; color: var(--text-muted);">Popup: Power Panel • QR Modal</div>
+                            </div>
+                        </div>
+                        <span class="badge badge-secondary">100% Offline Generator</span>
+                    </div>
+                    <div class="tool-guide-body">
+                        <p>
+                            Instantly transfers the current URL to your mobile phone or physical device for responsive testing. Built with a pure client-side QR generator algorithm—zero external API calls, completely private, and works 100% offline. Includes 1-click Link Copy and Save PNG.
+                        </p>
+                    </div>
+                </article>
+
+                <!-- 5.2 Media & Asset Extractor -->
+                <article class="tool-card" id="tool-media" data-keywords="media images videos svg background extract download">
+                    <div class="tool-card-header">
+                        <div class="tool-heading">
+                            <span class="tool-emoji">🖼️</span>
+                            <div>
+                                <h3 class="tool-name">Media &amp; Asset Extractor</h3>
+                                <div style="font-size: 0.8rem; color: var(--text-muted);">Popup: Power Panel • Media Modal</div>
+                            </div>
+                        </div>
+                        <span class="badge badge-primary">Deep Asset Crawler</span>
+                    </div>
+                    <div class="tool-guide-body">
+                        <p>
+                            Scans the active webpage for all visual assets: standard <code>&lt;img&gt;</code> tags, <code>currentSrc</code> responsive images, CSS <code>background-image: url(...)</code> declarations, HTML5 <code>&lt;video&gt;</code> sources, and vector SVG elements. Features a gallery preview with dimensions and a batch "Download All" button.
+                        </p>
+                    </div>
+
+                    <!-- Live Test Arena -->
+                    <div class="test-arena">
+                        <div class="test-arena-header">
+                            <div class="test-arena-title">🧪 Live Test Arena: Page Media Assets</div>
+                            <span class="badge badge-secondary">Embedded Fixtures</span>
+                        </div>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px;">
+                            <div style="background: var(--bg-surface); padding: 12px; border-radius: 8px; border: 1px solid var(--border-subtle); text-align: center;">
+                                <img src="assets/icons/icon128.png" alt="App Icon" style="width: 64px; height: 64px; margin-bottom: 8px;" />
+                                <div style="font-size: 0.78rem; color: var(--text-muted);">Standard &lt;img&gt;</div>
+                            </div>
+                            <div style="background: var(--bg-surface); padding: 12px; border-radius: 8px; border: 1px solid var(--border-subtle); text-align: center;">
+                                <div style="width: 64px; height: 64px; margin: 0 auto 8px; background-image: url('assets/icons/icon48.png'); background-size: contain; background-repeat: no-repeat; background-position: center;"></div>
+                                <div style="font-size: 0.78rem; color: var(--text-muted);">CSS background-image</div>
+                            </div>
+                            <div style="background: var(--bg-surface); padding: 12px; border-radius: 8px; border: 1px solid var(--border-subtle); text-align: center;">
+                                <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#6366f1" stroke-width="2" style="margin-bottom: 8px;" xmlns="http://www.w3.org/2000/svg">
+                                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                                </svg>
+                                <div style="font-size: 0.78rem; color: var(--text-muted);">Inline Vector &lt;svg&gt;</div>
+                            </div>
+                        </div>
+                        <div style="margin-top: 14px; font-size: 0.8rem; color: var(--text-muted);">
+                            👉 <strong>Test It:</strong> Click <strong>CodeSavvy Popup → Extract Media</strong>. Notice how it detects and aggregates all images and SVGs above!
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 5.3 Site Storage Wiper -->
+                <article class="tool-card" id="tool-storagewiper" data-keywords="storage wipe clear localstorage sessionstorage cookies">
+                    <div class="tool-card-header">
+                        <div class="tool-heading">
+                            <span class="tool-emoji">🧹</span>
+                            <div>
+                                <h3 class="tool-name">Site Storage Wiper</h3>
+                                <div style="font-size: 0.8rem; color: var(--text-muted);">Popup: Power Panel</div>
+                            </div>
+                        </div>
+                        <div class="tool-tags">
+                            <span class="badge badge-primary">Domain Isolated</span>
+                            <span class="badge badge-danger">1-Click Flush</span>
+                        </div>
+                    </div>
+                    <div class="tool-guide-body">
+                        <p>
+                            Instantly purges <code>localStorage</code>, <code>sessionStorage</code>, and active domain cookies without opening DevTools Application tabs. Strictly scoped to the current hostname, leaving all other websites unaffected.
+                        </p>
+                    </div>
+
+                    <!-- Live Test Arena -->
+                    <div class="test-arena" id="arena-storagewiper">
+                        <div class="test-arena-header">
+                            <div class="test-arena-title">🧪 Live Test Arena: Local Storage &amp; Cookie Monitor</div>
+                            <button class="test-arena-btn" onclick="seedDummyStorage()">Seed Test Data</button>
+                        </div>
+                        <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+                            <div class="metric-badge">LocalStorage Items: <strong id="storage-local-count">0</strong></div>
+                            <div class="metric-badge">SessionStorage Items: <strong id="storage-session-count">0</strong></div>
+                            <div class="metric-badge">Document Cookies: <strong id="storage-cookie-count">0</strong></div>
+                        </div>
+                        <div style="margin-top: 14px; font-size: 0.8rem; color: var(--text-muted);">
+                            👉 <strong>Test It:</strong> Click <strong>"Seed Test Data"</strong> above to populate dummy auth tokens and session keys. Then click <strong>CodeSavvy Popup → Wipe Storage</strong>. Watch the counts drop to 0!
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 5.4 Cache Wiper & Screenshot -->
+                <article class="tool-card" id="tool-cache" data-keywords="cache reload refresh screenshot capture fullscreen">
+                    <div class="tool-card-header">
+                        <div class="tool-heading">
+                            <span class="tool-emoji">🔄</span>
+                            <div>
+                                <h3 class="tool-name">Cache Wiper, Screenshot &amp; Fullscreen</h3>
+                                <div style="font-size: 0.8rem; color: var(--text-muted);">Popup: Power Panel • Shortcut: <kbd>Ctrl+Shift+R</kbd></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tool-guide-body">
+                        <ul class="steps-list">
+                            <li><strong>Clear Cache &amp; Hard Reload (<kbd>Ctrl+Shift+R</kbd>):</strong> Purges browser HTTP cache via <code>chrome.browsingData.remove</code> and forces a complete tab reload.</li>
+                            <li><strong>Screenshot:</strong> Captures the visible viewport in high-resolution PNG and downloads it automatically to your computer.</li>
+                            <li><strong>Fullscreen:</strong> Toggles browser window fullscreen mode for distraction-free presentations and testing.</li>
+                        </ul>
+                    </div>
+                </article>
+            </section>
+
+            <!-- ========================================================================= -->
+            <!-- CATEGORY 6: AI PAGE STUDIO & TEXT INTELLIGENCE -->
+            <!-- ========================================================================= -->
+            <section class="category-group" id="group-ai">
+                <div class="category-header">
+                    <div class="category-title-wrap">
+                        <div class="category-icon">🧠</div>
+                        <div>
+                            <h2 class="category-title">AI Page Studio &amp; Text Intelligence</h2>
+                            <div class="category-desc">Page-wide summaries, technical teardowns, custom Q&amp;A, and right-click context menu AI actions.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 6.1 AI Page Studio -->
+                <article class="tool-card" id="tool-aistudio" data-keywords="ai page studio summary tldr takeaways tech stack eli5 gemini">
+                    <div class="tool-card-header">
+                        <div class="tool-heading">
+                            <span class="tool-emoji">🧠</span>
+                            <div>
+                                <h3 class="tool-name">AI Page Studio (Page Summarizer &amp; Q&amp;A)</h3>
+                                <div style="font-size: 0.8rem; color: var(--text-muted);">Popup: Power Panel • Gemini AI Modal</div>
+                            </div>
+                        </div>
+                        <div class="tool-tags">
+                            <span class="badge badge-primary">Gemini 3.5 Flash Lite / Pro</span>
+                            <span class="badge badge-secondary">Direct Client API</span>
+                        </div>
+                    </div>
+                    <div class="tool-guide-body">
+                        <p>
+                            AI Page Studio reads the core article and content of the active page (automatically filtering out navigation, banners, sidebars, and ads) and provides 4 instant modes:
+                        </p>
+                        <ul class="steps-list">
+                            <li><strong>⚡ TL;DR Summary:</strong> Instant executive briefing with estimated reading time and core thesis.</li>
+                            <li><strong>📌 Key Takeaways:</strong> Markdown bullet points of key metrics, arguments, and action points.</li>
+                            <li><strong>💻 Tech Stack Breakdown:</strong> Analyzes documentation or engineering blogs to identify frameworks, APIs, and libraries mentioned.</li>
+                            <li><strong>👶 Explain Simple (ELI5):</strong> Demystifies dense academic papers or complex jargon into beginner-friendly analogies.</li>
+                            <li><strong>💬 Ask Page (Custom Q&amp;A):</strong> Ask custom questions grounded strictly in the page content.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Live Test Arena: Realistic Technical Benchmark Article -->
+                    <div class="test-arena">
+                        <div class="test-arena-header">
+                            <div class="test-arena-title">🧪 Live Test Arena: Technical Benchmark Article</div>
+                            <span class="badge badge-primary">Target for AI Page Studio</span>
+                        </div>
+                        <article style="background: var(--bg-surface); padding: 20px; border-radius: 8px; border: 1px solid var(--border-subtle); font-size: 0.92rem; line-height: 1.65;">
+                            <h4 style="font-size: 1.15rem; font-weight: 800; color: var(--text-primary); margin-bottom: 8px;">
+                                Scaling High-Throughput Edge Architectures with WebAssembly and GraphQL
+                            </h4>
+                            <p style="color: var(--text-secondary); margin-bottom: 10px;">
+                                <em>Published by Architecture Guild • Reading Time: 4 mins</em>
+                            </p>
+                            <p style="color: var(--text-secondary); margin-bottom: 10px;">
+                                Modern microservices face latency bottlenecks when serializing JSON across distributed multi-region databases. In this benchmark, we deployed a Rust-based WebAssembly (Wasm) micro-runtime alongside an Apollo GraphQL federated gateway running on Cloudflare Workers.
+                            </p>
+                            <p style="color: var(--text-secondary); margin-bottom: 10px;">
+                                <strong>Key Statistics:</strong> P99 latency dropped from 240ms to 18ms. Redis cache hit rates surged to 94.2%, and cold boot initialization times decreased by 86% across 14 global edge points of presence. PostgreSQL connection pooling via PgBouncer prevented connection starvation during 50,000 req/sec load spikes.
+                            </p>
+                            <div style="font-size: 0.8rem; color: var(--text-muted);">
+                                <strong>Tech Stack References:</strong> Rust, WebAssembly, Apollo GraphQL, Cloudflare Workers, Redis, PostgreSQL, PgBouncer, Docker.
+                            </div>
+                        </article>
+                        <div style="margin-top: 14px; font-size: 0.8rem; color: var(--text-muted);">
+                            👉 <strong>Test It:</strong> Click <strong>CodeSavvy Popup → AI Page Studio</strong>. Select <em>TL;DR Summary</em> or <em>Tech Stack</em> to watch Gemini extract insights from this article!
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 6.2 Context Menu AI Actions & Case Converters -->
+                <article class="tool-card" id="tool-contextai" data-keywords="context menu right click improve text roasted prompt engineer case converter">
+                    <div class="tool-card-header">
+                        <div class="tool-heading">
+                            <span class="tool-emoji">🤖</span>
+                            <div>
+                                <h3 class="tool-name">AI Context Menu &amp; Case Converters</h3>
+                                <div style="font-size: 0.8rem; color: var(--text-muted);">Right-Click Selected Text • Shortcut: <kbd>Ctrl+Shift+L</kbd></div>
+                            </div>
+                        </div>
+                        <span class="badge badge-primary">Context Menu Actions</span>
+                    </div>
+                    <div class="tool-guide-body">
+                        <p>
+                            Highlight any text string on any page, right-click, and select from rich AI presets or instant offline string converters:
+                        </p>
+                        <ul class="steps-list">
+                            <li><strong>Improve Text (<kbd>Ctrl+Shift+L</kbd>):</strong> Fixes typos, enhances flow, and refines grammar.</li>
+                            <li><strong>Advanced Presets:</strong> Professional Tone, Prompt Engineer, Make Casual, Add Humor, and Roasted Mode.</li>
+                            <li><strong>Offline Case Converters:</strong> UPPERCASE, lowercase, Title Case, camelCase, kebab-case, snake_case, PascalCase, Reverse text, and Word Count.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Live Test Arena -->
+                    <div class="test-arena">
+                        <div class="test-arena-header">
+                            <div class="test-arena-title">🧪 Live Test Arena: Text Enhancement Samples</div>
+                            <span class="badge badge-secondary">Highlight &amp; Right-Click</span>
+                        </div>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px;">
+                            <div style="background: var(--bg-surface); padding: 14px; border-radius: 8px; border: 1px solid var(--border-subtle);">
+                                <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; margin-bottom: 4px;">Grammar / Email Draft</div>
+                                <p style="font-size: 0.88rem; color: var(--text-secondary);">
+                                    "hey boss i cant make to meeting tmrw cuz my internet is so bad and also the code is totally breaking."
+                                </p>
+                            </div>
+                            <div style="background: var(--bg-surface); padding: 14px; border-radius: 8px; border: 1px solid var(--border-subtle);">
+                                <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; margin-bottom: 4px;">Roasted Mode Target</div>
+                                <p style="font-size: 0.88rem; color: var(--text-secondary);">
+                                    "I wrote 4,000 lines of nested if-else statements with global variables and zero unit tests. It works on my machine."
+                                </p>
+                            </div>
+                        </div>
+                        <div style="margin-top: 14px; font-size: 0.8rem; color: var(--text-muted);">
+                            👉 <strong>Test It:</strong> Highlight any sentence above, right-click, and choose <strong>CodeSavvy → Improve Text</strong> or <strong>Roasted Mode</strong>!
+                        </div>
+                    </div>
+                </article>
+            </section>
+
+            <!-- ========================================================================= -->
+            <!-- CATEGORY 7: HISTORY, DATA PORTABILITY & THEMES -->
+            <!-- ========================================================================= -->
+            <section class="category-group" id="group-settings">
+                <div class="category-header">
+                    <div class="category-title-wrap">
+                        <div class="category-icon">📋</div>
+                        <div>
+                            <h2 class="category-title">History, Portability &amp; Themes</h2>
+                            <div class="category-desc">Local transformation logs, JSON backup/restore, Incognito mode, and 7 vivid theme palettes.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <article class="tool-card" id="tool-history" data-keywords="history backup export import json incognito retention">
+                    <div class="tool-card-header">
+                        <div class="tool-heading">
+                            <span class="tool-emoji">📂</span>
+                            <div>
+                                <h3 class="tool-name">Transformation History &amp; Data Portability</h3>
+                                <div style="font-size: 0.8rem; color: var(--text-muted);">Popup: History Panel • Options Page</div>
+                            </div>
+                        </div>
+                        <span class="badge badge-secondary">100% Client-Side JSON</span>
+                    </div>
+                    <div class="tool-guide-body">
+                        <p>
+                            CodeSavvy provides complete data ownership:
+                        </p>
+                        <ul class="steps-list">
+                            <li><strong>Incognito Mode:</strong> Click the Incognito icon in the popup header to temporarily freeze history recording.</li>
+                            <li><strong>Auto-Retention:</strong> Set automatic cleanup schedules (prune items older than 1 day, 3 days, 1 week, or 1 month).</li>
+                            <li><strong>Export to JSON:</strong> Single-click export of your full transformation logs.</li>
+                            <li><strong>Import Backup:</strong> Merge past backups with automatic deduplication.</li>
+                        </ul>
+                    </div>
+                </article>
+
+                <article class="tool-card" id="tool-themes" data-keywords="theme color accent orange yellow emerald cyan violet rose quotes">
+                    <div class="tool-card-header">
+                        <div class="tool-heading">
+                            <span class="tool-emoji">🎨</span>
+                            <div>
+                                <h3 class="tool-name">7 Vivid Accent Themes &amp; Developer Quotes</h3>
+                                <div style="font-size: 0.8rem; color: var(--text-muted);">Popup: Header Swatches</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tool-guide-body">
+                        <p>
+                            Customize your popup aesthetic with 7 ultra-vivid accent themes:
+                            <strong>Classic Indigo</strong>, <strong>Solar Orange</strong>, <strong>Electric Yellow</strong>, <strong>Emerald Green</strong>, <strong>Cyber Cyan</strong>, <strong>Neon Violet</strong>, and <strong>Electric Rose</strong>.
+                            Includes daily inspirational developer quotes cached in local storage with a 2-hour TTL to eliminate unnecessary network requests.
+                        </p>
+                    </div>
+                </article>
+            </section>
+
+            <!-- Footer -->
+            <footer style="margin-top: 60px; padding-top: 30px; border-top: 1px solid var(--border-subtle); text-align: center; color: var(--text-muted); font-size: 0.88rem;">
+                <p>&copy; 2026 CodeSavvy. Created by <a href="https://github.com/mahdialaaaldin" target="_blank" rel="noopener noreferrer" style="color: var(--primary); font-weight: 600;">mahdialaaaldin</a>.</p>
+                <div style="display: flex; justify-content: center; gap: 20px; margin-top: 10px;">
+                    <a href="privacy.html" style="color: var(--text-secondary); text-decoration: none;">Privacy Policy</a>
+                    <a href="changelog.html" style="color: var(--text-secondary); text-decoration: none;">Release Changelog</a>
+                    <a href="https://chromewebstore.google.com/detail/codesavvy/jenendhnlcnokliclhccikgeohdgfhml" target="_blank" rel="noopener noreferrer" style="color: var(--text-secondary); text-decoration: none;">Chrome Web Store</a>
+                </div>
+            </footer>
+        </main>
     </div>
+
+    <!-- ========================================================================= -->
+    <!-- INTERACTIVE TESTBED & REACTIVE STATE SCRIPT -->
+    <!-- ========================================================================= -->
+    <script>
+        // ── Attach Open Shadow DOM Fixture ──────────────────────────────────────
+        function setupShadowDomFixture() {
+            const host = document.getElementById('fixture-shadow-host');
+            if (!host) return;
+            host.innerHTML = '';
+            const shadowRoot = host.attachShadow ? (host.shadowRoot || host.attachShadow({ mode: 'open' })) : null;
+            if (shadowRoot) {
+                shadowRoot.innerHTML = `
+                    <style>
+                        * { user-select: none !important; -webkit-user-select: none !important; }
+                        .shadow-content {
+                            color: #c084fc;
+                            font-size: 0.88rem;
+                            font-family: inherit;
+                        }
+                    </style>
+                    <strong style="color: #c084fc; display: block; margin-bottom: 4px;">Inside Open Shadow DOM: user-select: none</strong>
+                    <div class="shadow-content">
+                        This text lives inside an isolated Shadow Root with unselectable styling. CodeSavvy will penetrate this root!
+                    </div>
+                `;
+            }
+        }
+
+        // ── Right-Click Blocker Fixture ─────────────────────────────────────────
+        function attachRightClickBlocker() {
+            const box = document.getElementById('fixture-rightclick-box');
+            if (!box) return;
+            box.oncontextmenu = function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                const status = document.getElementById('status-rightclick');
+                if (status) {
+                    status.textContent = "● Intercepted Right-Click Attempt!";
+                    status.style.color = "#f87171";
+                }
+                return false;
+            };
+        }
+
+        // ── Copy/Paste Blocker Fixture ──────────────────────────────────────────
+        function attachCopyPasteBlocker() {
+            const input = document.getElementById('fixture-copypaste-input');
+            if (!input) return;
+            input.oncopy = (e) => { e.preventDefault(); alert("Copy blocked by page script!"); return false; };
+            input.oncut = (e) => { e.preventDefault(); return false; };
+            input.onpaste = (e) => { e.preventDefault(); alert("Paste blocked by page script!"); return false; };
+        }
+
+        // ── Maxlength Char Counter ──────────────────────────────────────────────
+        function setupMaxlengthWatcher() {
+            const input = document.getElementById('fixture-maxlength-input');
+            const badge = document.getElementById('char-count-badge');
+            const status = document.getElementById('status-maxlength');
+            if (!input) return;
+
+            input.addEventListener('input', () => {
+                const max = input.getAttribute('maxlength');
+                const len = input.value.length;
+                if (max) {
+                    badge.textContent = `${len} / ${max} chars`;
+                    badge.className = len >= parseInt(max) ? 'badge badge-danger' : 'badge badge-warning';
+                } else {
+                    badge.textContent = `${len} chars (Unlimited!)`;
+                    badge.className = 'badge badge-secondary';
+                    if (status) {
+                        status.textContent = "✓ Maxlength Removed!";
+                        status.style.color = "#34d399";
+                    }
+                }
+            });
+        }
+
+        // ── Real-Time DOM Observers for Sandbox Badges ─────────────────────────
+        let isUnlockAlreadyHandled = false;
+
+        function setupDomObservers() {
+            // Unlock elements observer (safely filtered by attribute to prevent infinite feedback loops)
+            const unlockBtn = document.getElementById('fixture-unlock-btn');
+            const unlockInput = document.getElementById('fixture-unlock-input');
+            const unlockStatus = document.getElementById('status-unlock');
+
+            if (unlockBtn && unlockInput) {
+                const observer = new MutationObserver(() => {
+                    if (isUnlockAlreadyHandled) return;
+                    const isBtnUnlocked = !unlockBtn.hasAttribute('disabled');
+                    const isInputUnlocked = !unlockInput.hasAttribute('readonly');
+                    if (isBtnUnlocked && isInputUnlocked) {
+                        isUnlockAlreadyHandled = true;
+                        unlockBtn.classList.remove('sim-locked-button');
+                        unlockBtn.style.opacity = '1';
+                        unlockBtn.style.cursor = 'pointer';
+                        unlockBtn.style.pointerEvents = 'auto';
+                        unlockBtn.style.background = '#10b981';
+                        unlockBtn.style.color = '#ffffff';
+                        unlockBtn.textContent = "✓ Unlocked & Editable!";
+
+                        unlockInput.style.opacity = '1';
+                        unlockInput.style.borderColor = '#10b981';
+
+                        if (unlockStatus) {
+                            unlockStatus.textContent = "✓ All Elements Unlocked!";
+                            unlockStatus.style.color = "#34d399";
+                        }
+                    }
+                });
+                observer.observe(unlockBtn, { attributes: true, attributeFilter: ['disabled'] });
+                observer.observe(unlockInput, { attributes: true, attributeFilter: ['readonly'] });
+            }
+
+            // Password unmask observer (filtered to 'type' attribute only)
+            const passInput = document.getElementById('fixture-password-input');
+            const passBadge = document.getElementById('password-visibility-badge');
+            const passStatus = document.getElementById('status-password');
+            if (passInput) {
+                const passObserver = new MutationObserver(() => {
+                    if (passInput.type === 'text') {
+                        passBadge.textContent = "Revealed (Plain Text)";
+                        passBadge.className = 'badge badge-secondary';
+                        passInput.style.borderColor = '#10b981';
+                        if (passStatus) {
+                            passStatus.textContent = "✓ Plain Text Revealed";
+                            passStatus.style.color = "#34d399";
+                        }
+                    } else {
+                        passBadge.textContent = "Masked (••••••)";
+                        passBadge.className = 'badge badge-warning';
+                    }
+                });
+                passObserver.observe(passInput, { attributes: true, attributeFilter: ['type'] });
+            }
+
+            // Design mode interval tracker
+            setInterval(() => {
+                const dmStatus = document.getElementById('status-designmode');
+                if (dmStatus) {
+                    const isDesignMode = document.designMode === 'on';
+                    dmStatus.textContent = isDesignMode ? "✓ designMode: ON (Editable!)" : "● designMode: OFF";
+                    dmStatus.style.color = isDesignMode ? "#34d399" : "#94a3b8";
+                }
+            }, 500);
+
+            // Zapper removal observer
+            const zapperContainer = document.getElementById('fixture-zapper-container');
+            const zapperStatus = document.getElementById('status-zapper');
+            if (zapperContainer && zapperStatus) {
+                const zapperObserver = new MutationObserver(() => {
+                    const hasBanner = !!document.getElementById('fixture-zapper-banner');
+                    if (!hasBanner) {
+                        zapperStatus.textContent = "✓ Banner Vaporized!";
+                        zapperStatus.style.color = "#34d399";
+                    } else {
+                        zapperStatus.textContent = "● Banner Present";
+                        zapperStatus.style.color = "#fbbf24";
+                    }
+                });
+                zapperObserver.observe(zapperContainer, { childList: true });
+            }
+        }
+
+        // ── Storage Seeder & Counter ───────────────────────────────────────────
+        function updateStorageCounts() {
+            document.getElementById('storage-local-count').textContent = localStorage.length;
+            document.getElementById('storage-session-count').textContent = sessionStorage.length;
+            const cookieCount = document.cookie ? document.cookie.split(';').filter(Boolean).length : 0;
+            document.getElementById('storage-cookie-count').textContent = cookieCount;
+        }
+
+        function seedDummyStorage() {
+            localStorage.setItem('codesavvy_user_token', 'demo_jwt_token_99182312');
+            localStorage.setItem('codesavvy_cached_data', JSON.stringify({ items: [1, 2, 3], role: 'developer' }));
+            sessionStorage.setItem('codesavvy_active_session', 'sess_active_109283');
+            document.cookie = "codesavvy_demo_cookie=auth_verified_true; path=/; max-age=3600";
+            updateStorageCounts();
+        }
+
+        // ── Reset Individual Fixtures ──────────────────────────────────────────
+        function resetUnlockArena() {
+            isUnlockAlreadyHandled = false;
+            const btn = document.getElementById('fixture-unlock-btn');
+            const input = document.getElementById('fixture-unlock-input');
+            const check = document.getElementById('fixture-unlock-check');
+            const div = document.getElementById('fixture-unlock-div');
+            const status = document.getElementById('status-unlock');
+
+            if (btn) {
+                btn.setAttribute('disabled', 'true');
+                btn.className = 'sim-locked-button';
+                btn.textContent = 'Locked Submit';
+                btn.style = '';
+            }
+            if (input) {
+                input.setAttribute('readonly', 'true');
+                input.style.opacity = '0.6';
+                input.style.borderColor = '';
+            }
+            if (check) check.setAttribute('disabled', 'true');
+            if (div) div.style.pointerEvents = 'none';
+            if (status) {
+                status.textContent = '● 4 Elements Locked';
+                status.style.color = '#f87171';
+            }
+        }
+
+        function resetMaxlengthArena() {
+            const input = document.getElementById('fixture-maxlength-input');
+            const badge = document.getElementById('char-count-badge');
+            const status = document.getElementById('status-maxlength');
+            if (input) {
+                input.setAttribute('maxlength', '5');
+                input.value = '';
+                badge.textContent = '0 / 5 chars';
+                badge.className = 'badge badge-warning';
+            }
+            if (status) {
+                status.textContent = '● Max Length = 5 chars';
+                status.style.color = '#f87171';
+            }
+        }
+
+        function resetPasswordArena() {
+            const input = document.getElementById('fixture-password-input');
+            const badge = document.getElementById('password-visibility-badge');
+            const status = document.getElementById('status-password');
+            if (input) {
+                input.type = 'password';
+                input.style.borderColor = '';
+            }
+            if (badge) {
+                badge.textContent = 'Masked (••••••)';
+                badge.className = 'badge badge-warning';
+            }
+            if (status) {
+                status.textContent = '● Type = password';
+                status.style.color = '#fbbf24';
+            }
+        }
+
+        function resetZapperArena() {
+            const container = document.getElementById('fixture-zapper-container');
+            if (!container) return;
+            container.innerHTML = `
+                <div id="fixture-zapper-banner" class="zapper-test-overlay">
+                    <div style="font-size: 1.3rem; margin-bottom: 6px;">📢 Annoying Newsletter &amp; Cookie Consent Overlay</div>
+                    <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 12px;">
+                        "Subscribe now to read 1 more article or accept all tracking cookies!"
+                    </p>
+                    <button class="sim-locked-button" style="pointer-events: none; opacity: 0.8; background: #dc2626; color: white;">Accept &amp; Subscribe</button>
+                </div>
+            `;
+            const status = document.getElementById('status-zapper');
+            if (status) {
+                status.textContent = '● Banner Present';
+                status.style.color = '#fbbf24';
+            }
+        }
+
+        function resetRightClickArena() {
+            attachRightClickBlocker();
+            const status = document.getElementById('status-rightclick');
+            if (status) {
+                status.textContent = '● Right-Click Blocked';
+                status.style.color = '#f87171';
+            }
+        }
+
+        function resetUserSelectArena() {
+            const box = document.getElementById('fixture-userselect-box');
+            if (box) {
+                box.style.userSelect = 'none';
+                box.style.webkitUserSelect = 'none';
+            }
+            setupShadowDomFixture();
+            const status = document.getElementById('status-userselect');
+            if (status) {
+                status.textContent = '● Selection Disabled';
+                status.style.color = '#f87171';
+            }
+        }
+
+        function resetCopyPasteArena() {
+            attachCopyPasteBlocker();
+            const status = document.getElementById('status-copypaste');
+            if (status) {
+                status.textContent = '● Copy/Paste Intercepted';
+                status.style.color = '#f87171';
+            }
+        }
+
+        // ── Master Reset All Sandbox Tests ─────────────────────────────────────
+        function resetAllFixtures() {
+            resetUnlockArena();
+            resetMaxlengthArena();
+            resetPasswordArena();
+            resetZapperArena();
+            resetRightClickArena();
+            resetUserSelectArena();
+            resetCopyPasteArena();
+            if (document.designMode === 'on') {
+                document.designMode = 'off';
+            }
+            updateStorageCounts();
+        }
+
+        // ── Search & Filter Logic ──────────────────────────────────────────────
+        function setupSearchFilter() {
+            const searchInput = document.getElementById('toolSearchInput');
+            if (!searchInput) return;
+
+            searchInput.addEventListener('input', (e) => {
+                const term = e.target.value.toLowerCase().trim();
+                const cards = document.querySelectorAll('.tool-card');
+                const groups = document.querySelectorAll('.category-group');
+
+                cards.forEach(card => {
+                    const text = card.textContent.toLowerCase();
+                    const keywords = (card.getAttribute('data-keywords') || '').toLowerCase();
+                    const matches = text.includes(term) || keywords.includes(term);
+                    card.style.display = matches ? 'block' : 'none';
+                });
+
+                // Hide empty groups
+                groups.forEach(group => {
+                    const visibleCards = group.querySelectorAll('.tool-card[style*="display: block"], .tool-card:not([style*="display: none"])');
+                    group.style.display = visibleCards.length > 0 ? 'block' : 'none';
+                });
+            });
+        }
+
+        // ── Mobile Drawer Toggle ───────────────────────────────────────────────
+        function setupMobileMenu() {
+            const btn = document.getElementById('mobileMenuToggle');
+            const sidebar = document.getElementById('appSidebar');
+            if (!btn || !sidebar) return;
+
+            btn.addEventListener('click', () => {
+                sidebar.classList.toggle('open');
+            });
+
+            // Close sidebar when clicking links on mobile
+            sidebar.querySelectorAll('.sidebar-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    sidebar.classList.remove('open');
+                });
+            });
+        }
+
+        // ── Active ScrollSpy for Sidebar ───────────────────────────────────────
+        function setupScrollSpy() {
+            const sections = document.querySelectorAll('section[id], article[id]');
+            const links = document.querySelectorAll('.sidebar-link');
+
+            window.addEventListener('scroll', () => {
+                let current = '';
+                sections.forEach(section => {
+                    const top = section.offsetTop - 120;
+                    if (window.scrollY >= top) {
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                links.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${current}`) {
+                        link.classList.add('active');
+                    }
+                });
+            });
+        }
+
+        // Initialize Everything on Load
+        document.addEventListener('DOMContentLoaded', () => {
+            setupShadowDomFixture();
+            attachRightClickBlocker();
+            attachCopyPasteBlocker();
+            setupMaxlengthWatcher();
+            setupDomObservers();
+            setupSearchFilter();
+            setupMobileMenu();
+            setupScrollSpy();
+            updateStorageCounts();
+
+            document.getElementById('btnResetAllFixtures')?.addEventListener('click', resetAllFixtures);
+        });
+    </script>
 </body>
 
 </html>

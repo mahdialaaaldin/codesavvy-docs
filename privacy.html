@@ -1,63 +1,46 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CodeSavvy - Privacy Policy</title>
+    <title>CodeSavvy — Privacy Policy (Chrome Web Store)</title>
+    <meta name="description" content="Official Privacy Policy for the CodeSavvy Chrome Extension. Fully compliant with Google Chrome Web Store Developer Program Policies.">
     <link rel="icon" type="image/png" sizes="16x16" href="assets/icons/icon16.png">
     <link rel="icon" type="image/png" sizes="48x48" href="assets/icons/icon48.png">
     <link rel="icon" type="image/png" sizes="128x128" href="assets/icons/icon128.png">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <!-- Theme system -->
     <script src="theme.js"></script>
     <link rel="stylesheet" href="theme.css">
     <style>
         :root {
             --primary: #6366f1;
-            --primary-hover: #4f46e5;
+            --primary-glow: rgba(99, 102, 241, 0.25);
             --secondary: #10b981;
-            --secondary-glow: rgba(16, 185, 129, 0.15);
-            --primary-glow: rgba(99, 102, 241, 0.15);
-            --text: #0f172a;
-            --text-light: #475569;
-            --text-muted: #64748b;
-            --bg: #f8fafc;
-            --bg-elevated: #ffffff;
-            --card-bg: rgba(255, 255, 255, 0.7);
-            --border: rgba(148, 163, 184, 0.15);
-            --radius: 16px;
-            --radius-lg: 24px;
-            --shadow: 0 4px 20px -2px rgba(99, 102, 241, 0.05), 0 2px 10px -1px rgba(0, 0, 0, 0.03);
-            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
-        }
-
-        /* Manual dark mode override — takes priority over media query */
-        html[data-theme="dark"] {
-            --text: #f8fafc;
-            --text-light: #cbd5e1;
-            --text-muted: #94a3b8;
-            --bg: #090d16;
+            --secondary-glow: rgba(16, 185, 129, 0.2);
+            --danger: #ef4444;
+            --bg-dark: #070a13;
+            --bg-card: rgba(15, 23, 42, 0.7);
             --bg-elevated: #0f172a;
-            --card-bg: rgba(15, 23, 42, 0.6);
-            --border: rgba(148, 163, 184, 0.08);
-            --shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.3);
-            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.4), 0 10px 10px -5px rgba(0, 0, 0, 0.3);
+            --border-normal: rgba(255, 255, 255, 0.08);
+            --text-main: #f8fafc;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --radius-md: 14px;
+            --radius-lg: 20px;
+            --shadow-card: 0 10px 30px rgba(0, 0, 0, 0.35);
         }
 
-        /* Manual light mode override — forces light even when OS is dark */
         html[data-theme="light"] {
-            --text: #0f172a;
-            --text-light: #475569;
-            --text-muted: #64748b;
-            --bg: #f8fafc;
+            --bg-dark: #f0f4f8;
+            --bg-card: rgba(255, 255, 255, 0.85);
             --bg-elevated: #ffffff;
-            --card-bg: rgba(255, 255, 255, 0.85);
-            --border: rgba(148, 163, 184, 0.15);
-            --shadow: 0 4px 20px -2px rgba(99, 102, 241, 0.05), 0 2px 10px -1px rgba(0, 0, 0, 0.03);
-            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+            --border-normal: rgba(148, 163, 184, 0.22);
+            --text-main: #0f172a;
+            --text-secondary: #475569;
+            --text-muted: #64748b;
+            --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.06);
         }
 
         * {
@@ -67,267 +50,294 @@
         }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background-color: var(--bg);
-            color: var(--text);
-            line-height: 1.6;
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.65;
             padding: 0;
             margin: 0;
-            overflow-x: hidden;
-            position: relative;
             background-image:
-                radial-gradient(circle at 100% 0%, var(--primary-glow) 0%, transparent 40%),
-                radial-gradient(circle at 0% 100%, var(--secondary-glow) 0%, transparent 40%);
+                radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.06) 0%, transparent 40%);
             background-attachment: fixed;
         }
 
         .container {
-            max-width: 900px;
+            max-width: 960px;
             margin: 0 auto;
-            padding: 40px 20px;
+            padding: 40px 24px 80px;
         }
 
-        /* Header Navigation */
         header {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-bottom: 60px;
-            animation: fadeIn 0.8s ease-out;
+            margin-bottom: 48px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid var(--border-normal);
+            flex-wrap: wrap;
+            gap: 16px;
         }
 
-        .logo-container {
+        .logo-group {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 14px;
             text-decoration: none;
             color: inherit;
         }
 
-        .logo-icon-svg {
-            width: 42px;
-            height: 42px;
+        .logo-svg {
+            width: 44px;
+            height: 44px;
             flex-shrink: 0;
-            filter: drop-shadow(0 0 8px var(--primary-glow));
-            transition: transform 0.3s ease;
+            filter: drop-shadow(0 0 10px var(--primary-glow));
         }
 
-        .logo-icon-svg:hover {
-            transform: rotate(5deg) scale(1.1);
-        }
-
-        .logo-text {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            font-weight: 800;
+        .logo-title {
             font-size: 22px;
-            letter-spacing: -0.5px;
-            background: linear-gradient(135deg, var(--primary), #a855f7, var(--secondary));
+            font-weight: 800;
+            background: linear-gradient(135deg, #6366f1, #a855f7, #10b981);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        /* Hero / Intro */
-        .hero {
-            text-align: center;
-            margin-bottom: 60px;
-            animation: slideUp 0.8s ease-out;
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
-        .hero h1 {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 38px;
+        .nav-btn {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border-normal);
+            color: var(--text-secondary);
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+
+        .nav-btn:hover {
+            border-color: var(--primary);
+            color: var(--text-main);
+            background: rgba(99, 102, 241, 0.1);
+        }
+
+        .hero-banner {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .compliance-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(16, 185, 129, 0.12);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            color: #34d399;
+            padding: 6px 16px;
+            border-radius: 999px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            font-family: 'JetBrains Mono', monospace;
+            margin-bottom: 18px;
+        }
+
+        .hero-banner h1 {
+            font-size: clamp(2rem, 4vw, 2.8rem);
             font-weight: 800;
             letter-spacing: -1px;
-            margin-bottom: 16px;
+            margin-bottom: 14px;
             line-height: 1.2;
-            background: linear-gradient(135deg, var(--text) 50%, var(--text-light));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
         }
 
-        .last-updated {
-            font-size: 14px;
+        .hero-banner p {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            max-width: 680px;
+            margin: 0 auto;
+        }
+
+        .meta-strip {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+            font-size: 0.82rem;
             color: var(--text-muted);
-            font-weight: 500;
-            background: var(--border);
-            padding: 6px 14px;
-            border-radius: 30px;
-            display: inline-block;
         }
 
-        /* Quick highlights */
-        .highlights {
+        .meta-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border-normal);
+            padding: 4px 12px;
+            border-radius: 6px;
+        }
+
+        /* Pillars Grid */
+        .pillars-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
             gap: 20px;
-            margin-bottom: 50px;
-            animation: slideUp 0.8s ease-out 0.1s backwards;
+            margin-bottom: 48px;
         }
 
-        .highlight-card {
-            background-color: var(--bg-elevated);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
+        .pillar-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--border-normal);
+            border-radius: var(--radius-md);
             padding: 24px;
-            box-shadow: var(--shadow);
-            transition: transform 0.3s ease, border-color 0.3s ease;
+            box-shadow: var(--shadow-card);
             position: relative;
             overflow: hidden;
+            transition: transform 0.2s ease, border-color 0.2s ease;
         }
 
-        .highlight-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 4px;
-            height: 100%;
-            background: linear-gradient(180deg, var(--primary), var(--secondary));
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .highlight-card:hover {
-            transform: translateY(-4px);
+        .pillar-card:hover {
+            transform: translateY(-3px);
             border-color: var(--primary);
         }
 
-        .highlight-card:hover::before {
-            opacity: 1;
+        .pillar-icon {
+            font-size: 1.8rem;
+            margin-bottom: 12px;
         }
 
-        .highlight-icon {
-            width: 48px;
-            height: 48px;
-            border-radius: 12px;
-            background: var(--primary-glow);
-            color: var(--primary);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 16px;
-        }
-
-        .highlight-card:nth-child(2) .highlight-icon {
-            background: var(--secondary-glow);
-            color: var(--secondary);
-        }
-
-        .highlight-icon svg {
-            width: 24px;
-            height: 24px;
-            fill: none;
-            stroke: currentColor;
-            stroke-width: 2;
-            stroke-linecap: round;
-            stroke-linejoin: round;
-        }
-
-        .highlight-card h3 {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 18px;
+        .pillar-card h3 {
+            font-size: 1.1rem;
             font-weight: 700;
             margin-bottom: 8px;
+            color: var(--text-main);
         }
 
-        .highlight-card p {
-            color: var(--text-light);
-            font-size: 14px;
+        .pillar-card p {
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+            line-height: 1.55;
         }
 
-        /* Detailed sections */
-        .content-section {
-            background-color: var(--card-bg);
+        /* Content Sections */
+        .doc-section {
+            background: var(--bg-card);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
-            border: 1px solid var(--border);
+            border: 1px solid var(--border-normal);
             border-radius: var(--radius-lg);
-            padding: 40px;
-            box-shadow: var(--shadow-lg);
-            margin-bottom: 40px;
-            animation: slideUp 0.8s ease-out 0.2s backwards;
+            padding: 36px 32px;
+            margin-bottom: 32px;
+            box-shadow: var(--shadow-card);
         }
 
-        .content-section h2 {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 24px;
-            font-weight: 700;
+        .doc-section h2 {
+            font-size: 1.4rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
             margin-bottom: 20px;
             display: flex;
             align-items: center;
             gap: 12px;
-            color: var(--text);
-            border-bottom: 1px solid var(--border);
+            color: var(--text-main);
+            border-bottom: 1px solid var(--border-normal);
             padding-bottom: 12px;
         }
 
-        .content-section h2 svg {
-            width: 24px;
-            height: 24px;
-            fill: none;
-            stroke: var(--primary);
-            stroke-width: 2.2;
+        .doc-section p {
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+            font-size: 0.96rem;
         }
 
-        .content-section p {
-            color: var(--text-light);
-            margin-bottom: 20px;
-            font-size: 16px;
-            line-height: 1.7;
+        .doc-section ul {
+            margin-left: 20px;
+            margin-bottom: 18px;
+            color: var(--text-secondary);
+            font-size: 0.94rem;
         }
 
-        /* Permissions Grid */
-        .permissions-list {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-            margin-top: 24px;
+        .doc-section li {
+            margin-bottom: 8px;
         }
 
-        .permission-item {
-            display: flex;
-            gap: 16px;
-            background: var(--bg-elevated);
-            border: 1px solid var(--border);
-            padding: 16px 20px;
-            border-radius: var(--radius);
-            transition: all 0.2s ease;
+        /* Permissions Table */
+        .table-wrap {
+            overflow-x: auto;
+            margin: 20px 0;
+            border-radius: 10px;
+            border: 1px solid var(--border-normal);
         }
 
-        .permission-item:hover {
-            transform: translateX(4px);
-            border-color: var(--primary-glow);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.88rem;
+            text-align: left;
         }
 
-        .permission-badge {
-            font-family: 'Courier New', Courier, monospace;
-            background: var(--primary-glow);
-            color: var(--primary);
+        th {
+            background: rgba(255, 255, 255, 0.04);
+            color: var(--text-main);
+            padding: 12px 16px;
             font-weight: 700;
-            padding: 4px 10px;
-            border-radius: 6px;
-            height: fit-content;
-            font-size: 13px;
-            letter-spacing: -0.2px;
-            align-self: flex-start;
+            border-bottom: 1px solid var(--border-normal);
         }
 
-        .permission-desc {
-            color: var(--text-light);
-            font-size: 14px;
-            line-height: 1.5;
+        td {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--border-normal);
+            color: var(--text-secondary);
+            vertical-align: top;
         }
 
-        /* Footer */
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        .perm-code {
+            font-family: 'JetBrains Mono', monospace;
+            background: rgba(99, 102, 241, 0.15);
+            color: #a5b4fc;
+            padding: 3px 8px;
+            border-radius: 5px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        /* Callout Box */
+        .callout {
+            background: rgba(99, 102, 241, 0.08);
+            border: 1px solid rgba(99, 102, 241, 0.25);
+            border-left: 4px solid var(--primary);
+            border-radius: 8px;
+            padding: 16px 20px;
+            margin: 20px 0;
+            font-size: 0.92rem;
+            color: var(--text-secondary);
+        }
+
+        .callout strong {
+            color: var(--text-main);
+        }
+
+        .callout.green {
+            background: rgba(16, 185, 129, 0.08);
+            border-color: rgba(16, 185, 129, 0.25);
+            border-left-color: var(--secondary);
+        }
+
         footer {
             text-align: center;
-            margin-top: 80px;
+            margin-top: 60px;
             padding-top: 24px;
-            border-top: 1px solid var(--border);
+            border-top: 1px solid var(--border-normal);
             color: var(--text-muted);
-            font-size: 14px;
-            animation: fadeIn 0.8s ease-out 0.3s backwards;
+            font-size: 0.85rem;
         }
 
         footer a {
@@ -339,44 +349,6 @@
         footer a:hover {
             text-decoration: underline;
         }
-
-        /* Animations */
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-
-            to {
-                opacity: 1;
-            }
-        }
-
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @media (max-width: 600px) {
-            .hero h1 {
-                font-size: 28px;
-            }
-
-            .content-section {
-                padding: 24px;
-            }
-
-            .permission-item {
-                flex-direction: column;
-                gap: 8px;
-            }
-        }
     </style>
 </head>
 
@@ -384,201 +356,197 @@
     <div class="container">
         <!-- Header -->
         <header>
-            <a href="index.html" class="logo-container">
-                <svg id="codesavvy-master-svg" viewBox="0 0 512 512" class="logo-icon-svg" fill="none"
-                    xmlns="http://www.w3.org/2000/svg">
+            <a href="index.html" class="logo-group">
+                <svg viewBox="0 0 512 512" class="logo-svg" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <defs>
-                        <filter id="vector-glow" x="-20%" y="-20%" width="140%" height="140%">
+                        <filter id="v-glow" x="-20%" y="-20%" width="140%" height="140%">
                             <feGaussianBlur stdDeviation="12" result="blur" />
                             <feMerge>
                                 <feMergeNode in="blur" />
                                 <feMergeNode in="SourceGraphic" />
                             </feMerge>
                         </filter>
-                        <linearGradient id="tile-gradient-fill" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <linearGradient id="t-grad" x1="0%" y1="0%" x2="100%" y2="100%">
                             <stop offset="0%" stop-color="#6366f1" />
                             <stop offset="100%" stop-color="#a855f7" />
                         </linearGradient>
-                        <filter id="inner-shadow">
-                            <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#000000" flood-opacity="0.45" />
-                        </filter>
                     </defs>
-                    <g transform="translate(256, 256) rotate(85) scale(1.2) translate(-256, -256)"
-                        filter="url(#vector-glow)">
-                        <g>
-                            <path d="M 180,240 V 170 C 180,120 220,80 270,80 C 320,80 360,120 360,170 V 175" fill="none"
-                                stroke="url(#tile-gradient-fill)" stroke-width="33" stroke-linecap="round" />
-                            <rect x="130" y="230" width="252" height="192" rx="35" fill="none"
-                                stroke="url(#tile-gradient-fill)" stroke-width="35.75" />
-                            <path d="M 230,326 L 210,326 M 282,326 L 302,326 M 256,290 V 362" stroke="#10b981"
-                                stroke-width="27.5" stroke-linecap="round" />
-                            <circle cx="256" cy="326" r="30" fill="none" stroke="#10b981" stroke-width="13.75" />
-                            <path d="M 256,246 L 256,230 M 256,406 L 256,422" stroke="#10b981" stroke-width="4"
-                                stroke-linecap="round" />
-                        </g>
+                    <g transform="translate(256, 256) rotate(85) scale(1.2) translate(-256, -256)" filter="url(#v-glow)">
+                        <path d="M 180,240 V 170 C 180,120 220,80 270,80 C 320,80 360,120 360,170 V 175" fill="none"
+                            stroke="url(#t-grad)" stroke-width="33" stroke-linecap="round" />
+                        <rect x="130" y="230" width="252" height="192" rx="35" fill="none" stroke="url(#t-grad)" stroke-width="35.75" />
+                        <path d="M 230,326 L 210,326 M 282,326 L 302,326 M 256,290 V 362" stroke="#10b981" stroke-width="27.5" stroke-linecap="round" />
+                        <circle cx="256" cy="326" r="30" fill="none" stroke="#10b981" stroke-width="13.75" />
                     </g>
                 </svg>
-                <span class="logo-text">CodeSavvy</span>
+                <span class="logo-title">CodeSavvy</span>
             </a>
-            <div style="display: flex; align-items: center; gap: 10px;">
-                <a href="changelog.html" style="background: rgba(255, 255, 255, 0.04); border: 1px solid var(--border); padding: 8px 16px; border-radius: 8px; font-size: 0.85rem; color: var(--text-light); text-decoration: none; font-weight: 600;">📜 Changelog</a>
-                <span class="last-updated">Last Updated: June 13, 2026</span>
+            <div class="nav-actions">
+                <a href="index.html" class="nav-btn">📖 Documentation &amp; Testing Lab</a>
+                <a href="changelog.html" class="nav-btn">📜 Changelog</a>
             </div>
         </header>
 
         <!-- Hero -->
-        <section class="hero">
-            <h1>Privacy Policy</h1>
-            <p style="font-size: 18px; color: var(--text-muted); max-width: 600px; margin: 0 auto;">
-                CodeSavvy is committed to providing a secure, lightweight, and private browsing experience. Read on to
-                learn how we protect your information.
-            </p>
-        </section>
-
-        <!-- Highlights -->
-        <section class="highlights">
-            <div class="highlight-card">
-                <div class="highlight-icon">
-                    <svg viewBox="0 0 24 24">
-                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
-                        <path d="M7 11V7a5 5 0 0 1 9.9-1"></path>
-                    </svg>
-                </div>
-                <h3>Privacy First</h3>
-                <p>We do not collect, store, or transmit your personal data, browser history, or activities to any
-                    remote servers.</p>
+        <div class="hero-banner">
+            <div class="compliance-tag">
+                🛡️ Chrome Web Store Developer Program Compliant
             </div>
-            <div class="highlight-card">
-                <div class="highlight-icon">
-                    <svg viewBox="0 0 24 24">
-                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-                        <line x1="16" y1="2" x2="16" y2="6"></line>
-                        <line x1="8" y1="2" x2="8" y2="6"></line>
-                        <line x1="3" y1="10" x2="21" y2="10"></line>
-                    </svg>
-                </div>
-                <h3>100% Local Storage</h3>
-                <p>Your settings and Gemini API key are kept strictly on your local browser profile. No cloud sync is
-                    used.</p>
+            <h1>Privacy Policy for CodeSavvy</h1>
+            <p>
+                CodeSavvy is engineered with a strict <strong>local-first, zero-telemetry architecture</strong>.
+                Your browsing data, keystrokes, and settings never touch developer-owned servers.
+            </p>
+            <div class="meta-strip">
+                <span class="meta-item">Version: <strong>2.3.0</strong></span>
+                <span class="meta-item">Effective Date: <strong>June 13, 2026</strong></span>
+                <span class="meta-item">Last Updated: <strong>September 6, 2026</strong></span>
+                <span class="meta-item">Architecture: <strong>Manifest V3 Local Sandbox</strong></span>
             </div>
-        </section>
-
-        <!-- Main Content -->
-        <div class="content-section">
-            <h2>
-                <svg viewBox="0 0 24 24">
-                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-                </svg>
-                1. Data Collection & Usage
-            </h2>
-            <p>
-                CodeSavvy acts purely as a local utility extension. We believe in absolute transparency:
-            </p>
-            <p>
-                <strong>Settings & Gemini API Key:</strong> All customizable settings, quotes toggles, and API keys are
-                stored on your local device using the Chrome Storage API (<code>chrome.storage.local</code>). This data
-                stays isolated within your browser's extension sandbox and is never uploaded to the developer.
-            </p>
-            <p>
-                <strong>AI Text Enhancement:</strong> When you select text and use the context menu to run
-                Gemini-powered enhancements, the extension uses your provided API Key to communicate directly with
-                Google's API servers. No intermediary servers are involved, and we do not see or retain your text.
-            </p>
         </div>
 
-        <div class="content-section">
-            <h2>
-                <svg viewBox="0 0 24 24">
-                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
-                </svg>
-                2. Permissions Justification
-            </h2>
-            <p>
-                In compliance with Google's Single Purpose policy and data minimization guidelines, CodeSavvy requests
-                the following permissions for operational purposes:
-            </p>
-            <div class="permissions-list">
-                <div class="permission-item">
-                    <span class="permission-badge">activeTab</span>
-                    <span class="permission-desc">Required to apply modifications (like font changes, design mode
-                        editing, and input unlocking) exclusively to the active webpage you explicitly interact with.</span>
-                </div>
-                <div class="permission-item">
-                    <span class="permission-badge">scripting</span>
-                    <span class="permission-desc">Enables the extension to execute scripts for font styling, unlocking
-                        disabled inputs, and removing character length restrictions on demand.</span>
-                </div>
-                <div class="permission-item">
-                    <span class="permission-badge">storage</span>
-                    <span class="permission-desc">Used to save and retrieve your custom API key, prompt presets, and option selections
-                        strictly on your local device via chrome.storage.local.</span>
-                </div>
-                <div class="permission-item">
-                    <span class="permission-badge">browsingData</span>
-                    <span class="permission-desc">Used to clear local cache files when utilizing the "Clear Cache"
-                        button.</span>
-                </div>
-                <div class="permission-item">
-                    <span class="permission-badge">contextMenus</span>
-                    <span class="permission-desc">Allows registering right-click context menu options to enable
-                        rapid text transformations (case conversions, AI prompt adjustments, and highlighting).</span>
-                </div>
-                <div class="permission-item">
-                    <span class="permission-badge">notifications</span>
-                    <span class="permission-desc">Displays minor non-intrusive desktop alerts when operations
-                        complete (e.g. confirming cache clear).</span>
-                </div>
-                <div class="permission-item">
-                    <span class="permission-badge">downloads</span>
-                    <span class="permission-desc">Allows saving captured webpage screenshots directly
-                        to your computer's downloads folder.</span>
-                </div>
+        <!-- 3 Core Privacy Pillars -->
+        <div class="pillars-grid">
+            <div class="pillar-card">
+                <div class="pillar-icon">🔒</div>
+                <h3>Zero External Servers</h3>
+                <p>We do not own, operate, or maintain any telemetry servers, analytics collectors, or cloud databases. CodeSavvy never sends your data to us.</p>
             </div>
-            <p style="margin-top: 20px; font-size: 14px; color: var(--text-muted);">
-                🔒 <strong>Data Minimization Commitment:</strong> CodeSavvy intentionally does <strong>not</strong> request the broad <code>tabs</code> permission (which would grant access to your browser history and all open tabs). We strictly adhere to Google Chrome Web Store's Principle of Least Privilege.
-            </p>
+            <div class="pillar-card">
+                <div class="pillar-icon">💻</div>
+                <h3>100% Local Execution</h3>
+                <p>All DOM manipulation, CSS inspection, QR code generation, media extraction, and storage wiping occur entirely inside your browser sandbox.</p>
+            </div>
+            <div class="pillar-card">
+                <div class="pillar-icon">🤖</div>
+                <h3>Direct Gemini API</h3>
+                <p>When you use AI features, requests travel directly from your browser's service worker to Google's official Gemini endpoint with zero intermediaries.</p>
+            </div>
         </div>
 
-        <div class="content-section">
-            <h2>
-                <svg viewBox="0 0 24 24">
-                    <path
-                        d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z">
-                    </path>
-                </svg>
-                3. Third Party Services
-            </h2>
-            <p>
-                The extension interacts directly with <strong>Google Gemini API</strong> endpoints to provide AI text
-                enhancements. By using these features, you agree to Google's terms. Please consult the <a
-                    href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Google Privacy
-                    Policy</a> for information on their data retention policies.
+        <!-- Section 1: Data Handled -->
+        <div class="doc-section">
+            <h2>1. Information Handled &amp; How It Is Used</h2>
+            <p>CodeSavvy operates under the principle of extreme data minimization. The only data processed is that which is strictly required for the tools you explicitly run:</p>
+            
+            <p><strong>A. Local Preferences &amp; Gemini API Key (<code>chrome.storage.local</code>):</strong><br>
+            Your chosen color theme, dark/light mode preference, custom AI presets, transformation history, and personal Google Gemini API Key are stored locally inside Chromium's isolated storage sandbox. This data is never synchronized to developer servers or accessible to websites you visit.</p>
+
+            <p><strong>B. Selected Text for Context Menu AI Actions:</strong><br>
+            When you select text on a page, right-click, and choose an AI preset (e.g. <em>Improve Text</em>, <em>Roasted Mode</em>, or custom prompt), CodeSavvy reads only the selected text. The string is transmitted directly from your extension's background service worker to Google's Gemini API endpoints (<code>https://generativelanguage.googleapis.com/</code>). It is never routed through any third-party proxy.</p>
+
+            <p><strong>C. Webpage Content for AI Page Studio:</strong><br>
+            When you invoke <em>AI Page Studio</em> from the popup, the extension extracts the visible article/main text of the active tab (stripping navigation, ads, footers, and scripts). The text is sent directly to Google Gemini using your API key to generate executive summaries, key takeaways, tech stack breakdowns, or answers to your questions.</p>
+
+            <p><strong>D. Transformation History &amp; User Retention Controls:</strong><br>
+            If history logging is enabled, CodeSavvy logs transformation snippets locally so you can review before/after diffs. You have complete control:
             </p>
+            <ul>
+                <li><strong>Incognito Mode:</strong> 1-click toggle in the popup to pause history logging immediately.</li>
+                <li><strong>Auto-Retention:</strong> Automatically prune entries older than 1 day, 3 days, 1 week, or 1 month.</li>
+                <li><strong>Data Portability:</strong> Export your history to JSON or import backups with automatic deduplication.</li>
+                <li><strong>Instant Wipe:</strong> 1-click "Clear All" permanently purges history from local storage.</li>
+            </ul>
         </div>
 
-        <div class="content-section">
-            <h2>
-                <svg viewBox="0 0 24 24">
-                    <circle cx="12" cy="12" r="10"></circle>
-                    <line x1="12" y1="16" x2="12" y2="12"></line>
-                    <line x1="12" y1="8" x2="12.01" y2="8"></line>
-                </svg>
-                4. Policy Updates & Contact
-            </h2>
+        <!-- Section 2: Permissions Justification -->
+        <div class="doc-section">
+            <h2>2. Chrome Web Store Permissions Justification</h2>
             <p>
-                We may revise this privacy policy from time to time. The updated document will always be available at
-                this address. For any questions, suggestions, or concerns regarding your privacy:
+                In compliance with Google's <strong>Single Purpose Policy</strong> and the <strong>Principle of Least Privilege</strong>, CodeSavvy declares only the permissions necessary to deliver its features:
             </p>
-            <p style="margin-bottom: 0;">
-                ✉️ Reach out via email: <a
-                    href="mailto:malaadin192+codesavvy@gmail.com"><strong>malaadin192+codesavvy@gmail.com</strong></a>
+
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Permission</th>
+                            <th>Technical Purpose &amp; Justification</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="perm-code">activeTab</span></td>
+                            <td>Grants temporary, user-initiated access to the active webpage when you invoke an extension action or keyboard shortcut. Required to unlock elements, inspect CSS, zap banners, toggle design mode, and inject fonts without broad persistent host permissions.</td>
+                        </tr>
+                        <tr>
+                            <td><span class="perm-code">scripting</span></td>
+                            <td>Permits executing utility scripts into the active tab upon user command (e.g. removing <code>disabled</code>/<code>readonly</code> attributes, stripping <code>maxlength</code>, and attaching the CSS Inspector HUD).</td>
+                        </tr>
+                        <tr>
+                            <td><span class="perm-code">storage</span></td>
+                            <td>Used to persist user interface preferences, custom AI prompt presets, API keys, and transformation logs strictly within <code>chrome.storage.local</code> on the user's device.</td>
+                        </tr>
+                        <tr>
+                            <td><span class="perm-code">browsingData</span></td>
+                            <td>Required solely for the "Clear Cache &amp; Hard Reload" feature (<code>Ctrl+Shift+R</code>), invoking <code>chrome.browsingData.remove({ since: 0 }, { cache: true })</code> on explicit user demand.</td>
+                        </tr>
+                        <tr>
+                            <td><span class="perm-code">contextMenus</span></td>
+                            <td>Registers right-click menu items for AI text enhancements (e.g., Improve Text, Advanced Edit, Roast) and offline case transformations (UPPERCASE, camelCase, snake_case).</td>
+                        </tr>
+                        <tr>
+                            <td><span class="perm-code">notifications</span></td>
+                            <td>Displays brief, non-intrusive desktop status alerts (e.g., confirming browser cache clear or notifying if an API key is missing).</td>
+                        </tr>
+                        <tr>
+                            <td><span class="perm-code">downloads</span></td>
+                            <td>Allows saving captured webpage screenshots, generated offline QR code PNGs, and JSON backup exports directly to your computer's downloads folder.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="callout green">
+                <strong>🔒 Strict Data Minimization Commitment:</strong><br>
+                CodeSavvy intentionally does <strong>NOT</strong> request the broad <code>tabs</code> permission or <code>&lt;all_urls&gt;</code> background host permissions. CodeSavvy has zero access to your browsing history, background tabs, or overall web usage.
+            </div>
+        </div>
+
+        <!-- Section 3: Google Gemini API & Limited Use -->
+        <div class="doc-section">
+            <h2>3. Google Gemini API &amp; Chrome Web Store Limited Use Disclosure</h2>
+            <p>
+                CodeSavvy adheres to the <strong>Chrome Web Store User Data Policy</strong>, including the <strong>Limited Use</strong> requirements:
             </p>
+            <ul>
+                <li><strong>No User Data Selling:</strong> CodeSavvy does not sell or license user data, prompt contents, or website information to any brokers or advertising networks.</li>
+                <li><strong>No Advertising or Tracking:</strong> User data is never used or transferred for serving targeted, personalized, or interest-based ads.</li>
+                <li><strong>No Human Inspection:</strong> Neither the developer nor any third party reads or reviews your data, queries, or API keys.</li>
+                <li><strong>Direct Client Communication:</strong> All AI requests are transmitted directly from the client's browser service worker to Google LLC. Please review the <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" style="color: var(--primary);">Google Privacy Policy</a> and <a href="https://ai.google.dev/terms" target="_blank" rel="noopener noreferrer" style="color: var(--primary);">Google Gemini API Terms</a>.</li>
+            </ul>
+        </div>
+
+        <!-- Section 4: Security & Offline Capabilities -->
+        <div class="doc-section">
+            <h2>4. Security Standards &amp; Offline Capabilities</h2>
+            <p>
+                CodeSavvy is built to modern Manifest V3 standards:
+            </p>
+            <ul>
+                <li><strong>Zero Remote Code Execution:</strong> In strict compliance with Manifest V3, no remote JavaScript is loaded or executed. All logic is packaged within the extension binary.</li>
+                <li><strong>Complete Offline Capabilities:</strong> All core developer tools (Element Unlocker, Element Zapper, CSS Box Inspector, Password Revealer, Maxlength Stripper, Design Mode, Font Injection, QR Code Generator, Media Extractor, Site Storage Wiper, Case Converters) function 100% offline without requiring internet access.</li>
+                <li><strong>Host Page Isolation:</strong> The extension executes network API calls inside its background service worker context, ensuring host webpage scripts cannot access or intercept your Gemini API key.</li>
+            </ul>
+        </div>
+
+        <!-- Section 5: Updates & Contact -->
+        <div class="doc-section">
+            <h2>5. Contact &amp; Inquiries</h2>
+            <p>
+                If you have questions, feedback, or concerns regarding this Privacy Policy or CodeSavvy's privacy architecture, please contact the developer:
+            </p>
+            <div class="callout">
+                <strong>Developer / Publisher:</strong> Mahdi Al-Alaaldin<br>
+                <strong>Contact &amp; Inquiries Email:</strong> <a href="mailto:malaadin192+codesavvy@gmail.com" style="color: var(--primary); font-weight: 600;">malaadin192+codesavvy@gmail.com</a><br>
+                <strong>Documentation &amp; Interactive Lab:</strong> <a href="https://mahdialaaaldin.github.io/codesavvy-docs/" style="color: var(--primary); font-weight: 600;">mahdialaaaldin.github.io/codesavvy-docs/</a>
+            </div>
         </div>
 
         <!-- Footer -->
         <footer>
-            <p>&copy; 2026 CodeSavvy. All rights reserved. Created by <a href="https://github.com/mahdialaaaldin"
-                    target="_blank" rel="noopener noreferrer">mahdialaaaldin</a>.</p>
+            <p>&copy; 2026 CodeSavvy. All rights reserved. Created by <a href="https://github.com/mahdialaaaldin" target="_blank" rel="noopener noreferrer">mahdialaaaldin</a>.</p>
+            <p style="margin-top: 6px; font-size: 0.78rem;">CodeSavvy is an independent open-source developer extension and is not affiliated with Google LLC.</p>
         </footer>
     </div>
 </body>
