@@ -21,7 +21,7 @@ Welcome to the public documentation, architectural guide, and interactive live t
    * **Unlock Elements (`Ctrl+Shift+E`):** Strips `disabled`, `readonly`, `aria-disabled`, removes disabled class tokens, and forces `pointer-events: auto`.
    * **Remove Limits:** Clears artificial `maxlength` and `minlength` constraints on forms and inputs.
    * **Reveal Passwords:** Safely unmasks hidden text inside password inputs.
-   * **Element Zapper with Live Undo:** Vaporize sticky banners, modal walls, and overlays with live <kbd>Ctrl+Z</kbd> restoration and root safety guards.
+   * **Translucent Element Zapper with Live Undo:** Vaporize sticky banners, modal walls, and overlays through a smoked-glass HUD (`backdrop-filter: blur(6px)`) with pointer pass-through, live <kbd>Ctrl+Z</kbd> restoration, and root container safety guards.
    * **Non-Destructive CSS & Box Model Inspector:** Glassmorphic HUD overlay displaying computed dimensions, font stacks, margins, paddings, colors, and 1-click CSS snippet copy.
    * **Smart Dark Mode:** Intelligent high-contrast dark theme with counter-inversion for images, SVGs, canvases, and media.
 
@@ -45,15 +45,22 @@ Welcome to the public documentation, architectural guide, and interactive live t
    * **Site Storage Wiper:** 1-click purge of `localStorage`, `sessionStorage`, and domain cookies strictly for the active hostname.
    * **Clear Cache & Hard Reload (`Ctrl+Shift+R`):** Instantly purges browser cache via `chrome.browsingData`.
 
-6. **🧠 AI Page Studio & Intelligence (Google Gemini):**
+6. **🧠 AI Intelligence & Guardrails (Google Gemini):**
    * **Page Studio:** TL;DR Summaries, Key Takeaways, Tech Stack Breakdowns, ELI5, and Custom Q&A.
-   * **Context Menu AI Presets (`Ctrl+Shift+L`):** Improve Text, Advanced Edit, Professional, Roasted Mode, and Prompt Engineer.
+   * **Safe Multi-Element Guard (`Ctrl+Shift+L`):** Detects multi-element and whole-page selections, backs up to clipboard, and renders an isolated Shadow DOM preview card before applying rewrites.
+   * **Protected Terms Dictionary:** Blacklist critical brand names, code identifiers, and API parameters that AI must never alter.
+   * **Custom AI Instructions:** Global directives for personalized tone, formatting, and dialect (UK vs US English).
+   * **Customizable Favorite Action (`★`):** Map your preferred prompt to `Ctrl+Shift+L` directly from Options.
+   * **Context Menu AI Presets:** Improve Text, Advanced Edit, Professional, Roasted Mode, and Prompt Engineer.
    * **Case Converters:** UPPERCASE, lowercase, Title Case, camelCase, kebab-case, snake_case, PascalCase, Reverse text.
 
-7. **📋 Data Ownership & Customization:**
+7. **📋 Internationalization, Customization & Quality:**
+   * **Global I18n & RTL:** Full support across 22 languages with automated bi-directional RTL layout for Arabic (`ar`) and Persian (`fa`).
+   * **Interactive Welcome Hub:** First-run onboarding (`welcome.html`) with an interactive Chrome toolbar Pin tutorial.
    * **Incognito Mode:** Pause history recording anytime.
    * **Portability:** Export to JSON or import backups with automatic deduplication.
-   * **7 Accent Themes:** Classic Indigo, Solar Orange, Electric Yellow, Emerald Green, Cyber Cyan, Neon Violet, Electric Rose.
+   * **7 Accent Themes:** Classic Indigo, Solar Orange, Electric Yellow, Emerald Green, Cyber Cyan, Neon Violet, Electric Rose with zero-flicker preload.
+   * **Automated Test Suite:** 40-test built-in headless validation suite verifying transforms, locales, and MV3 compliance.
 
 ---
 

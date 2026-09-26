@@ -975,7 +975,8 @@
                 <a href="index.html" class="nav-btn">📖 Guide &amp; Testing Suite</a>
                 <a href="privacy.html" class="nav-btn">🛡️ Privacy Policy</a>
                 <a href="changelog.html" class="nav-btn active">📜 Changelog</a>
-                <a href="https://chromewebstore.google.com/detail/codesavvy/jenendhnlcnokliclhccikgeohdgfhml" class="nav-btn" target="_blank" rel="noopener noreferrer">🛒 Web Store</a>
+                <a href="https://chromewebstore.google.com/detail/codesavvy/jenendhnlcnokliclhccikgeohdgfhml"
+                    class="nav-btn" target="_blank" rel="noopener noreferrer">🛒 Web Store</a>
             </div>
         </header>
 
@@ -999,25 +1000,27 @@
         <!-- Hero Section -->
         <section class="hero">
             <div class="hero-title-badge">
-                <span>🚀 Latest Release v2.3.0</span>
+                <span>🚀 Latest Release v2.4.2</span>
                 <span>•</span>
-                <span>Updated August 14, 2026</span>
+                <span>Updated September 26, 2026</span>
             </div>
             <h1>Release Changelog</h1>
             <p>
-                Follow the complete release history of CodeSavvy developer toolbox — from initial launch to AI Page Studio,
-                Color Studio, Non-Destructive CSS Inspector, Element Zapper with Undo, and offline QR generator.
+                Follow the complete release history of CodeSavvy developer toolbox — from initial launch to Gemini AI
+                rewriting,
+                Safe Multi-Element Guard, Translucent Glasses Zapper, 22-language i18n & RTL engine, AI Page Studio, and
+                40-test automated suite.
             </p>
         </section>
 
         <!-- Metrics Dashboard -->
         <div class="stats-grid">
             <div class="stat-card">
-                <div class="stat-number" id="totalReleasesCount">12</div>
+                <div class="stat-number" id="totalReleasesCount">15</div>
                 <div class="stat-label">Total Releases</div>
             </div>
             <div class="stat-card">
-                <div class="stat-number">v2.3.0</div>
+                <div class="stat-number">v2.4.2</div>
                 <div class="stat-label">Current Version</div>
             </div>
             <div class="stat-card">
@@ -1070,8 +1073,213 @@
         <!-- Releases Timeline -->
         <div class="timeline" id="changelogTimeline">
 
+            <!-- Release 2.4.2 -->
+            <article class="release-item latest" id="v2.4.2" data-version="2.4.2"
+                data-cat="v2 major ai security ui tools">
+                <div class="timeline-node"></div>
+                <div class="release-card">
+                    <div class="release-header">
+                        <div class="version-meta">
+                            <span class="version-tag">[2.4.2]</span>
+                            <span class="release-date">📅 2026-09-26</span>
+                        </div>
+                        <div class="release-badges">
+                            <span class="tag-badge latest">LATEST RELEASE</span>
+                            <span class="tag-badge major">SAFETY GUARDRAILS &amp; ONBOARDING</span>
+                        </div>
+                    </div>
+                    <h2 class="release-title">Interactive Welcome Hub, Safe Multi-Element Guard, Translucent Glasses
+                        Zapper HUD, Protected Terms &amp; 40-Test Automated Suite</h2>
+                    <p class="release-summary">
+                        A major architectural, guardrail, and user-experience release. Features an interactive first-run
+                        Welcome &amp; Onboarding Hub with a visual Chrome toolbar pin guide, Safe Multi-Element &amp;
+                        Whole-Page Guard (<kbd>Ctrl+Shift+L</kbd>) with non-destructive Shadow DOM preview, a
+                        translucent "glasses" Element Zapper HUD with pointer pass-through, an AI Protected Terms
+                        Dictionary and Custom System Instructions, customizable Favorite Prompt (<kbd>★</kbd>), and a
+                        comprehensive 40-test automated test suite.
+                    </p>
+                    <ul class="feature-bullets">
+                        <li class="feature-item">
+                            <span class="feature-icon">🧭</span>
+                            <div><strong>Interactive Welcome &amp; Onboarding Hub:</strong> Automatically greets new
+                                users on install (<code>welcome.html</code>) with an animated visual guide on pinning
+                                the extension to the Chrome toolbar, real browser mockup screenshots, and 1-click links
+                                to the hosted interactive testing sandbox.</div>
+                        </li>
+                        <li class="feature-item">
+                            <span class="feature-icon">🛡️</span>
+                            <div><strong>Safe Multi-Element &amp; Whole-Page Guard:</strong> Safeguards page layouts
+                                when highlighting text across multiple DOM elements or selecting an entire page
+                                (<kbd>Ctrl+A</kbd>). Automatically copies original text to the clipboard, displays an
+                                isolated Shadow DOM comparison preview card with an amber alert, and requires two-step
+                                confirmation before applying changes.</div>
+                        </li>
+                        <li class="feature-item">
+                            <span class="feature-icon">👓</span>
+                            <div><strong>Translucent "Glasses" Element Zapper HUD:</strong> Redesigned glassmorphic
+                                control HUD (<code>backdrop-filter: blur(6px)</code>) with pointer pass-through and a
+                                smooth 0.35 opacity fade on hover, allowing users to see through the HUD and zap
+                                elements directly underneath without obstruction. Controls (Undo <kbd>Ctrl+Z</kbd>,
+                                Close <kbd>ESC</kbd>) retain full clickability.</div>
+                        </li>
+                        <li class="feature-item">
+                            <span class="feature-icon">🔒</span>
+                            <div><strong>AI Protected Terms Dictionary:</strong> Configure a persistent dictionary of
+                                protected terms (brand names, trademarks, code identifiers, API parameters) in Options
+                                that Google Gemini is strictly forbidden from altering, translating, or hallucinating
+                                over.</div>
+                        </li>
+                        <li class="feature-item">
+                            <span class="feature-icon">✍️</span>
+                            <div><strong>Custom AI System Instructions:</strong> Inject user-defined global guidance
+                                into every AI prompt, enabling customized persona tones, dialect enforcement (e.g. UK vs
+                                US English), output formatting constraints, and domain-specific rules.</div>
+                        </li>
+                        <li class="feature-item">
+                            <span class="feature-icon">⭐</span>
+                            <div><strong>Customizable Favorite Action (<kbd>★</kbd>):</strong> Select which AI action
+                                triggers on the global <kbd>Ctrl+Shift+L</kbd> shortcut directly from the Options
+                                management panel, denoted by a gold star badge placed neatly after the action name
+                                (<code>Improve Text ★</code>).</div>
+                        </li>
+                        <li class="feature-item">
+                            <span class="feature-icon">🗂️</span>
+                            <div><strong>Streamlined Popup &amp; Options User Guide:</strong> Relocated the User Guide
+                                manual from the compact daily popup into Options to maximize popup speed and eliminate
+                                visual clutter.</div>
+                        </li>
+                        <li class="feature-item">
+                            <span class="feature-icon">🧪</span>
+                            <div><strong>40-Test Automated Test Suite &amp; Packaging:</strong> Integrated headless
+                                automated test suite running via <code>npm test</code> verifying text transformations,
+                                bidirectional AR/EN keyboard fixer, Manifest V3 integrity, 16/32/48/128 icon registry,
+                                and 22 locales. Paired with <code>npm run package</code> for zero-leak Chrome Web Store
+                                packaging.</div>
+                        </li>
+                    </ul>
+                    <div class="card-actions">
+                        <button class="card-action-btn copy-entry-btn">
+                            📄 Copy Release Details
+                        </button>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Release 2.4.1 -->
+            <article class="release-item" id="v2.4.1" data-version="2.4.1" data-cat="v2 minor ui i18n">
+                <div class="timeline-node"></div>
+                <div class="release-card">
+                    <div class="release-header">
+                        <div class="version-meta">
+                            <span class="version-tag">[2.4.1]</span>
+                            <span class="release-date">📅 2026-09-21</span>
+                        </div>
+                        <div class="release-badges">
+                            <span class="tag-badge minor">MINOR RELEASE</span>
+                            <span class="tag-badge">I18N &amp; OPTIONS UX</span>
+                        </div>
+                    </div>
+                    <h2 class="release-title">Theme Engine Refinement &amp; Options UX</h2>
+                    <p class="release-summary">
+                        Improves theme loading performance, and removes automatic options page closure timers to grant
+                        developers complete control over their workflow.
+                    </p>
+                    <ul class="feature-bullets">
+                        <li class="feature-item">
+                            <span class="feature-icon">🇮🇹</span>
+                            <div><strong>Italian Localization Overhaul:</strong> Complete linguistic review and
+                                translation of all extension strings, popup tooltips, context menus, and options panels
+                                for Italian (<code>it</code>).</div>
+                        </li>
+                        <li class="feature-item">
+                            <span class="feature-icon">🎨</span>
+                            <div><strong>Refactored Theme Engine:</strong> Improved CSS theme variable initialization to
+                                eliminate race conditions during options saving.</div>
+                        </li>
+                        <li class="feature-item">
+                            <span class="feature-icon">⏱️</span>
+                            <div><strong>Options UX Control:</strong> Removed the automatic 2-second options page close
+                                timer on save, allowing users to adjust multiple configuration tabs seamlessly.</div>
+                        </li>
+                    </ul>
+                    <div class="card-actions">
+                        <button class="card-action-btn copy-entry-btn">
+                            📄 Copy Release Details
+                        </button>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Release 2.4.0 -->
+            <article class="release-item" id="v2.4.0" data-version="2.4.0" data-cat="v2 major i18n ui tools">
+                <div class="timeline-node"></div>
+                <div class="release-card">
+                    <div class="release-header">
+                        <div class="version-meta">
+                            <span class="version-tag">[2.4.0]</span>
+                            <span class="release-date">📅 2026-09-14</span>
+                        </div>
+                        <div class="release-badges">
+                            <span class="tag-badge major">GLOBAL I18N &amp; RTL</span>
+                        </div>
+                    </div>
+                    <h2 class="release-title">Global Internationalization (22 Languages), Bi-Directional RTL Engine
+                        &amp; Zero-Flicker Preload</h2>
+                    <p class="release-summary">
+                        Major internationalization release delivering complete multi-language support across 22 locales
+                        in <code>_locales/</code>, full bi-directional RTL layout support for Arabic and Persian, an
+                        in-settings language preference selector with instant dynamic UI reload, zero-flicker
+                        synchronous theme preloading, and enhanced element unlocking.
+                    </p>
+                    <ul class="feature-bullets">
+                        <li class="feature-item">
+                            <span class="feature-icon">🌍</span>
+                            <div><strong>Global Localization Across 22 Languages:</strong> Full coverage of all UI
+                                strings, tooltips, context menus, and settings across 22 languages including Arabic,
+                                German, Spanish, French, Italian, Japanese, Korean, Portuguese, Russian, Chinese, Hindi,
+                                Turkish, and more.</div>
+                        </li>
+                        <li class="feature-item">
+                            <span class="feature-icon">🔄</span>
+                            <div><strong>Bi-Directional RTL Engine:</strong> Automatic RTL layout switching for
+                                right-to-left languages (Arabic <code>ar</code> and Persian <code>fa</code>), featuring
+                                mirrored inputs, flipped password reveal icons, reversed chevrons, and adjusted modal
+                                positions.</div>
+                        </li>
+                        <li class="feature-item">
+                            <span class="feature-icon">🌐</span>
+                            <div><strong>In-Settings Language Selector:</strong> Override browser default language with
+                                a built-in language dropdown in Options, triggering an instant synchronized reload of
+                                all active extension views.</div>
+                        </li>
+                        <li class="feature-item">
+                            <span class="feature-icon">⚡</span>
+                            <div><strong>Zero-Flicker Synchronous Theme Preload:</strong> Reads theme color and mode
+                                synchronously from <code>localStorage</code> before DOM render, completely eliminating
+                                theme and accent flash on popup and options load.</div>
+                        </li>
+                        <li class="feature-item">
+                            <span class="feature-icon">🔓</span>
+                            <div><strong>Enhanced Element Unlocking:</strong> Improved class token clearing and
+                                attribute stripping logic to bypass stubborn CSS pseudo-class disabled styling on
+                                enterprise web apps.</div>
+                        </li>
+                        <li class="feature-item">
+                            <span class="feature-icon">🐛</span>
+                            <div><strong>Media Asset Template Bugfix:</strong> Fixed placeholder substitution bug in
+                                media extractor notifications and asset labels.</div>
+                        </li>
+                    </ul>
+                    <div class="card-actions">
+                        <button class="card-action-btn copy-entry-btn">
+                            📄 Copy Release Details
+                        </button>
+                    </div>
+                </div>
+            </article>
+
             <!-- Release 2.3.0 -->
-            <article class="release-item latest" id="v2.3.0" data-version="2.3.0" data-cat="v2 major ai tools ui">
+            <article class="release-item" id="v2.3.0" data-version="2.3.0" data-cat="v2 major ai tools ui">
                 <div class="timeline-node"></div>
                 <div class="release-card">
                     <div class="release-header">
@@ -1080,42 +1288,60 @@
                             <span class="release-date">📅 2026-08-14</span>
                         </div>
                         <div class="release-badges">
-                            <span class="tag-badge latest">LATEST RELEASE</span>
                             <span class="tag-badge major">AI PAGE STUDIO &amp; POWER TOOLS</span>
                         </div>
                     </div>
-                    <h2 class="release-title">AI Page Studio, Color Studio, Non-Destructive Box Inspector, Safe Element Zapper, Offline QR Code &amp; History Portability</h2>
+                    <h2 class="release-title">AI Page Studio, Color Studio, Non-Destructive Box Inspector, Safe Element
+                        Zapper, Offline QR Code &amp; History Portability</h2>
                     <p class="release-summary">
-                        A major feature update introducing AI Page Studio (TL;DR summaries, key takeaways, tech stack breakdown, and custom Q&amp;A with built-in Markdown viewer), Color Studio with instant 0ms eyedropper, live non-destructive CSS Inspector HUD, Element Zapper with undo stack, offline QR code generator, media extractor, site storage wiper, and history import/export.
+                        A major feature update introducing AI Page Studio (TL;DR summaries, key takeaways, tech stack
+                        breakdown, and custom Q&amp;A with built-in Markdown viewer), Color Studio with instant 0ms
+                        eyedropper, live non-destructive CSS Inspector HUD, Element Zapper with undo stack, offline QR
+                        code generator, media extractor, site storage wiper, and history import/export.
                     </p>
                     <ul class="feature-bullets">
                         <li class="feature-item">
                             <span class="feature-icon">🧠</span>
-                            <div><strong>AI Page Studio &amp; Markdown Viewer:</strong> Extract clean webpage text without ads to generate TL;DR summaries, actionable takeaways, tech stack analysis, ELI5 simplifications, or ask custom questions rendered in rich high-contrast typography.</div>
+                            <div><strong>AI Page Studio &amp; Markdown Viewer:</strong> Extract clean webpage text
+                                without ads to generate TL;DR summaries, actionable takeaways, tech stack analysis, ELI5
+                                simplifications, or ask custom questions rendered in rich high-contrast typography.
+                            </div>
                         </li>
                         <li class="feature-item">
                             <span class="feature-icon">🎨</span>
-                            <div><strong>Color Studio &amp; Instant 0ms Eyedropper:</strong> Interactive spectrum color picker, 10 palette presets, real-time conversion &amp; 1-click copying for HEX, RGB, HSL, and CSS variables, plus zero-latency screen color sampling.</div>
+                            <div><strong>Color Studio &amp; Instant 0ms Eyedropper:</strong> Interactive spectrum color
+                                picker, 10 palette presets, real-time conversion &amp; 1-click copying for HEX, RGB,
+                                HSL, and CSS variables, plus zero-latency screen color sampling.</div>
                         </li>
                         <li class="feature-item">
                             <span class="feature-icon">📐</span>
-                            <div><strong>Non-Destructive CSS &amp; Box Model Inspector:</strong> Hover over any element to view computed dimensions, font stacks, colors, display mode, margin, and padding in a floating HUD without touching page styles. Click to copy CSS declarations.</div>
+                            <div><strong>Non-Destructive CSS &amp; Box Model Inspector:</strong> Hover over any element
+                                to view computed dimensions, font stacks, colors, display mode, margin, and padding in a
+                                floating HUD without touching page styles. Click to copy CSS declarations.</div>
                         </li>
                         <li class="feature-item">
                             <span class="feature-icon">⚡</span>
-                            <div><strong>Element Zapper with Live Undo:</strong> Hover and vaporize sticky overlays, banners, and modal paywalls with an interactive crosshair HUD, root container safety guards, and live Ctrl+Z / on-screen Undo.</div>
+                            <div><strong>Element Zapper with Live Undo:</strong> Hover and vaporize sticky overlays,
+                                banners, and modal paywalls with an interactive crosshair HUD, root container safety
+                                guards, and live Ctrl+Z / on-screen Undo.</div>
                         </li>
                         <li class="feature-item">
                             <span class="feature-icon">📱</span>
-                            <div><strong>Offline QR Generator &amp; Media Extractor:</strong> Generate instant offline QR codes with 1-click link copying and PNG download, plus a deep media extractor that scans images and SVGs with batch download capabilities.</div>
+                            <div><strong>Offline QR Generator &amp; Media Extractor:</strong> Generate instant offline
+                                QR codes with 1-click link copying and PNG download, plus a deep media extractor that
+                                scans images and SVGs with batch download capabilities.</div>
                         </li>
                         <li class="feature-item">
                             <span class="feature-icon">📥</span>
-                            <div><strong>History Import &amp; Export:</strong> Export your transformation history as JSON and import/merge backups across devices with automatic deduplication, plus unified settings backup support.</div>
+                            <div><strong>History Import &amp; Export:</strong> Export your transformation history as
+                                JSON and import/merge backups across devices with automatic deduplication, plus unified
+                                settings backup support.</div>
                         </li>
                         <li class="feature-item">
                             <span class="feature-icon">💬</span>
-                            <div><strong>Smart Quote Caching &amp; Tab Typography:</strong> Instant 0ms quote display with 2-hour TTL cache and hover copy/refresh buttons, plus upgraded segmented pill track tabs with Inter typography.</div>
+                            <div><strong>Smart Quote Caching &amp; Tab Typography:</strong> Instant 0ms quote display
+                                with 2-hour TTL cache and hover copy/refresh buttons, plus upgraded segmented pill track
+                                tabs with Inter typography.</div>
                         </li>
                     </ul>
                     <div class="card-actions">
@@ -1139,30 +1365,43 @@
                             <span class="tag-badge major">BACKUP &amp; AI MODELS</span>
                         </div>
                     </div>
-                    <h2 class="release-title">Settings Backup &amp; Restore, Preset Reordering, Latest Gemini Models &amp; Options UX</h2>
+                    <h2 class="release-title">Settings Backup &amp; Restore, Preset Reordering, Latest Gemini Models
+                        &amp; Options UX</h2>
                     <p class="release-summary">
-                        Introduces full Settings Export (.json download) and Import with auto-save, Drag &amp; Drop preset reordering, latest Gemini models (3.5 Flash Lite, 3.6 Flash, 3.5 Flash) grouped by tier, factory reset to defaults, and history Copy actions.
+                        Introduces full Settings Export (.json download) and Import with auto-save, Drag &amp; Drop
+                        preset reordering, latest Gemini models (3.5 Flash Lite, 3.6 Flash, 3.5 Flash) grouped by tier,
+                        factory reset to defaults, and history Copy actions.
                     </p>
                     <ul class="feature-bullets">
                         <li class="feature-item">
                             <span class="feature-icon">💾</span>
-                            <div><strong>Settings Backup &amp; Restore:</strong> Export extension settings and custom prompts to JSON files (API key safely excluded for privacy) and import backups instantly across browsers.</div>
+                            <div><strong>Settings Backup &amp; Restore:</strong> Export extension settings and custom
+                                prompts to JSON files (API key safely excluded for privacy) and import backups instantly
+                                across browsers.</div>
                         </li>
                         <li class="feature-item">
                             <span class="feature-icon">↕️</span>
-                            <div><strong>Preset Drag &amp; Drop Reordering:</strong> Easily reorder custom AI right-click prompt items using drag handles (`⠿`) or Move Up/Down (`▲`/`▼`) buttons.</div>
+                            <div><strong>Preset Drag &amp; Drop Reordering:</strong> Easily reorder custom AI
+                                right-click prompt items using drag handles (`⠿`) or Move Up/Down (`▲`/`▼`) buttons.
+                            </div>
                         </li>
                         <li class="feature-item">
                             <span class="feature-icon">🤖</span>
-                            <div><strong>Latest Gemini AI Models:</strong> Organized model selector into Flash Lite, Flash, and Pro tiers, adding Gemini 3.5 Flash Lite (Recommended Default), Gemini 3.6 Flash, and Gemini 3.5 Flash.</div>
+                            <div><strong>Latest Gemini AI Models:</strong> Organized model selector into Flash Lite,
+                                Flash, and Pro tiers, adding Gemini 3.5 Flash Lite (Recommended Default), Gemini 3.6
+                                Flash, and Gemini 3.5 Flash.</div>
                         </li>
                         <li class="feature-item">
                             <span class="feature-icon">📋</span>
-                            <div><strong>History Copy Actions:</strong> Replaced selection restore buttons with direct "Copy Original" and "Copy Enhanced" clipboard buttons featuring animated toast feedback.</div>
+                            <div><strong>History Copy Actions:</strong> Replaced selection restore buttons with direct
+                                "Copy Original" and "Copy Enhanced" clipboard buttons featuring animated toast feedback.
+                            </div>
                         </li>
                         <li class="feature-item">
                             <span class="feature-icon">✨</span>
-                            <div><strong>Modern Options UX &amp; Cross-Browser:</strong> Full tab option layout (`open_in_tab: true`) optimized for Edge &amp; Chrome, replacing native popups with glassmorphic Toast notifications and button state feedback.</div>
+                            <div><strong>Modern Options UX &amp; Cross-Browser:</strong> Full tab option layout
+                                (`open_in_tab: true`) optimized for Edge &amp; Chrome, replacing native popups with
+                                glassmorphic Toast notifications and button state feedback.</div>
                         </li>
                     </ul>
                     <div class="card-actions">
@@ -1833,7 +2072,11 @@
             // Copy Markdown notes of all releases
             const copyMarkdownBtn = document.getElementById('copyMarkdownBtn');
             copyMarkdownBtn.addEventListener('click', () => {
-                const markdownText = `[2.2.4] - 2026-08-01: Settings Backup & Restore (.json export/import), Preset Drag & Drop reordering, latest Gemini models (3.5 Flash Lite default, 3.6 Flash), factory reset to defaults, and history Copy actions.
+                const markdownText = `[2.4.2] - 2026-09-26: Interactive Welcome & Onboarding Hub (welcome.html), Safe Multi-Element & Whole-Page Guard (Ctrl+Shift+L) with isolated Shadow DOM preview, Translucent Glasses Element Zapper HUD with pointer pass-through, AI Protected Terms Dictionary & Custom System Instructions, customizable Favorite Prompt (★), streamlined popup, and comprehensive 40-test automated test suite.
+[2.4.1] - 2026-09-21: Italian localization overhaul & review, refactored theme variable engine, and removed auto-close timers in Options.
+[2.4.0] - 2026-09-14: Global Internationalization (22 languages in _locales/), bi-directional RTL engine for Arabic & Persian, in-settings language preference selector, zero-flicker synchronous theme preloading, and enhanced element unlocking.
+[2.3.0] - 2026-08-14: AI Page Studio (TL;DR summaries, key takeaways, tech stack breakdown, custom Q&A with Markdown viewer), Color Studio with instant 0ms eyedropper, non-destructive CSS & Box Model Inspector, Element Zapper with undo stack, offline QR generator, media extractor, and history import/export.
+[2.2.4] - 2026-08-01: Settings Backup & Restore (.json export/import), Preset Drag & Drop reordering, latest Gemini models (3.5 Flash Lite default, 3.6 Flash), factory reset to defaults, and history Copy actions.
 [2.2.3] - 2026-07-30: Customizable Theme Accent Color Palettes (7 color themes: Indigo, Orange, Yellow, Emerald, Cyan, Violet, Rose), dynamic SVG & CSS variable styling, interactive swatch bar, and storage persistence.
 [2.2.1] - 2026-07-26: History Privacy Modes (Full Logging vs Incognito Mode header button), Auto-Delete log retention policies (7/30/90 days or on exit), custom AI prompt preset modal editor in Options.
 [2.2.0] - 2026-07-19: Upgrade to v2.2 with custom AI presets system, System/Dark/Light theme switcher, animated toast notification system, and History Log viewer with JSON export.
