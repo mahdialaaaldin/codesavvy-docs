@@ -1,8 +1,8 @@
 # Privacy Policy for CodeSavvy (Chrome Extension)
 
 **Effective Date:** June 2, 2026  
-**Last Updated:** October 14, 2026  
-**Version:** 2.4.4.5  
+**Last Updated:** October 30, 2026  
+**Version:** 2.4.4.10  
 **Online Web Version:** [https://mahdialaaaldin.github.io/codesavvy-docs/privacy.html](https://mahdialaaaldin.github.io/codesavvy-docs/privacy.html)
 
 ---
@@ -37,7 +37,7 @@ CodeSavvy never reads or transmits webpage text in the background. Text is proce
 
 ---
 
-## 4. Chrome Permissions Justification (v2.4.4.5)
+## 4. Chrome Permissions Justification (v2.4.4.10)
 
 | Permission | Justification |
 | :--- | :--- |
